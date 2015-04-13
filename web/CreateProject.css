@@ -1,0 +1,26 @@
+span {
+    margin-left: 143px
+}
+p1{
+    margin-left: 15px
+}
+p2{
+    border-width: 1px;
+    border-color: black;
+    border-style: inset;
+    position: absolute; 
+    left: 500px; 
+    top: 130px;
+}
+p3{
+    position: absolute; 
+    left: 310px; 
+    top: 320px;
+}
+p4{
+    position: absolute; 
+    left: 400px; 
+    top: 680px;
+}
+ 
+
