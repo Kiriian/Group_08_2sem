@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateProjectServlet extends HttpServlet
 {
  String startDate, endDate, currency, activityDescription,comments,
-         targetAudience, objectiveResult,firstname,lastname,phone;
+         targetAudience, objectiveResult,firstname,lastname,phone, status;
  int projectBudget, partnerID;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,6 +38,7 @@ public class CreateProjectServlet extends HttpServlet
     {
         try {
             Controller controller = new Controller();
+            status = request.getParameter("status");
             startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
             endDate = request.getParameter("endDate");
             projectBudget = Integer.valueOf(request.getParameter("budget"));
@@ -53,7 +54,7 @@ public class CreateProjectServlet extends HttpServlet
             firstname= request.getParameter("firstName");
             lastname= request.getParameter("lastName");
             phone= request.getParameter("phone");
-            controller.CreateProject(startDate, endDate, projectBudget, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone);        
+            controller.CreateProject(status, startDate, endDate, projectBudget, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone);        
             request.getRequestDispatcher("projectCreated.jsp").forward(request, response);
         }
         catch (Exception e) {

@@ -19,7 +19,8 @@
         <hr>
         <br>
         <br>
-        <div> Project id: <span> Status: </span> </div> <br>
+        <div> Project id:
+            <span>Status:<input type="text" name="status" value="Project proposal" size="30" readonly="readonly" /> </span> </div> <br>
         
         Start date: 
         <input type="text" name="startDate" value="" size="20" />

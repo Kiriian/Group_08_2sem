@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class ProjectDTO implements Serializable
 {
+    private String status;
     private String startDate;
     private String endDate;
     private String currency;
@@ -22,8 +23,9 @@ public class ProjectDTO implements Serializable
     private String phone;
     private int projectBudget;
 
-    public ProjectDTO( String startDate, String endDate, String currency, String activityDescription, String comments, String targetAudience, String objectiveResult, int PartnerID, String firstname, String lastname, String phone, int projectBudget)
+    public ProjectDTO(String status, String startDate, String endDate, String currency, String activityDescription, String comments, String targetAudience, String objectiveResult, int PartnerID, String firstname, String lastname, String phone, int projectBudget)
     {
+        this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
         this.currency = currency;
@@ -98,12 +100,10 @@ public class ProjectDTO implements Serializable
     {
         return projectBudget;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public String getStatus()
+    {
+        return status;
+    }
+ 
 }

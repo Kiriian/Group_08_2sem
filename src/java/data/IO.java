@@ -27,18 +27,19 @@ public class IO
     { 
             try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
             {
-                String sql = "INSERT INTO PROJECT(PROJECT_ID, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO PROJECT(PROJECT_ID, STATUS, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
                         
                 PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setString(1, p.getActivityDescription());
-                statement.setString(2, p.getComments());
-                statement.setString(3, p.getTargetAudience());
-                statement.setInt(4, p.getProjectBudget());
-                statement.setString(5, p.getCurrency());
-                statement.setString(6, p.getStartDate());
-                statement.setString(7, p.getEndDate());
-                statement.setString(8, p.getObjectiveResult());
-                statement.setInt(9, p.getPartnerID());
+                statement.setString(1,p.getStatus());
+                statement.setString(2, p.getActivityDescription());
+                statement.setString(3, p.getComments());
+                statement.setString(4, p.getTargetAudience());
+                statement.setInt(5, p.getProjectBudget());
+                statement.setString(6, p.getCurrency());
+                statement.setString(7, p.getStartDate());
+                statement.setString(8, p.getEndDate());
+                statement.setString(9, p.getObjectiveResult());
+                statement.setInt(10, p.getPartnerID());
                 statement.executeUpdate();
                 connection.commit();
             } catch (SQLException sqle)
