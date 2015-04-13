@@ -27,7 +27,7 @@ public class IO
     { 
             try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
             {
-                String sql = "INSERT INTO PROJECT (PROJECT_ID, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+                String sql = "INSERT INTO PROJECT(PROJECT_ID, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?)";
                         
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, p.getActivityDescription());
@@ -39,7 +39,8 @@ public class IO
                 statement.setString(7, p.getEndDate());
                 statement.setString(8, p.getObjectiveResult());
                 statement.setInt(9, p.getPartnerID());
-                statement.executeUpdate();      
+                statement.executeUpdate();
+                connection.commit();
             } catch (SQLException sqle)
         {
             System.err.println(sqle);        
