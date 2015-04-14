@@ -15,24 +15,17 @@ public class Validator
     private String patternLetters = "[a-zA-Z]*";
     private String patternNumbers = "[0-9]*";
 
-    public String validator(int project_budget, int partnerID, String startDate, String endDate, String activityDescription, String targetAudience, String objectiveResult, String firstname, String lastname, String phone) throws InvalidateDataException, NumberFormatException
+    public String validator(int project_budget, int partnerID, String startDate, String endDate, String activityDescription, String targetAudience, String objectiveResult, String firstname, String lastname, String phone) throws InvalidateDataException
     {
-//        System.err.println("fejl");
-        if (patternLetters.matches(project_budget+""))
-        {
-            throw new InvalidateDataException("Budget cannot contain letters");
-        }
-        if (patternLetters.matches(partnerID+""))
-        {
-            throw new InvalidateDataException("PartnerID cannot contain letters");
-        }
+        System.err.println("fejl");
+
         if (project_budget == 0)
         {
-            throw new InvalidateDataException("Budget cannot be empty");
+            throw new InvalidateDataException("Budget cannot be empty and cannot contain letters");
         }
         if (partnerID == 0)
         {
-            throw new InvalidateDataException("PartnerID cannot be empty");
+            throw new InvalidateDataException("PartnerID cannot be empty and cannot contain letters");
         }
         if (activityDescription.equals(""))
         {

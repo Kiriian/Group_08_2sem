@@ -45,16 +45,22 @@ public class CreateProjectServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException
+            throws ServletException, IOException, ClassNotFoundException, SQLException, NullPointerException, NumberFormatException
     {
+        String answer = null;
         try
         {
-            try
-            {
+
                 status = request.getParameter("status");
                 startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
                 endDate = request.getParameter("endDate");
+                try
+                {
                 projectBudget = Integer.valueOf(request.getParameter("budget"));
+                }
+                catch(NumberFormatException exi){
+                    System.out.println("");
+                }
 //            String budgetText = request.getParameter("budget");
 //            System.out.println("budget: "+budgetText);
 //            budget = Integer.valueOf(budgetText);
@@ -63,23 +69,31 @@ public class CreateProjectServlet extends HttpServlet
                 comments = request.getParameter("comments");
                 targetAudience = request.getParameter("targetAudience");
                 objectiveResult = request.getParameter("objectiveResult");
+                try
+                {
                 partnerID = Integer.valueOf(request.getParameter("partnerID"));
+                }
+                catch(NumberFormatException exi){
+                    System.out.println("");
+                }
+                
                 firstname = request.getParameter("firstName");
                 lastname = request.getParameter("lastName");
                 phone = request.getParameter("phone");
-
-                v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult, firstname, lastname, phone);
-            } catch (InvalidateDataException | NumberFormatException ex)
-            {
-                request.setAttribute("validateMsg", ex.getMessage());
-
-                RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
-                rd.forward(request, response);
-            }
+                
+                try
+                {
+                   answer = v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult, firstname, lastname, phone);
+                } catch (InvalidateDataException ex)
+                {
+                    request.setAttribute("validateMsg", ex.getMessage());
+                    RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
+                    rd.forward(request, response);
+                }
             ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone, projectBudget);
             controller.CreateProject(p);
             request.setAttribute("Project", p);
-            
+            request.setAttribute("validateMsg", answer);           
             request.getRequestDispatcher("projectCreated.jsp").forward(request, response);
         } catch (Exception e)
         {
