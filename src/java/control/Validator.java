@@ -15,17 +15,22 @@ public class Validator
     private String patternLetters = "[a-zA-Z]*";
     private String patternNumbers = "[0-9]*";
 
-    public String validator(int project_budget, int partnerID, String startDate, String endDate, String activityDescription, String targetAudience, String objectiveResult, String firstname, String lastname, String phone) throws InvalidDataException
+    public String validator(
+            int project_budget,
+            int partnerID,
+            String startDate,
+            String endDate,
+            String activityDescription,
+            String targetAudience,
+            String objectiveResult,
+            String firstname,
+            String lastname,
+            String phone
+    ) throws InvalidDataException
     {
-        System.err.println("fejl");
-        if (patternLetters.equals(project_budget+""))
+        try
         {
-            throw new InvalidDataException("Budget cannot contain letters");
-        }
-        if (patternLetters.equals(partnerID+""))
-        {
-            throw new InvalidDataException("PartnerID cannot contain letters");
-        }
+          System.err.println("fejl");
         if (project_budget == 0)
         {
             throw new InvalidDataException("Budget cannot be empty");
@@ -79,6 +84,16 @@ public class Validator
         {
             throw new InvalidDataException("Phone cannot be empty");
         }
-        return "";
+        return "";  
+        }
+        catch(InvalidDataException ide)
+        {
+            throw ide;
+        }
+        catch (Exception e) {
+            e.printStackTrace(System.err);
+            throw new InvalidDataException("Unknown error "+e);
+        }
+        
     }
 }

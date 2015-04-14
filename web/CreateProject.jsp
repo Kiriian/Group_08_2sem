@@ -57,7 +57,7 @@
         
         Activity description:
         <br>
-        <textarea name="activetyDescription" rows="10" cols="40"></textarea>
+        <textarea name="activityDescription" rows="10" cols="40"></textarea>
         <br>
         
         <p3>Comments: 

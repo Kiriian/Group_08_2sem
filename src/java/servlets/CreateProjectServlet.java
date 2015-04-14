@@ -45,7 +45,7 @@ public class CreateProjectServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, NullPointerException, NumberFormatException
+            throws ServletException, IOException, ClassNotFoundException, SQLException
     {
         String answer = null;
         try
@@ -69,7 +69,7 @@ public class CreateProjectServlet extends HttpServlet
 
             try
             {
-                answer = v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult, firstname, lastname, phone);
+                v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult, firstname, lastname, phone);
             } catch (InvalidDataException ex)
             {
                 request.setAttribute("validateMsg", ex.getMessage());
