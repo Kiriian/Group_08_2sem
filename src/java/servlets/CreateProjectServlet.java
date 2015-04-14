@@ -12,18 +12,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import control.InvalidateDataException;
+import control.Validator;
 
 /**
  *
  * @author Pernille
  */
-@WebServlet(name = "CreateProject", urlPatterns = {"/createProject"})
+@WebServlet(name = "CreateProject", urlPatterns =
+{
+    "/createProject"
+})
 
 public class CreateProjectServlet extends HttpServlet
 {
- String startDate, endDate, currency, activityDescription,comments,
-         targetAudience, objectiveResult,firstname,lastname,phone, status;
- int projectBudget, partnerID;
+
+    String startDate, endDate, currency, activityDescription, comments,
+            targetAudience, objectiveResult, firstname, lastname, phone, status;
+    int projectBudget, partnerID;
+
+    Controller controller = new Controller();
+    Validator v = new Validator();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,30 +46,42 @@ public class CreateProjectServlet extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException
     {
-        try {
-            Controller controller = new Controller();
-            status = request.getParameter("status");
-            startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
-            endDate = request.getParameter("endDate");
-            projectBudget = Integer.valueOf(request.getParameter("budget"));
+        try
+        {
+            try
+            {
+                status = request.getParameter("status");
+                startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
+                endDate = request.getParameter("endDate");
+                projectBudget = Integer.valueOf(request.getParameter("budget"));
 //            String budgetText = request.getParameter("budget");
 //            System.out.println("budget: "+budgetText);
-//            budget = Integer.valueOf(budgetText);  
-            currency= request.getParameter("currency");
-            activityDescription= request.getParameter("activityDescription");
-            comments = request.getParameter("comments");
-            targetAudience= request.getParameter("targetAudience");
-            objectiveResult= request.getParameter("objectiveResult");
-            partnerID = Integer.valueOf(request.getParameter("partnerID"));
-            firstname= request.getParameter("firstName");
-            lastname= request.getParameter("lastName");
-            phone= request.getParameter("phone");
-            controller.CreateProject(status, startDate, endDate, projectBudget, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone);        
+//            budget = Integer.valueOf(budgetText);
+                currency = request.getParameter("currency");
+                activityDescription = request.getParameter("activityDescription");
+                comments = request.getParameter("comments");
+                targetAudience = request.getParameter("targetAudience");
+                objectiveResult = request.getParameter("objectiveResult");
+                partnerID = Integer.valueOf(request.getParameter("partnerID"));
+                firstname = request.getParameter("firstName");
+                lastname = request.getParameter("lastName");
+                phone = request.getParameter("phone");
+
+                v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult, firstname, lastname, phone);
+            } catch (InvalidateDataException | NumberFormatException ex)
+            {
+                request.setAttribute("validateMsg", ex.getMessage());
+
+                RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
+                rd.forward(request, response);
+            }
+
+            controller.CreateProject(status, startDate, endDate, projectBudget, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone);
             request.getRequestDispatcher("projectCreated.jsp").forward(request, response);
-        }
-        catch (Exception e) {
+        } catch (Exception e)
+        {
             PrintWriter out = response.getWriter();
-            out.println("<h2>"+e+"</h2>");
+            out.println("<h2>" + e + "</h2>");
             out.print("<pre>");
             e.printStackTrace(out);
             out.println("</pre>");
@@ -79,16 +101,16 @@ public class CreateProjectServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-     try
-     {
-         processRequest(request, response);
-     } catch (ClassNotFoundException ex)
-     {
-         Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-     } catch (SQLException ex)
-     {
-         Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-     }
+        try
+        {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -103,16 +125,16 @@ public class CreateProjectServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-     try
-     {
-         processRequest(request, response);
-     } catch (ClassNotFoundException ex)
-     {
-         Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-     } catch (SQLException ex)
-     {
-         Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-     }
+        try
+        {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
