@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import control.InvalidateDataException;
+import control.ProjectDTO;
 import control.Validator;
 
 /**
@@ -75,8 +76,10 @@ public class CreateProjectServlet extends HttpServlet
                 RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
                 rd.forward(request, response);
             }
-
-            controller.CreateProject(status, startDate, endDate, projectBudget, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone);
+            ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone, projectBudget);
+            controller.CreateProject(p);
+            request.setAttribute("Project", p);
+            
             request.getRequestDispatcher("projectCreated.jsp").forward(request, response);
         } catch (Exception e)
         {

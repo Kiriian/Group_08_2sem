@@ -15,9 +15,8 @@ import java.sql.SQLException;
 public class Controller
 {
 
-    public void CreateProject(String status, String startDate, String endDate, int budget, String currency, String activityDescription, String comments, String targetAudience, String objectiveResult, int partnerID, String firstname, String lastname, String phone) throws ClassNotFoundException, SQLException
+    public void CreateProject( ProjectDTO p) throws ClassNotFoundException, SQLException
     {
-        ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone, budget);
         IO io = new IO();
         io.SaveProject(p);
     }

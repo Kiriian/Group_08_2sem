@@ -1,47 +1,58 @@
 span {
 
-    margin-left: 143px
-
+    margin-left: 180px
 }
 
 p1{
-
+    
     margin-left: 15px
-
 }
 
 p2{
-    border-width: 3px;
-
+    border-width: 1px;
     border-color: black;
-
     border-style: inset;
-
     position: absolute;
-
     left: 500px;
-
     top: 130px;
+    padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 50px;
 
 }
 
 p3{
 
     position: absolute;
-
     left: 310px;
-
-    top: 320px;
-
+    top: 360px;
 }
 
 p4{
 
     position: absolute;
-
-    left: 400px;
-
-    top: 680px;
-
+    left: 500px;
+    top: 725px;
 }
 
+p5{
+    margin-left: 10px
+}
+
+p6{
+     margin-left: 80px
+}
+
+p7{
+    margin-left: 250px
+}
+
+p8{
+    border-width: 1px;
+    border-color: black;
+    border-style: inset;
+    position: absolute;
+    left: 500px;
+    top: 130px;
+}

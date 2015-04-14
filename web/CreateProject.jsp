@@ -18,18 +18,20 @@
         <h1>Create Project</h1><h3 align="right">Username: </h3>
         <hr>
         <br>
+        <p> ${validateMsg} </p>
+        <br>
         <br>
         <div> Project id:
-            <span>Status:<input type="text" name="status" value="Project proposal" size="30" readonly="readonly" /> </span> </div> <br>
+            <span>Status:&nbsp <input type="text" name="status" value="Project proposal" size="20" readonly="readonly" /> </span> </div> <br>
         
         Start date: 
-        <input type="text" name="startDate" value="" size="20" />
+        <input type="text" name="startDate" value="" size="20" />&nbsp &nbsp &nbsp
         End date: 
         <input type="text" name="endDate" value="" size="20" /><br>
         <br>
         
         <p1>Budget: 
-        <input type="text" name="budget" value="" size="20" />
+        <input type="text" name="budget" value="" size="20" />&nbsp &nbsp &nbsp
         Currency: 
         <select name="Currency">
             <option>DKK</option>
@@ -51,7 +53,7 @@
         <br> <br>
         Phone: 
         <input type="text" name="phone" value="" size="12" /> </p2>
-        <br> <br>
+        <br> <br><br>
         
         Activity description:
         <br>
@@ -67,13 +69,13 @@
         Target audience: 
         <input type="text" name="targetAudience" value="" size="20" />
         <br> <br>
-        Objective  result: 
+        Objective & result: 
         <br>
         <textarea name="objectiveResult" rows="10" cols="40">
         </textarea>
         <br>
         
-        <p4><input type="submit" value="Create project" name="Create project" style="width: 10em;  height:10em; font-size:100%" /></p4>
+        <p4><input type="submit" value="Create project" name="Create project" style="width: 10em;  height:5em;" /></p4>
         </form>
     </body>
 </html>

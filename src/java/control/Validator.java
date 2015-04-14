@@ -17,6 +17,7 @@ public class Validator
 
     public String validator(int project_budget, int partnerID, String startDate, String endDate, String activityDescription, String targetAudience, String objectiveResult, String firstname, String lastname, String phone) throws InvalidateDataException, NumberFormatException
     {
+//        System.err.println("fejl");
         if (patternLetters.matches(project_budget+""))
         {
             throw new InvalidateDataException("Budget cannot contain letters");
