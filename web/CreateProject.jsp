@@ -57,22 +57,19 @@
         
         Activity description:
         <br>
-        <textarea name="activityDescription" rows="10" cols="40">
-        </textarea>
+        <textarea name="activetyDescription" rows="10" cols="40"></textarea>
         <br>
         
         <p3>Comments: 
         <br>
-        <textarea name="comments" rows="10" cols="40">
-        </textarea> </p3>
+        <textarea name="comments" rows="10" cols="40"></textarea> </p3>
         <br>
         Target audience: 
         <input type="text" name="targetAudience" value="" size="20" />
         <br> <br>
         Objective & result: 
         <br>
-        <textarea name="objectiveResult" rows="10" cols="40">
-        </textarea>
+        <textarea name="objectiveResult" rows="10" cols="40"></textarea>
         <br>
         
         <p4><input type="submit" value="Create project" name="Create project" style="width: 10em;  height:5em;" /></p4>

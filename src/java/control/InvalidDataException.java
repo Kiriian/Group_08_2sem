@@ -9,10 +9,10 @@ package control;
  *
  * @author Jeanette
  */
-public class InvalidateDataException extends Exception
+public class InvalidDataException extends Exception
 {
 
-    public InvalidateDataException(String msg)
+    public InvalidDataException(String msg)
     {
         super(msg);
     }
