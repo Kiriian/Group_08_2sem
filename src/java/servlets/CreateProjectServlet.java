@@ -53,7 +53,15 @@ public class CreateProjectServlet extends HttpServlet
             status = request.getParameter("status");
             startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
             endDate = request.getParameter("endDate");
-            projectBudget = Integer.valueOf(request.getParameter("budget"));
+            try
+            {
+                projectBudget = Integer.valueOf(request.getParameter("budget"));
+            } catch (NumberFormatException ex)
+            {
+                request.setAttribute("validateMsg", "Budget cannot contain letters");
+                RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
+                rd.forward(request, response);
+            }
 //            String budgetText = request.getParameter("budget");
 //            System.out.println("budget: "+budgetText);
 //            budget = Integer.valueOf(budgetText);
@@ -62,7 +70,15 @@ public class CreateProjectServlet extends HttpServlet
             comments = request.getParameter("comments");
             targetAudience = request.getParameter("targetAudience");
             objectiveResult = request.getParameter("objectiveResult");
-            partnerID = Integer.valueOf(request.getParameter("partnerID"));
+            try
+            {
+                partnerID = Integer.valueOf(request.getParameter("partnerID"));
+            } catch (NumberFormatException nfe)
+            {
+                request.setAttribute("validateMsg", "PartnerID cannot contain letters");
+                RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
+                rd.forward(request, response);
+            }
             firstname = request.getParameter("firstName");
             lastname = request.getParameter("lastName");
             phone = request.getParameter("phone");

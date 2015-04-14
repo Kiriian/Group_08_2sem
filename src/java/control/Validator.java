@@ -30,70 +30,81 @@ public class Validator
     {
         try
         {
-          System.err.println("fejl");
-        if (project_budget == 0)
-        {
-            throw new InvalidDataException("Budget cannot be empty");
-        }
-        if (partnerID == 0)
-        {
-            throw new InvalidDataException("PartnerID cannot be empty");
-        }
-        if (activityDescription.equals(""))
-        {
-            throw new InvalidDataException("Activity Description cannot be empty");
-        }
+            System.err.println("fejl");
+            if ((project_budget + "").matches(patternLetters))
+            {
+                throw new InvalidDataException("Budget cannot contain letters");
+            }
+            if ((partnerID + "").matches(patternLetters))
+            {
+                throw new InvalidDataException("PartnerID cannot contain letters");
+            }
+            if (patternLetters.matches(partnerID + ""))
+            {
+                throw new InvalidDataException("PartnerID cannot contain letters");
+            }
+            if (project_budget == 0)
+            {
+                throw new InvalidDataException("Budget cannot be empty");
+            }
+            if (partnerID == 0)
+            {
+                throw new InvalidDataException("PartnerID cannot be empty");
+            }
+            if (activityDescription.equals(""))
+            {
+                throw new InvalidDataException("Activity Description cannot be empty");
+            }
 
-        if (startDate.matches(patternLetters))
-        {
-            throw new InvalidDataException("The date needs to be write in the format: yyyy-mm-dd");
-        }
+            if (startDate.matches(patternLetters))
+            {
+                throw new InvalidDataException("The date needs to be write in the format: yyyy-mm-dd");
+            }
 
-        if (endDate.matches(patternLetters))
-        {
-            throw new InvalidDataException("The date needs to be write in the format: yyyy-mm-dd");
-        }
+            if (endDate.matches(patternLetters))
+            {
+                throw new InvalidDataException("The date needs to be write in the format: yyyy-mm-dd");
+            }
 
-        if (targetAudience.matches(patternNumbers))
-        {
-            throw new InvalidDataException("Target audience cannot contain numbers");
-        }
+            if (targetAudience.matches(patternNumbers))
+            {
+                throw new InvalidDataException("Target audience cannot contain numbers");
+            }
 
-        if (targetAudience.equals(""))
-        {
-            throw new InvalidDataException("Target audience cannot be empty");
-        }
+            if (targetAudience.equals(""))
+            {
+                throw new InvalidDataException("Target audience cannot be empty");
+            }
 
-        if (objectiveResult.equals(""))
-        {
-            throw new InvalidDataException("Objective and result cannot be empty");
-        }
-        if (firstname.equals(""))
-        {
-            throw new InvalidDataException("Firstname cannot be empty");
-        }
-        if (lastname.equals(""))
-        {
-            throw new InvalidDataException("Lastname cannot be empty");
-        }
-        if (phone.matches(patternLetters))
-        {
-            throw new InvalidDataException("Phone cannot contain letters");
-        }
-        if (phone.equals(""))
-        {
-            throw new InvalidDataException("Phone cannot be empty");
-        }
-        return "";  
-        }
-        catch(InvalidDataException ide)
+            if (objectiveResult.equals(""))
+            {
+                throw new InvalidDataException("Objective and result cannot be empty");
+            }
+            if (firstname.equals(""))
+            {
+                throw new InvalidDataException("Firstname cannot be empty");
+            }
+            if (lastname.equals(""))
+            {
+                throw new InvalidDataException("Lastname cannot be empty");
+            }
+            if (phone.matches(patternLetters))
+            {
+                throw new InvalidDataException("Phone cannot contain letters");
+            }
+            if (phone.equals(""))
+            {
+                throw new InvalidDataException("Phone cannot be empty");
+            }
+            return "";
+        } catch (InvalidDataException ide)
         {
             throw ide;
-        }
-        catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace(System.err);
-            throw new InvalidDataException("Unknown error "+e);
+            throw new InvalidDataException("Unknown error " + e);
         }
-        
+
     }
 }
