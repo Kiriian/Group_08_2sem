@@ -28,7 +28,7 @@ public class CreateProjectTest
     
     //Class variables: 
     private IO io;
-    private  static Connection connection;
+    private static Connection connection;
     private ProjectDTO p;
     private String status = "PENDING";
     private String startDate = "2015-04-10";
@@ -45,9 +45,6 @@ public class CreateProjectTest
     private int projectBudget = 1;
     
     
-    
-    
-    
     public CreateProjectTest()
     {
     }
@@ -57,9 +54,7 @@ public class CreateProjectTest
     {
         //DB connection:
        connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
-       
-        
-        
+ 
     }
     
     @AfterClass
