@@ -64,17 +64,32 @@ public class IO
         {
             Class.forName(DB.DRIVER);
             connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
-            String query = "SELECT * FROM PROJECT WHERE STATUS LIKE '"+searchCriteria+"' ORDER BY PROJECT_ID DESC";
-            
+            String query = "SELECT * FROM PROJECT WHERE STATUS LIKE '" + searchCriteria + "' ORDER BY PROJECT_ID DESC";
+
             statement = connection.prepareStatement(query);
             //statement.setString(1, "Project proposal");
-            
+
             rs = statement.executeQuery(query);
-            
+
             //=== read the result
             while (rs.next())
             {
-                out.add(new ProjectDTO(rs.getString("STATUS"), rs.getString("START_DATE"), rs.getString("END_DATE"), rs.getString("CURRENCY"), rs.getString("ACTIVITY_DESCRIPTION"), rs.getString("COMMENTS"), rs.getString("TARGET_AUDIENCE"), rs.getString("OBJECTIVE_RESULT"), rs.getInt("PARTNER_ID"), rs.getInt("PROJECT_BUDGET"), rs.getInt("PROJECT_COST"), rs.getString("REQUIRED_POE"), rs.getInt("EMPLOYEE_ID"), rs.getInt("PROJECT_ID"), rs.getString("QUARTER_NAME")));
+                out.add(new ProjectDTO(
+                        rs.getString("STATUS"),
+                        rs.getString("START_DATE"),
+                        rs.getString("END_DATE"),
+                        rs.getString("CURRENCY"),
+                        rs.getString("ACTIVITY_DESCRIPTION"),
+                        rs.getString("COMMENTS"),
+                        rs.getString("TARGET_AUDIENCE"),
+                        rs.getString("OBJECTIVE_RESULT"),
+                        rs.getInt("PARTNER_ID"),
+                        rs.getInt("PROJECT_BUDGET"),
+                        rs.getInt("PROJECT_COST"),
+                        rs.getString("REQUIRED_POE"),
+                        rs.getInt("EMPLOYEE_ID"),
+                        rs.getInt("PROJECT_ID"),
+                        rs.getString("QUARTER_NAME")));
             }
         } catch (SQLException sqle)
         {
@@ -86,6 +101,49 @@ public class IO
         }
 
         return out;
+    }
+
+    public static Object getProjectToChange(int projectID) throws SQLException, ClassNotFoundException
+    {
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        ProjectDTO p= null;
+        try
+        {
+            Class.forName(DB.DRIVER);
+            connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
+            String sql2 = "SELECT * FROM PROJECT WHERE PROJECT_ID LIKE '" + projectID + "'";
+
+            statement = connection.prepareStatement(sql2);
+
+            rs = statement.executeQuery(sql2);
+            p = new ProjectDTO(
+                    rs.getString("STATUS"),
+                    rs.getString("START_DATE"),
+                    rs.getString("END_DATE"),
+                    rs.getString("CURRENCY"),
+                    rs.getString("ACTIVITY_DESCRIPTION"),
+                    rs.getString("COMMENTS"),
+                    rs.getString("TARGET_AUDIENCE"),
+                    rs.getString("OBJECTIVE_RESULT"),
+                    rs.getInt("PARTNER_ID"),
+                    rs.getInt("PROJECT_BUDGET"),
+                    rs.getInt("PROJECT_COST"),
+                    rs.getString("REQUIRED_POE"),
+                    rs.getInt("EMPLOYEE_ID"),
+                    rs.getInt("PROJECT_ID"),
+                    rs.getString("QUARTER_NAME"));
+
+        } catch (SQLException sqle)
+        {
+            System.err.println(sqle);
+        } finally
+        {
+            statement.close();
+            connection.close();
+        }
+        return p;
     }
 
 }

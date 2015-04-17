@@ -33,10 +33,47 @@
         <p7><input type="submit" value="Search"/></p7>
          <br><br>
         
-        Result:  <p7> </p7>
+        <table>
+            <tr>
+                <th>ProjectID</th>
+                <th>Status</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Currency</th>
+                <th>Activity Description</th>
+                <th>Comments</th>
+                <th>Target Audience</th>
+                <th>Objective & Result</th>
+                <th>Partner ID</th>
+                <th>Project Budget</th>
+                <th>Cost</th>
+                <th>Required POE</th>
+                <th>Employee ID</th>
+                <th>Quarter</th>
+            </tr>
+        
         </form>
         <c:forEach var="p" items="${projects}">
-            <p>${p}</p>
+        <tr>
+                <td <a onclick="location.href='ChangeProjectServlet.java?projectid=${p.getProjectID()}'">${p.getProjectID()}</a></td>
+            <td>${p.getStatus()}</td>
+            <td>${p.getStartDate()}</td>
+            <td>${p.getEndDate()}</td>
+            <td>${p.getCurrency()}</td>
+            <td>${p.getActivityDescription()}</td>
+            <td>${p.getComments()}</td>
+            <td>${p.getTargetAudience()}</td>
+            <td>${p.getObjectiveResult()}</td>
+            <td>${p.getPartnerID()}</td>
+            <td>${p.getProjectBudget()}</td>
+            <td>${p.getCost()}</td>
+            <td>${p.getRequiredPOE()}</td>
+            <td>${p.getEmployeeID()}</td>
+            <td>${p.getQuarter()}</td>
+            
+           <!-- <p>${p}</p> -->
+         </tr>
         </c:forEach>
+          </table>
     </body>
 </html>

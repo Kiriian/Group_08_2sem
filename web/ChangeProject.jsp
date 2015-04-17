@@ -1,19 +1,21 @@
 <%-- 
-    Document   : CreateProject
-    Created on : 09-Apr-2015, 13:04:04
-    Author     : Pernille
+    Document   : ChangeProject
+    Created on : 17-04-2015, 10:06:43
+    Author     : martamiszczyk
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="control.ProjectDTO"%>
+<%ProjectDTO p=(ProjectDTO)request.getAttribute("Project");%>
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="CreateProject.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="CreateProject.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
-        <form name="Create project" action="createProject" method="POST">
+        <form name="ChangeProject" action="changeProject" method="POST">
         
         <h1>Create Project</h1><h3 align="right">Username: </h3>
         <hr>
@@ -22,7 +24,7 @@
         <br>
         <br>
         <div> Project id:
-            <span>Status:&nbsp <input type="text" name="status" value="Project proposal" size="20" readonly="readonly" /> </span> </div> <br>
+            <span>Status:&nbsp <%= p.setStatus("status")%> </span> </div> <br>
         
         Start date: 
         <input type="text" name="startDate" value="" size="20" />&nbsp &nbsp &nbsp
