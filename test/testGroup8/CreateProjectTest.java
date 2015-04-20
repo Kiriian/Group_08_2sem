@@ -69,7 +69,7 @@ public class CreateProjectTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void tc_1_saveProject() throws SQLException {
+    public void tc_1_saveProject() throws SQLException, ClassNotFoundException {
         //Bruge metoder i Assert klassen
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -95,7 +95,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_2_saveProject() throws SQLException {
+    public void tc_2_saveProject() throws SQLException, ClassNotFoundException {
         //Er det muligt at oprette et projekt uden at indtaste budget
         //Bruge metoder i Assert klassen
         //projectBudget = null;  Int kan ikke være null
@@ -131,7 +131,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_3_saveProject() throws SQLException{
+    public void tc_3_saveProject() throws SQLException, ClassNotFoundException{
         //Er det muligt at oprette et projekt uden at indtaste activity description
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -165,7 +165,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_4_saveProject() throws SQLException{
+    public void tc_4_saveProject() throws SQLException, ClassNotFoundException{
         //Er det muligt at oprette et projekt uden start og end date
         status = "Project proposal";
         startDate = null;
@@ -199,7 +199,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_5_saveProject() throws SQLException {
+    public void tc_5_saveProject() throws SQLException, ClassNotFoundException {
         // Kan ikke rigtigt test det i JUnittest
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -234,7 +234,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_6_saveProject() throws SQLException {
+    public void tc_6_saveProject() throws SQLException, ClassNotFoundException {
         //er det muligt at indtaste nonsenstal i budget
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -268,7 +268,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_7_saveProject() throws SQLException {
+    public void tc_7_saveProject() throws SQLException, ClassNotFoundException {
         //Er det muligt at taste andet end tal og bindestreger i start og end date
         status = "Project proposal";
         startDate = "Hello World";
@@ -302,7 +302,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_8_saveProject() throws SQLException {
+    public void tc_8_saveProject() throws SQLException, ClassNotFoundException {
         //Er det muligt at indtaste lange inddateringer i comments
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -341,7 +341,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_9_saveProject() throws SQLException {
+    public void tc_9_saveProject() throws SQLException, ClassNotFoundException {
         //Er det muligt at indtaste lange inddateringer i activety description
         status = "Project proposal";
         startDate = "2015-02-10";

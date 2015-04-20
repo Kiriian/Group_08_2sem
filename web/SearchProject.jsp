@@ -23,7 +23,7 @@
                 <option value="Execution">Execution</option>
                 <option value="Request POE">Request POE</option>
                 <option value="Approval">Approval</option>
-            <option>Claim sent</option>
+            <option value="Claim sent">Claim sent</option>
             </select></p5>
     <p6>Partner ID: <input type="text" name="partnerID" value="" disabled="disabled"/> </p6>
 
@@ -55,7 +55,7 @@
         </form>
         <c:forEach var="p" items="${projects}">
         <tr>
-                <td <a onclick="location.href='ChangeProjectServlet.java?projectid=${p.getProjectID()}'">${p.getProjectID()}</a></td>
+                <td <a onclick="location.href='changeProjectServlet?projectid=${p.getProjectID()}'">${p.getProjectID()}</a></td>
             <td>${p.getStatus()}</td>
             <td>${p.getStartDate()}</td>
             <td>${p.getEndDate()}</td>
