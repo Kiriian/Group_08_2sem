@@ -23,7 +23,9 @@
         <br>
         <div> Project id:
             <span>Status:&nbsp <input type="text" name="status" value="Project proposal" size="20" readonly="readonly" /> </span> </div> <br>
-        
+            <textarea name="hello" rows="4" cols="20">
+hello	
+            </textarea>
         Start date: 
         <input type="text" name="startDate" value="" size="20" />&nbsp &nbsp &nbsp
         End date: 
@@ -38,6 +40,7 @@
             <option value="NOK">NOK</option>
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
+                    
         </select></p1><br>
         <br>
         
