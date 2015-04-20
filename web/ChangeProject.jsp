@@ -39,7 +39,7 @@
                 Cost: 
                 <input type="text" name="cost" value='${project.getCost()}' size="20" />
                 Currency: 
-                <input type="text" name="currency" value='${project.getCurrency()}' size="20" readonly="readonly" />
+                <input type="text" name="" value='${project.getCurrency()}' size="20" readonly="readonly" />
                 <select name="currency">
                     <option value="DKK">DKK</option>
                     <option value="NOK">NOK</option>

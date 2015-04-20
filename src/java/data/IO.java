@@ -8,11 +8,14 @@ package data;
 import control.ProjectDTO;
 import data.DB;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -149,10 +152,11 @@ public class IO
         return p;
     }
 
-    public static ProjectDTO UpdateProject(ProjectDTO p) throws ClassNotFoundException, SQLException
+    public static ProjectDTO UpdateProject(ProjectDTO p) throws ClassNotFoundException, SQLException, java.text.ParseException
     {
         PreparedStatement statement = null;
         Connection connection = null;
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.s");
         try
         {
             Class.forName(DB.DRIVER);
@@ -180,14 +184,17 @@ public class IO
             statement.setInt(5, p.getProjectBudget());
             statement.setInt(6, p.getCost());
             statement.setString(7, p.getCurrency());
-            statement.setString(8, p.getStartDate());
-            statement.setString(9, p.getEndDate());
+            java.util.Date startDate1 = formatter.parse(p.getStartDate());
+            java.sql.Date startDate2 = new java.sql.Date(startDate1.getTime());
+            statement.setDate(8, startDate2);
+            java.util.Date endDate1 = formatter.parse(p.getEndDate());
+            java.sql.Date endDate2 = new java.sql.Date(endDate1.getTime());
+            statement.setDate(9, endDate2);
             statement.setString(10, p.getObjectiveResult());
             statement.setInt(11, p.getEmployeeID());
             statement.setString(12, p.getQuarter());
-            statement.setInt(13, p.getProjectID());
+            statement.setInt(13, p.getProjectID());     
             statement.executeUpdate();
-            connection.commit();
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
