@@ -28,8 +28,6 @@ import javax.servlet.http.HttpServletResponse;
         })
 public class ChangeProjectServlet extends HttpServlet
 {
-
-
     Controller controller = new Controller();
     IO io = new IO();
 

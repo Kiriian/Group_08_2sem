@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ProjectChanged
-    Created on : 20-04-2015, 10:54:43
-    Author     : Junes
+    Document   : PartnerCreated
+    Created on : 21-04-2015, 11:07:17
+    Author     : Jeanette
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

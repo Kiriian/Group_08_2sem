@@ -28,95 +28,6 @@ public class ProjectDTO implements Serializable
     private int projectID;
     private String quarter;
 
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-    public void setStartDate(String startDate)
-    {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(String endDate)
-    {
-        this.endDate = endDate;
-    }
-
-    public void setCurrency(String currency)
-    {
-        this.currency = currency;
-    }
-
-    public void setActivityDescription(String activityDescription)
-    {
-        this.activityDescription = activityDescription;
-    }
-
-    public void setComments(String comments)
-    {
-        this.comments = comments;
-    }
-
-    public void setTargetAudience(String targetAudience)
-    {
-        this.targetAudience = targetAudience;
-    }
-
-    public void setObjectiveResult(String objectiveResult)
-    {
-        this.objectiveResult = objectiveResult;
-    }
-
-    public void setPartnerID(int partnerID)
-    {
-        this.partnerID = partnerID;
-    }
-
-    public void setFirstname(String firstname)
-    {
-        this.firstname = firstname;
-    }
-
-    public void setLastname(String lastname)
-    {
-        this.lastname = lastname;
-    }
-
-    public void setPhone(String phone)
-    {
-        this.phone = phone;
-    }
-
-    public void setProjectBudget(int projectBudget)
-    {
-        this.projectBudget = projectBudget;
-    }
-
-    public void setCost(int cost)
-    {
-        this.cost = cost;
-    }
-
-    public void setRequiredPOE(String requiredPOE)
-    {
-        this.requiredPOE = requiredPOE;
-    }
-
-    public void setEmployeeID(int employeeID)
-    {
-        this.employeeID = employeeID;
-    }
-
-    public void setProjectID(int projectID)
-    {
-        this.projectID = projectID;
-    }
-
-    public void setQuarter(String quarter)
-    {
-        this.quarter = quarter;
-    }
 
     public ProjectDTO(String status, String startDate, String endDate, String currency, String activityDescription, String comments, String targetAudience, String objectiveResult, int partnerID, String firstname, String lastname, String phone, int projectBudget)
     {
@@ -243,7 +154,96 @@ public class ProjectDTO implements Serializable
     {
         return status;
     }
+    
+        public void setStatus(String status)
+    {
+        this.status = status;
+    }
 
+    public void setStartDate(String startDate)
+    {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(String endDate)
+    {
+        this.endDate = endDate;
+    }
+
+    public void setCurrency(String currency)
+    {
+        this.currency = currency;
+    }
+
+    public void setActivityDescription(String activityDescription)
+    {
+        this.activityDescription = activityDescription;
+    }
+
+    public void setComments(String comments)
+    {
+        this.comments = comments;
+    }
+
+    public void setTargetAudience(String targetAudience)
+    {
+        this.targetAudience = targetAudience;
+    }
+
+    public void setObjectiveResult(String objectiveResult)
+    {
+        this.objectiveResult = objectiveResult;
+    }
+
+    public void setPartnerID(int partnerID)
+    {
+        this.partnerID = partnerID;
+    }
+
+    public void setFirstname(String firstname)
+    {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname)
+    {
+        this.lastname = lastname;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    public void setProjectBudget(int projectBudget)
+    {
+        this.projectBudget = projectBudget;
+    }
+
+    public void setCost(int cost)
+    {
+        this.cost = cost;
+    }
+
+    public void setRequiredPOE(String requiredPOE)
+    {
+        this.requiredPOE = requiredPOE;
+    }
+
+    public void setEmployeeID(int employeeID)
+    {
+        this.employeeID = employeeID;
+    }
+
+    public void setProjectID(int projectID)
+    {
+        this.projectID = projectID;
+    }
+
+    public void setQuarter(String quarter)
+    {
+        this.quarter = quarter;
+    }
     @Override
     public String toString()
     {

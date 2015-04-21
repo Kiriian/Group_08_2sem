@@ -5,6 +5,7 @@
  */
 package data;
 
+import control.PartnerDTO;
 import control.ProjectDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -191,7 +192,7 @@ public class IO
             statement.setString(10, p.getObjectiveResult());
             statement.setInt(11, p.getEmployeeID());
             statement.setString(12, p.getQuarter());
-            statement.setInt(13, p.getProjectID());     
+            statement.setInt(13, p.getProjectID());
             statement.executeUpdate();
         } catch (SQLException sqle)
         {
@@ -202,5 +203,31 @@ public class IO
             connection.close();
         }
         return p;
+    }
+
+    public static void savePartner(PartnerDTO part) throws ClassNotFoundException, SQLException
+    {
+        PreparedStatement statement = null;
+        Connection connection = null;
+        try
+        {
+            Class.forName(DB.DRIVER);
+            connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
+            
+            String sql4 ="INSERT INTO PARTNER VALUES (PARTNER_ID_SEQUENCE.NEXTVAL, ?, ?, ?)";
+            statement = connection.prepareStatement(sql4);
+            statement.setString(1, part.getCountry());
+            statement.setString(2, part.getPartnerName());
+            statement.setString(3, part.getPartnerType());
+            statement.executeUpdate();
+                        
+        } catch (SQLException sqle)
+        {
+            System.err.println(sqle);
+        } finally
+        {
+            statement.close();
+            connection.close();
+        }
     }
 }
