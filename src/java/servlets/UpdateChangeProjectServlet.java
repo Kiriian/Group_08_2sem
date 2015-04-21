@@ -90,10 +90,11 @@ public class UpdateChangeProjectServlet extends HttpServlet
             projectID = Integer.valueOf(request.getParameter("projectID"));
 
             ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget, projectCost, requiredPOE, employeeID, projectID, quarter);
-
+            IO.UpdateProject(p);
+            String confirm = "Project "+projectID+ " have been changed, you can now view the changed project by doing a search";
 //            request.setAttribute("validateMsg", answer);
-            request.setAttribute("project", IO.UpdateProject(p));
-            request.getRequestDispatcher("ProjectChanged.jsp").forward(request, response);
+            request.setAttribute("projectHaveBeenChanged", confirm);
+            request.getRequestDispatcher("SearchProject.jsp").forward(request, response);
         } catch (Exception e)
         {
             PrintWriter out = response.getWriter();

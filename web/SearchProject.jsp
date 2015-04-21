@@ -15,7 +15,11 @@
     </head>
     <body>
         <form name="Search project" action="searchProject" method="POST">
-        <h1>Search Project</h1><h3 align="right"> Username: </h3>
+        <h1>Search Project</h1>
+        <h4 align="left">To search for a project, choose the relevant status and press the search button</h4>
+        <h4 align="left">To view or change a project, simply click the project ID of the project</h4>
+        <h3 align="right">Username: </h3>
+        <h3 id ="confirm" align="center" >${projectHaveBeenChanged}</h3>
         <hr>
         <p5>Status: &nbsp <select name="status">
                 <option value="Project proposal">Project proposal</option>
@@ -39,36 +43,28 @@
                 <th>Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Currency</th>
                 <th>Activity Description</th>
-                <th>Comments</th>
-                <th>Target Audience</th>
                 <th>Objective & Result</th>
                 <th>Partner ID</th>
                 <th>Project Budget</th>
                 <th>Cost</th>
-                <th>Required POE</th>
-                <th>Employee ID</th>
+                <th>Currency</th>
                 <th>Quarter</th>
             </tr>
         
         </form>
         <c:forEach var="p" items="${projects}">
         <tr>
-                <td <a onclick="location.href='changeProjectServlet?projectid=${p.getProjectID()}'">${p.getProjectID()}</a></td>
+            <td <a onclick="location.href='changeProjectServlet?projectid=${p.getProjectID()}'">${p.getProjectID()}</a></td>
             <td>${p.getStatus()}</td>
             <td>${p.getStartDate()}</td>
             <td>${p.getEndDate()}</td>
-            <td>${p.getCurrency()}</td>
             <td>${p.getActivityDescription()}</td>
-            <td>${p.getComments()}</td>
-            <td>${p.getTargetAudience()}</td>
             <td>${p.getObjectiveResult()}</td>
             <td>${p.getPartnerID()}</td>
             <td>${p.getProjectBudget()}</td>
             <td>${p.getCost()}</td>
-            <td>${p.getRequiredPOE()}</td>
-            <td>${p.getEmployeeID()}</td>
+            <td>${p.getCurrency()}</td>
             <td>${p.getQuarter()}</td>
             
            <!-- <p>${p}</p> -->
