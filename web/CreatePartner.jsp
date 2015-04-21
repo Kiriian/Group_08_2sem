@@ -15,6 +15,8 @@
         <h1>Create Partner</h1>
         <h3>${validateMsg}</h3>
         <hr>
+        <br>
+        <br>
         <form name="Create Partner" action="CreatePartnerServlet" method="POST">
             PartnerID: &nbsp <input type="text" name="partnerID" value="" size="20" disabled="disabled" />
             <br>
@@ -35,7 +37,8 @@
                 <option value="partner">Partner</option>
                 <option value="distributer">Distributer</option>
             </select>
-            <input type="submit" value="CreatePartnerServlet" />
+            <br>
+            <input name="Create Partner" type="submit" value="CreatePartnerServlet" />
         </form>
     </body>
 </html>

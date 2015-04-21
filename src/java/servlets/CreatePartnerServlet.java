@@ -52,15 +52,11 @@ public class CreatePartnerServlet extends HttpServlet
         {
             country = request.getParameter("country");
             partnerType = request.getParameter("partnerType");
-            try
-            { 
-                partnerName = request.getParameter("partnerName");
-                
-            } catch (NullPointerException npex)
+            partnerName = request.getParameter("partnerName");
+            if (partnerName.isEmpty())
             {
                 request.setAttribute("validateMsg", "Partner Name cannot be empty");
                 request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
-
             }
             PartnerDTO part = new PartnerDTO(country, partnerName, partnerType);
             IO.savePartner(part);
