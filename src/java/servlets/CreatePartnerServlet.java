@@ -29,9 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class CreatePartnerServlet extends HttpServlet
 {
-        private String country;
-        private String partnerName;
-        private String partnerType;
+
+    private String country;
+    private String partnerName;
+    private String partnerType;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,28 +47,35 @@ public class CreatePartnerServlet extends HttpServlet
             throws ServletException, IOException, ClassNotFoundException, SQLException
     {
         response.setContentType("text/html;charset=UTF-8");
-        
-        try (PrintWriter out = response.getWriter())
+
+        try
         {
-//            try
-//            {
             country = request.getParameter("country");
-            partnerName = request.getParameter("partnerName");
             partnerType = request.getParameter("partnerType");
-//            }
-//            catch(NullPointerException npex)
-//            {
-//                request.setAttribute("validateMsg", "Partner Name cannot be empty");
-//                RequestDispatcher rd = request.getRequestDispatcher("CreatePartner.jsp");
-//                rd.forward(request, response);
-//            }
+            try
+            { 
+                partnerName = request.getParameter("partnerName");
+                
+            } catch (NullPointerException npex)
+            {
+                request.setAttribute("validateMsg", "Partner Name cannot be empty");
+                request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
+
+            }
             PartnerDTO part = new PartnerDTO(country, partnerName, partnerType);
             IO.savePartner(part);
-            
+
             request.setAttribute("partner", part);
-            
-            request.getRequestDispatcher("PartnerCreated.jsp").forward(request, response);
-            
+            request.setAttribute("validateMsg", "Partner created");
+            request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
+
+        } catch (Exception e)
+        {
+            PrintWriter out = response.getWriter();
+            out.println("<h2>" + e + "</h2>");
+            out.print("<pre>");
+            e.printStackTrace(out);
+            out.println("</pre>");
         }
     }
 
