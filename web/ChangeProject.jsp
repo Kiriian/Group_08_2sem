@@ -20,7 +20,7 @@
             <div> Project id:<input type="text" name="projectID" value='${project.getProjectID()}' size="20" readonly="readonly" />
                 <br>
                 <br>
-                Status:&nbsp <input type="text" name="status" value='${project.getStatus()}'  size="20" readonly="readonly"/>
+                Status:&nbsp <input type="text" name="" value='${project.getStatus()}'  size="20" readonly="readonly"/>
             &nbsp To change status use the dropdown: &nbsp <select name="status">
                 <option value="Project proposal">Project proposal</option>
                 <option value="Submit">Submittet</option>
