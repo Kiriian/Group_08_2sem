@@ -130,7 +130,7 @@ public class CreateProjectTest {
         assertEquals("More customers", p.getObjectiveResult());
     }
 
-    @Test
+    @Test 
     public void tc_3_saveProject() throws SQLException, ClassNotFoundException{
         //Er det muligt at oprette et projekt uden at indtaste activity description
         status = "Project proposal";
@@ -183,7 +183,7 @@ public class CreateProjectTest {
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, firstname, lastname, phone, projectBudget);
         io.SaveProject(p); //Gemmer et projekt
-
+           fail();
         assertNull(startDate, p.getStartDate());
         assertNull(endDate, p.getEndDate());
         assertEquals(20000, p.getProjectBudget());
