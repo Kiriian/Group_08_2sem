@@ -19,11 +19,7 @@
         <h5>End date: <%= p.getEndDate()%></h5>
         <h5>Budget: <%= p.getProjectBudget()%></h5>
         <h5>Currency: <%= p.getCurrency()%></h5>
-        <h5> Contact Information </h5>
         <h5>Partner ID: <%= p.getPartnerID() %></h5>
-        <h5>First Name: <%= p.getFirstname() %></h5>
-        <h5>Last name: <%= p.getLastname() %></h5>
-        <h5>Phone: <%= p.getPhone() %></h5>
         <h5>Activity Description: <%= p.getActivityDescription() %></h5>
         <h5>Comments: <%= p.getComments() %></h5>
         <h5>Target Audience: <%= p.getTargetAudience() %></h5>

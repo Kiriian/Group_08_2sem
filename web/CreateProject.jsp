@@ -23,9 +23,8 @@
         <br>
         <div> Project id:
             <span>Status:&nbsp <input type="text" name="status" value="Project proposal" size="20" readonly="readonly" /> </span> </div> <br>
-            <textarea name="hello" rows="4" cols="20">
-hello	
-            </textarea>
+        Partner ID:
+        <input type="text" name="partnerID" value="" size="20" />
         Start date: 
         <input type="text" name="startDate" value="" size="20" />&nbsp &nbsp &nbsp
         End date: 
@@ -43,20 +42,6 @@ hello
                     
         </select></p1><br>
         <br>
-        
-        <p2>Contact information:
-        <br> <br>
-        Partner id: <input type="text" name="partnerID" value="" size="30" />
-        <br><br>
-        First name:
-        <input type="text" name="firstName" value="" size="30" />
-        <br> <br>
-        Last name:
-        <input type="text" name="lastName" value="" size="30" />
-        <br> <br>
-        Phone: 
-        <input type="text" name="phone" value="" size="12" /> </p2>
-        <br> <br><br>
         
         Activity description:
         <br>

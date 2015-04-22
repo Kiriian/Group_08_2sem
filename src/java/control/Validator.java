@@ -80,28 +80,8 @@ public class Validator
             {
                 throw new InvalidDataException("Objective and result cannot be empty");
             }
-            if (firstname.equals(""))
-            {
-                throw new InvalidDataException("Firstname cannot be empty");
-            }
-            if (lastname.equals(""))
-            {
-                throw new InvalidDataException("Lastname cannot be empty");
-            }
-            if (phone.matches(patternLetters))
-            {
-                throw new InvalidDataException("Phone cannot contain letters");
-            }
-            if (phone.equals(""))
-            {
-                throw new InvalidDataException("Phone cannot be empty");
-            }
             return "";
-            
-            
-      
-                
-            
+
         } catch (InvalidDataException ide)
         {
             throw ide;
