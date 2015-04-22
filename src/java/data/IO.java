@@ -16,6 +16,8 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,13 +25,22 @@ import java.util.ArrayList;
  */
 public class IO
 {
-
+    static {
+        System.err.println("static initialiser called in IO");
+        try
+        {
+            Class.forName(DB.DRIVER);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     //public IO() throws ClassNotFoundException, SQLException {
     public static void SaveProject(ProjectDTO p) throws ClassNotFoundException
     {
         try
         {
-            Class.forName(DB.DRIVER);
+           
             Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
 //                connection.setAutoCommit(false);
             String sql = "INSERT INTO PROJECT(PROJECT_ID, STATUS, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
@@ -62,7 +73,6 @@ public class IO
         Connection connection = null;
         try
         {
-            Class.forName(DB.DRIVER);
             connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
             String query = "SELECT * FROM PROJECT WHERE STATUS LIKE '" + searchCriteria + "' ORDER BY PROJECT_ID DESC";
 
@@ -111,7 +121,6 @@ public class IO
         ProjectDTO p = null;
         try
         {
-            Class.forName(DB.DRIVER);
             connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
             String sql2 = "SELECT * FROM PROJECT WHERE PROJECT_ID LIKE '" + projectID + "'";
 
@@ -158,7 +167,6 @@ public class IO
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.s");
         try
         {
-            Class.forName(DB.DRIVER);
             connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
 //                connection.setAutoCommit(false);
 
@@ -211,7 +219,6 @@ public class IO
         Connection connection = null;
         try
         {
-            Class.forName(DB.DRIVER);
             connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
             
             String sql4 ="INSERT INTO PARTNER VALUES (PARTNER_ID_SEQUENCE.NEXTVAL, ?, ?, ?)";
@@ -230,4 +237,5 @@ public class IO
             connection.close();
         }
     }
+    
 }
