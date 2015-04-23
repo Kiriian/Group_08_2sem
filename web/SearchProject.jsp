@@ -26,7 +26,8 @@
             <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
             <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
-            <li><a href="#">Create user</a></li>
+            <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
+             <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
         </ul>
         <form name="Search project" action="searchProject" method="POST">
         <h1>Search Project</h1>

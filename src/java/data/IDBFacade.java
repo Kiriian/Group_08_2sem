@@ -5,6 +5,7 @@
  */
 package data;
 
+import control.EmployeeDTO;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
@@ -30,5 +31,8 @@ interface IDBFacade
     void savePartner(PartnerDTO part) throws InvalidDataException;
     
     boolean validateCheckLogin(String username, String password) throws InvalidDataException;
+    
    void createUser(UserDTO user) throws InvalidDataException;
+   
+   void createEmployee(EmployeeDTO emp) throws InvalidDataException;
 }

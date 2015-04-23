@@ -32,14 +32,14 @@ public class CreateUserServlet extends HttpServlet {
 
     UserValidator uv = new UserValidator();
     Controller ctrl = new Controller();
-    String answer = null;
+    private String answer = null;
 
-    int employeeID;
-    int partnerID;
-    String firstname;
-    String lastname;
-    String username;
-    String password;
+    private int employeeID;
+    private int partnerID;
+    private String firstname;
+    private String lastname;
+    private String username;
+    private String password;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, InvalidDataException {

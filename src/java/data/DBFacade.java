@@ -5,6 +5,7 @@
  */
 package data;
 
+import control.EmployeeDTO;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
@@ -80,6 +81,15 @@ public class DBFacade implements IDBFacade {
     public void createUser(UserDTO user) throws InvalidDataException {
         try {
             mapper.createUser(user);
+        } catch (SQLException sqle) {
+            throw new InvalidDataException("" + sqle);
+        }
+    }
+
+    public void createEmployee(EmployeeDTO emp) throws InvalidDataException
+    {
+       try {
+            mapper.createEmployee(emp);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
         }

@@ -46,4 +46,9 @@ public class Controller {
     public void createUser(UserDTO user) throws InvalidDataException {
          facade.createUser(user);
     }
+
+    public void createEmployee(EmployeeDTO emp) throws InvalidDataException
+    {
+        facade.createEmployee(emp);
+    }
 }

@@ -25,6 +25,7 @@
             <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
             <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
+            <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
         </ul>
         <h1>Create user</h1>
         <h3>${validateMsg}
