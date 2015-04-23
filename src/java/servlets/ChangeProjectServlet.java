@@ -6,6 +6,7 @@
 package servlets;
 
 import control.Controller;
+import control.InvalidDataException;
 import data.Mapper;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class ChangeProjectServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException
+            throws ServletException, IOException, InvalidDataException
     {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -69,12 +70,10 @@ public class ChangeProjectServlet extends HttpServlet
         try
         {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex)
+        } 
+         catch (InvalidDataException ide)
         {
-            Logger.getLogger(ChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(ChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ide);
         }
     }
 
@@ -93,12 +92,9 @@ public class ChangeProjectServlet extends HttpServlet
         try
         {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex)
+        } catch (InvalidDataException ide)
         {
-            Logger.getLogger(ChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(ChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ide);
         }
     }
 

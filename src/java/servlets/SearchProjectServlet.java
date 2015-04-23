@@ -6,6 +6,7 @@
 package servlets;
 
 import control.Controller;
+import control.InvalidDataException;
 import data.Mapper;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +32,7 @@ public class SearchProjectServlet extends HttpServlet
     private Controller ctrl = new Controller();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException
+            throws ServletException, IOException, InvalidDataException
     {
         response.setContentType("text/html;charset=UTF-8");
         String status = request.getParameter("status");
@@ -51,9 +52,9 @@ public class SearchProjectServlet extends HttpServlet
 //            {
 //                request.setAttribute("projects", IO.getAllProjects(quarter));
 //            }
-        } catch (SQLException sqle)
+        } catch (InvalidDataException ide)
         {
-            System.err.println(sqle);
+            System.err.println(ide);
         }
 
         request.getRequestDispatcher("SearchProject.jsp").forward(request, response);
@@ -75,9 +76,9 @@ public class SearchProjectServlet extends HttpServlet
         try
         {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex)
+        } catch (InvalidDataException ide)
         {
-            Logger.getLogger(SearchProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchProjectServlet.class.getName()).log(Level.SEVERE, null, ide);
         }
     }
 
@@ -96,9 +97,9 @@ public class SearchProjectServlet extends HttpServlet
         try
         {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex)
+        } catch (InvalidDataException ide)
         {
-            Logger.getLogger(SearchProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchProjectServlet.class.getName()).log(Level.SEVERE, null, ide);
         }
     }
 

@@ -6,6 +6,7 @@
 package servlets;
 
 import control.Controller;
+import control.InvalidDataException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -32,7 +33,7 @@ public class LogInServlet extends HttpServlet
     private String password;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException
+            throws ServletException, IOException, InvalidDataException
     {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -74,13 +75,11 @@ public class LogInServlet extends HttpServlet
         try
         {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex)
+        } 
+         catch (InvalidDataException ide)
         {
-            Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ide);
+        } 
     }
 
     /**
@@ -98,13 +97,10 @@ public class LogInServlet extends HttpServlet
         try
         {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex)
+        } catch (InvalidDataException ide)
         {
-            Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ide);
+        } 
     }
 
     /**
