@@ -38,7 +38,7 @@
                 Lastname: &nbsp <input type="text" name="lastname" value="" size="20" />
                 <br>
                 <br>
-                Country: &nbsp <select name="Country">
+                Country: &nbsp <select name="country">
                     <option value="Denmark">Denmark</option>
                     <option value="Norway">Norway</option>
                     <option value="Sweeden">Sweeden</option>
