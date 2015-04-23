@@ -29,7 +29,7 @@ public class DBFacade implements IDBFacade
             mapper.saveProject(p);
         } catch (SQLException sqle)
         {
-            throw new InvalidDataException("");
+            throw new InvalidDataException(""+sqle);
         }
 
     }
@@ -42,7 +42,7 @@ public class DBFacade implements IDBFacade
             return mapper.getAllProjects(searchCriteria);
         } catch (SQLException sqle)
         {
-            throw new InvalidDataException("");
+            throw new InvalidDataException(""+sqle);
         }
     }
 
@@ -54,7 +54,7 @@ public class DBFacade implements IDBFacade
             return mapper.getProjectToChange(projectID);
         } catch (SQLException sqle)
         {
-            throw new InvalidDataException("");
+            throw new InvalidDataException(""+sqle);
         }
     }
 
@@ -66,7 +66,7 @@ public class DBFacade implements IDBFacade
             return mapper.updateProject(p);
         } catch (SQLException sqle)
         {
-            throw new InvalidDataException("");
+            throw new InvalidDataException(""+sqle);
         }
     }
 
@@ -78,7 +78,7 @@ public class DBFacade implements IDBFacade
             mapper.savePartner(part);
         } catch (SQLException sqle)
         {
-            throw new InvalidDataException("");
+            throw new InvalidDataException(""+sqle);
         }
     }
 
@@ -90,7 +90,7 @@ public class DBFacade implements IDBFacade
             return mapper.validateCheckLogin(username, password);
         } catch (SQLException sqle)
         {
-            throw new InvalidDataException("");
+            throw new InvalidDataException(""+sqle);
         }
     }
 

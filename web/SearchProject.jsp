@@ -12,8 +12,22 @@
         <link href="CreateProject.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <br>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">DELL</a>
+        </div>
+        <ul class="nav nav-tabs">
+            <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+            <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+            <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+            <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
+            <li><a href="#">Create user</a></li>
+        </ul>
         <form name="Search project" action="searchProject" method="POST">
         <h1>Search Project</h1>
         <h4 align="left">To search for a project, choose the relevant status and press the search button</h4>
