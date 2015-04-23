@@ -8,6 +8,7 @@ package data;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
+import control.UserDTO;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,4 +30,5 @@ interface IDBFacade
     void savePartner(PartnerDTO part) throws InvalidDataException;
     
     boolean validateCheckLogin(String username, String password) throws InvalidDataException;
+   void createUser(UserDTO user) throws InvalidDataException;
 }

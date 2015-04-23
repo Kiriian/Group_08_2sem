@@ -27,8 +27,18 @@
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
         </ul>
         <h1>Create user</h1>
+        <h3>${validateMsg}
+
+
+        </h3>
         <hr>
-        <form name="Create user" action="createUserServlet" method="POST">
+        <form name="Create user" action="CreateUserServlet" method="POST">
+            Firstname: &nbsp <input type="text" name="firstname" value="" size="20" />
+            <br>
+            <br>
+            Lastname: &nbsp <input type="text" name="lastname" value="" size="20" />
+            <br>
+            <br>
             Username: &nbsp <input type="text" name="username" value="" size="20" />
             <br>
             <br>
@@ -48,9 +58,9 @@
             EmployeeID: &nbsp <input type="text" name="employeeID" value="0" size="20" />
             <br>
             <br>
-            <input type="submit" value="Submit User" name="createUserServlet" />
+            <input type="submit" value="Submit User" name="CreateUserServlet" />
         </form>
-        
-        
+
+
     </body>
 </html>

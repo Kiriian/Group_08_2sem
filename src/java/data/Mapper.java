@@ -7,6 +7,7 @@ package data;
 
 import control.PartnerDTO;
 import control.ProjectDTO;
+import control.UserDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -230,6 +231,27 @@ public class Mapper
         {
             System.err.println(sqle);
         }
+    }
+
+   public void createUser(UserDTO user)throws SQLException {
+        PreparedStatement statement=null;
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW)){
+        
+        String sql5 ="INSERT INTO USERS VALUES (USER_ID_SEQUENCE.NEXTVAL, ?, ?, ?,?,?,?)";
+            statement = connection.prepareStatement(sql5);
+            statement.setString(1,user.getUsername());
+            statement.setString(2,user.getPassword());
+            statement.setString(3,user.getFirstname());
+            statement.setString(4,user.getLastname());
+            statement.setInt(5,user.getPartnerID());
+            statement.setInt(6,user.getEmployeeID());
+            statement.executeUpdate();
+                        
+        } catch (SQLException sqle)
+        {
+            System.err.println(sqle);
+        }
+       
     }
     
 }

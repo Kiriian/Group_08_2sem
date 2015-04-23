@@ -8,6 +8,7 @@ package data;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
+import control.UserDTO;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class DBFacade implements IDBFacade
 {
 
     Mapper mapper = new Mapper();
+    
 
     @Override
     public void saveProject(ProjectDTO p) throws InvalidDataException
@@ -93,5 +95,14 @@ public class DBFacade implements IDBFacade
             throw new InvalidDataException(""+sqle);
         }
     }
-
+ @Override
+ public void createUser(UserDTO user) throws InvalidDataException{
+  try
+        {
+      mapper.createUser(user);
+        } catch (SQLException sqle)
+        {
+            throw new InvalidDataException(""+sqle);
+        }
+ }
 }

@@ -15,36 +15,35 @@ import java.util.ArrayList;
  *
  * @author Jeanette
  */
-public class Controller
-{
+public class Controller {
+
     DBFacade facade = new DBFacade();
-    public void SaveProject( ProjectDTO p) throws InvalidDataException
-    {
+
+    public void SaveProject(ProjectDTO p) throws InvalidDataException {
         facade.saveProject(p);
     }
-    
-    public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException
-    {
+
+    public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException {
         return facade.getAllProjects(searchCriteria);
     }
-    
-    public ProjectDTO getProjectToChange(int projectID) throws InvalidDataException
-    {
+
+    public ProjectDTO getProjectToChange(int projectID) throws InvalidDataException {
         return facade.getProjectToChange(projectID);
     }
-    
-    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException
-    {
+
+    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException {
         return facade.updateProject(p);
     }
-    
-    public void savePartner(PartnerDTO part) throws InvalidDataException
-    {
+
+    public void savePartner(PartnerDTO part) throws InvalidDataException {
         facade.savePartner(part);
     }
-    
-    public boolean validateCheckLogin(String username, String password) throws InvalidDataException
-    {
+
+    public boolean validateCheckLogin(String username, String password) throws InvalidDataException {
         return facade.validateCheckLogin(username, password);
+    }
+
+    public void createUser(UserDTO user) throws InvalidDataException {
+         facade.createUser(user);
     }
 }
