@@ -5,8 +5,9 @@
  */
 package servlets;
 
+import control.Controller;
 import control.PartnerDTO;
-import data.IO;
+import data.Mapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class CreatePartnerServlet extends HttpServlet
 {
-
+    private Controller ctrl = new Controller();
     private String country;
     private String partnerName;
     private String partnerType;
@@ -59,7 +60,7 @@ public class CreatePartnerServlet extends HttpServlet
                 request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
             }
             PartnerDTO part = new PartnerDTO(country, partnerName, partnerType);
-            IO.savePartner(part);
+            ctrl.savePartner(part);
 
             request.setAttribute("partner", part);
             request.setAttribute("validateMsg", "Partner created");

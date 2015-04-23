@@ -5,8 +5,9 @@
  */
 package servlets;
 
+import control.Controller;
 import control.ProjectDTO;
-import data.IO;
+import data.Mapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -26,10 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class UpdateChangeProjectServlet extends HttpServlet
 {
-    int projectCost;
-    int projectBudget;
-    int partnerID;
-    int projectID;
+    private Controller ctrl = new Controller();
+    private int projectCost;
+    private int projectBudget;
+    private int partnerID;
+    private int projectID;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,14 +85,16 @@ public class UpdateChangeProjectServlet extends HttpServlet
             }
             catch(NumberFormatException nfe)
             {
-                
+                request.setAttribute("validateMsg", "Cost cannot contain letters");
+                RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
+                rd.forward(request, response);
             }
             int employeeID = Integer.valueOf(request.getParameter("employeeID"));
             String quarter = request.getParameter("quarter");
             projectID = Integer.valueOf(request.getParameter("projectID"));
 
             ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget, projectCost, requiredPOE, employeeID, projectID, quarter);
-            IO.UpdateProject(p);
+            ctrl.updateProject(p);
             String confirm = "Project "+projectID+ " have been changed, you can now view the changed project by doing a search";
 //            request.setAttribute("validateMsg", answer);
             request.setAttribute("projectHaveBeenChanged", confirm);

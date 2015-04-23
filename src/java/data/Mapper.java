@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Jeanette
  */
-public class IO
+public class Mapper
 {
     static {
         System.err.println("static initialiser called in IO");
@@ -32,17 +32,38 @@ public class IO
             Class.forName(DB.DRIVER);
         } catch (ClassNotFoundException ex)
         {
-            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Mapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //public IO() throws ClassNotFoundException, SQLException {
-    public static void SaveProject(ProjectDTO p) throws ClassNotFoundException
+    
+     public boolean validateCheckLogin(String username, String password) throws SQLException
     {
-        try
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
+            String checkLogin = "SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
+
+            PreparedStatement statement = connection.prepareStatement(checkLogin);
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            ResultSet rs = statement.executeQuery();
            
-            Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
-//                connection.setAutoCommit(false);
+                if (rs.next())
+                {
+                    return true;
+                }
+            
+        } catch (SQLException sqle)
+        {
+            System.err.println(sqle);
+        }
+        return false;
+    }
+    
+    public void saveProject(ProjectDTO p) throws SQLException
+    {
+        try(Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
             String sql = "INSERT INTO PROJECT(PROJECT_ID, STATUS, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -65,15 +86,13 @@ public class IO
         System.out.println("ok - fra io");
     }
 
-    public static Object getAllProjects(String searchCriteria) throws SQLException, ClassNotFoundException
+    public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws SQLException
     {
         ArrayList<ProjectDTO> out = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement statement = null;
-        Connection connection = null;
-        try
+        try(Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
             String query = "SELECT * FROM PROJECT WHERE STATUS LIKE '" + searchCriteria + "' ORDER BY PROJECT_ID DESC";
 
             statement = connection.prepareStatement(query);
@@ -104,24 +123,17 @@ public class IO
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
-        } finally
-        {
-            statement.close();
-            connection.close();
         }
-
         return out;
     }
 
-    public static ProjectDTO getProjectToChange(int projectID) throws SQLException, ClassNotFoundException
+    public ProjectDTO getProjectToChange(int projectID) throws SQLException
     {
         ResultSet rs = null;
         PreparedStatement statement = null;
-        Connection connection = null;
         ProjectDTO p = null;
-        try
+        try(Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);)
         {
-            connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
             String sql2 = "SELECT * FROM PROJECT WHERE PROJECT_ID LIKE '" + projectID + "'";
 
             statement = connection.prepareStatement(sql2);
@@ -151,25 +163,17 @@ public class IO
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
-        } finally
-        {
-            statement.close();
-            connection.close();
         }
         System.out.println("her" + p.toString());
         return p;
     }
 
-    public static ProjectDTO UpdateProject(ProjectDTO p) throws ClassNotFoundException, SQLException, java.text.ParseException
+    public ProjectDTO updateProject(ProjectDTO p) throws SQLException, java.text.ParseException
     {
         PreparedStatement statement = null;
-        Connection connection = null;
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.s");
-        try
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
-//                connection.setAutoCommit(false);
-
             String sql3 = "UPDATE PROJECT SET STATUS=?,"
                     + "ACTIVITY_DESCRIPTION=?,"
                     + "COMMENTS=?,"
@@ -205,21 +209,15 @@ public class IO
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
-        } finally
-        {
-            statement.close();
-            connection.close();
         }
         return p;
     }
 
-    public static void savePartner(PartnerDTO part) throws ClassNotFoundException, SQLException
+    public void savePartner(PartnerDTO part) throws SQLException
     {
         PreparedStatement statement = null;
-        Connection connection = null;
-        try
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
             
             String sql4 ="INSERT INTO PARTNER VALUES (PARTNER_ID_SEQUENCE.NEXTVAL, ?, ?, ?)";
             statement = connection.prepareStatement(sql4);
@@ -231,10 +229,6 @@ public class IO
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
-        } finally
-        {
-            statement.close();
-            connection.close();
         }
     }
     

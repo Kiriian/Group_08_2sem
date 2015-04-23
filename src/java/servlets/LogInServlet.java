@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import data.LogInDBCheck;
+import control.Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class LogInServlet extends HttpServlet
 {
-
+    private Controller ctrl = new Controller();
     private String username;
     private String password;
 
@@ -45,7 +45,7 @@ public class LogInServlet extends HttpServlet
             request.getRequestDispatcher("LogIn.jsp").forward(request, response);
         }
         boolean LogInCheck = false;
-        LogInCheck = LogInDBCheck.validateCheckLogin(username, password);
+        LogInCheck = ctrl.validateCheckLogin(username, password);
         if (LogInCheck == true)
         {
             request.getRequestDispatcher("Welcome.jsp").forward(request, response);

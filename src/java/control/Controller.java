@@ -5,8 +5,11 @@
  */
 package control;
 
-import data.IO;
+import data.DBFacade;
+import data.Mapper;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,9 +17,34 @@ import java.sql.SQLException;
  */
 public class Controller
 {
-        IO io = new IO();
-    public void CreateProject( ProjectDTO p) throws ClassNotFoundException, SQLException
+    DBFacade facade = new DBFacade();
+    public void SaveProject( ProjectDTO p) throws InvalidDataException
     {
-        io.SaveProject(p);
+        facade.saveProject(p);
+    }
+    
+    public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException
+    {
+        return facade.getAllProjects(searchCriteria);
+    }
+    
+    public ProjectDTO getProjectToChange(int projectID) throws InvalidDataException
+    {
+        return facade.getProjectToChange(projectID);
+    }
+    
+    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException
+    {
+        return facade.updateProject(p);
+    }
+    
+    public void savePartner(PartnerDTO part) throws InvalidDataException
+    {
+        facade.savePartner(part);
+    }
+    
+    public boolean validateCheckLogin(String username, String password) throws InvalidDataException
+    {
+        return facade.validateCheckLogin(username, password);
     }
 }

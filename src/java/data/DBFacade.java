@@ -5,7 +5,12 @@
  */
 package data;
 
+import control.InvalidDataException;
+import control.PartnerDTO;
 import control.ProjectDTO;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,9 +18,80 @@ import control.ProjectDTO;
  */
 public class DBFacade implements IDBFacade
 {
-    public void SaveProject(ProjectDTO p) throws ClassNotFoundException{
-    IO io = new IO();
-    io.SaveProject(p);
+
+    Mapper mapper = new Mapper();
+
+    @Override
+    public void saveProject(ProjectDTO p) throws InvalidDataException
+    {
+        try
+        {
+            mapper.saveProject(p);
+        } catch (SQLException sqle)
+        {
+            throw new InvalidDataException("");
+        }
+
     }
-    
+
+    @Override
+    public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException
+    {
+        try
+        {
+            return mapper.getAllProjects(searchCriteria);
+        } catch (SQLException sqle)
+        {
+            throw new InvalidDataException("");
+        }
+    }
+
+    @Override
+    public ProjectDTO getProjectToChange(int projectID) throws InvalidDataException
+    {
+        try
+        {
+            return mapper.getProjectToChange(projectID);
+        } catch (SQLException sqle)
+        {
+            throw new InvalidDataException("");
+        }
+    }
+
+    @Override
+    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException
+    {
+        try
+        {
+            return mapper.updateProject(p);
+        } catch (SQLException sqle)
+        {
+            throw new InvalidDataException("");
+        }
+    }
+
+    @Override
+    public void savePartner(PartnerDTO part) throws InvalidDataException
+    {
+        try
+        {
+            mapper.savePartner(part);
+        } catch (SQLException sqle)
+        {
+            throw new InvalidDataException("");
+        }
+    }
+
+    @Override
+    public boolean validateCheckLogin(String username, String password) throws InvalidDataException
+    {
+        try
+        {
+            return mapper.validateCheckLogin(username, password);
+        } catch (SQLException sqle)
+        {
+            throw new InvalidDataException("");
+        }
+    }
+
 }

@@ -5,7 +5,8 @@
  */
 package servlets;
 
-import data.IO;
+import control.Controller;
+import data.Mapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,16 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class SearchProjectServlet extends HttpServlet
 {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private Controller ctrl = new Controller();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException
     {
@@ -48,7 +41,7 @@ public class SearchProjectServlet extends HttpServlet
         {
             if (!status.isEmpty())
             {
-                request.setAttribute("projects", IO.getAllProjects(status));
+                request.setAttribute("projects", ctrl.getAllProjects(status));
             }
 //            else if (!partnerID.isEmpty())
 //            {

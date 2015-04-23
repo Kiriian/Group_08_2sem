@@ -93,7 +93,7 @@ public class CreateProjectServlet extends HttpServlet
                 rd.forward(request, response);
             }
             ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone, projectBudget);
-            controller.CreateProject(p);
+            controller.SaveProject(p);
             request.setAttribute("Project", p);
             request.setAttribute("validateMsg", answer);
             request.getRequestDispatcher("projectCreated.jsp").forward(request, response);

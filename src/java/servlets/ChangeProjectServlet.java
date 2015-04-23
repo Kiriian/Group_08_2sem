@@ -6,7 +6,7 @@
 package servlets;
 
 import control.Controller;
-import data.IO;
+import data.Mapper;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -28,8 +28,7 @@ import javax.servlet.http.HttpServletResponse;
         })
 public class ChangeProjectServlet extends HttpServlet
 {
-    Controller controller = new Controller();
-    IO io = new IO();
+    Controller ctrl = new Controller();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,7 +48,7 @@ public class ChangeProjectServlet extends HttpServlet
 //
 
 //
-        request.setAttribute("project", IO.getProjectToChange(projectID));
+        request.setAttribute("project", ctrl.getProjectToChange(projectID));
         
         request.getRequestDispatcher("ChangeProject.jsp").forward(request, response);
     }
