@@ -30,19 +30,12 @@ import javax.servlet.http.HttpServletResponse;
         })
 public class CreateUserServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    UserValidator uv = new UserValidator();
+    Controller ctrl = new Controller();
+    String answer = null;
+
     int employeeID;
     int partnerID;
-    String answer = null;
-    Controller ctrl = new Controller();
     String firstname;
     String lastname;
     String username;
@@ -51,24 +44,19 @@ public class CreateUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, InvalidDataException {
         response.setContentType("text/html;charset=UTF-8");
-        UserValidator uv = new UserValidator();
-
         try {
-
-            firstname =request.getParameter("firstname");
+            firstname = request.getParameter("firstname");
             lastname = request.getParameter("lastname");
             username = request.getParameter("username");
             password = request.getParameter("password");
-            String repeatPassword = request.getParameter("reapeatPassword");
+            String repeatPassword = request.getParameter("repeatPassword");
             try {
                 partnerID = Integer.valueOf(request.getParameter("partnerID"));
 
             } catch (NumberFormatException nfe) {
                 request.setAttribute("validateMsg", "partnerID must not contain letters");
                 request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
-
             }
-
             try {
                 employeeID = Integer.valueOf(request.getParameter("employeeID"));
 
@@ -76,12 +64,13 @@ public class CreateUserServlet extends HttpServlet {
                 request.setAttribute("validateMsg", "employeeID must not contain letters");
                 request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
             }
+
             answer = uv.userValidator(firstname, lastname, username, password, repeatPassword, partnerID, employeeID);
         } catch (InvalidDataException ide) {
-            request.setAttribute("validateMsg", answer);
+            request.setAttribute("validateMsg", ide.getMessage());
             request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
         }
-        UserDTO user = new UserDTO(username, password,  partnerID, employeeID,firstname, lastname);
+        UserDTO user = new UserDTO(username, password, partnerID, employeeID, firstname, lastname);
         ctrl.createUser(user);
         request.setAttribute("validateMsg", "User created");
         request.getRequestDispatcher("CreateUser.jsp").forward(request, response);

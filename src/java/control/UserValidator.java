@@ -22,7 +22,6 @@ public class UserValidator {
         try {
             if (firstname.isEmpty()) {
                 throw new InvalidDataException("Firstname cannot be empty");
-
             }
             if (lastname.isEmpty()) {
                 throw new InvalidDataException("Lastname cannot be empty");
@@ -44,8 +43,8 @@ public class UserValidator {
             if (checkEmployeeID.isEmpty()) {
                 throw new InvalidDataException("EmployeeID cannot be empty");
             }
-            if (password.equals(repeatPassword)) {
-                throw new InvalidDataException("Password and RepeatPassword is not the same");
+            if (!password.equals(repeatPassword)) {
+                throw new InvalidDataException("Password and repeated password is not the same");
             }
             if (partnerID != 0 && employeeID != 0) {
                 throw new InvalidDataException(
@@ -57,7 +56,6 @@ public class UserValidator {
                         "Enter partnerID only if the user is a partner else 0,"
                         + "Enter EmployeeID only if the user is a Dell Employee else 0");
             }
-
             return "";
 
         } catch (InvalidDataException ide) {
