@@ -48,7 +48,7 @@ public class CreateEmployeeServlet extends HttpServlet
             throws ServletException, IOException, InvalidDataException
     {
         response.setContentType("text/html;charset=UTF-8");
-        
+        request.getSession().getAttribute("user");
             firstname = request.getParameter("firstname");
             lastname = request.getParameter("lastname");
             country = request.getParameter("country");

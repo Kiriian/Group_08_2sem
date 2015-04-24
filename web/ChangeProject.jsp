@@ -28,7 +28,7 @@
             <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
         </ul>
 
-        <h1>View and Change Project ${project.getProjectID()}</h1>
+        <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
         
         <form name="Change project" action="UpdateChangeProjectServlet" method="POST">
             <hr> 

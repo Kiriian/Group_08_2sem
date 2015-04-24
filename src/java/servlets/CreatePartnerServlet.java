@@ -48,7 +48,7 @@ public class CreatePartnerServlet extends HttpServlet
             throws ServletException, IOException, ClassNotFoundException, SQLException
     {
         response.setContentType("text/html;charset=UTF-8");
-
+        request.getSession().getAttribute("user");
         try
         {
             country = request.getParameter("country");

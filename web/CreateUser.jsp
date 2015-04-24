@@ -27,7 +27,7 @@
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
             <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
         </ul>
-        <h1>Create user</h1>
+        <h1>Create user</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
         <h3>${validateMsg}
 
 

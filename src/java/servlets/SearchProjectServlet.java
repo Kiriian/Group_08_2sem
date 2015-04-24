@@ -35,6 +35,7 @@ public class SearchProjectServlet extends HttpServlet
             throws ServletException, IOException, InvalidDataException
     {
         response.setContentType("text/html;charset=UTF-8");
+        request.getSession().getAttribute("user");
         String status = request.getParameter("status");
 //        String partnerID = request.getParameter("partnerID");
 //        String quarter = request.getParameter("quarter");

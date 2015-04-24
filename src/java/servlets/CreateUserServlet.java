@@ -44,7 +44,10 @@ public class CreateUserServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, InvalidDataException {
+        
         response.setContentType("text/html;charset=UTF-8");
+        request.getSession().getAttribute("user");
+        
         try {
             firstname = request.getParameter("firstname");
             lastname = request.getParameter("lastname");

@@ -46,6 +46,7 @@ public class UpdateChangeProjectServlet extends HttpServlet
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
+        request.getSession().getAttribute("user");
         String answer = null;
         try
         {

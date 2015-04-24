@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome</h1>
+        <h1>Welcome</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
 
         <div class="navbar-header">
             <a class="navbar-brand" href="#">DELL</a>

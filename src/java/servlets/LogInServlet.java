@@ -46,11 +46,11 @@ public class LogInServlet extends HttpServlet
             request.setAttribute("validateMsg", "Inputfields cannot be empty");
             request.getRequestDispatcher("LogIn.jsp").forward(request, response);
         }
-        UserDTO user;
-        user = ctrl.validateCheckLogin(username, password);
-        request.getSession().setAttribute("user", user);
+        UserDTO sessionUser;
+        sessionUser = ctrl.validateCheckLogin(username, password);
+        request.getSession().setAttribute("user", sessionUser);
         
-        if (user != null)
+        if (sessionUser != null)
         {
             request.getRequestDispatcher("Welcome.jsp").forward(request, response);
         }

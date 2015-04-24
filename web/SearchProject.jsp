@@ -28,12 +28,13 @@
             <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
             <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
              <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+           
         </ul>
         <form name="Search project" action="searchProject" method="POST">
-        <h1>Search Project</h1>
+        <h1>Search Project</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
         <h4 align="left">To search for a project, choose the relevant status and press the search button</h4>
         <h4 align="left">To view or change a project, simply click the project ID of the project</h4>
-        <h3 align="right">Username: </h3>
+
         <h3 id ="confirm" align="center" >${projectHaveBeenChanged}</h3>
         <hr>
         <p5>Status: &nbsp <select name="status">
