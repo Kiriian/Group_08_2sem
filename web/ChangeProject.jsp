@@ -28,9 +28,10 @@
             <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
         </ul>
 
-        <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
+        <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5> <input type="text" name="usertype" value='${user.getUserType()}' size="20" />
         
         <form name="Change project" action="UpdateChangeProjectServlet" method="POST">
+            <h4>${validateMsg}</h4>
             <hr> 
             <br>
             <div> Project id:<input type="text" name="projectID" value='${project.getProjectID()}' size="20" readonly="readonly" />

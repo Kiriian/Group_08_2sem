@@ -29,7 +29,7 @@
         </ul>
         <form name="Create project" action="createProject" method="POST">
         
-            <h1>Create Project</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5><input type="hidden" name="status" value='${user.getUserType()}' size="20" />
+            <h1>Create Project</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5><input type="hidden" name="type" value='${user.getUserType()}' size="20" />
         <hr>
         <br>
         <p> ${validateMsg} </p>

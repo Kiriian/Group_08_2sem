@@ -44,8 +44,9 @@ public class ChangeProjectServlet extends HttpServlet
             throws ServletException, IOException, InvalidDataException
     {
         response.setContentType("text/html;charset=UTF-8");
-
+        
         request.getSession().getAttribute("user");
+        
         int projectID = Integer.valueOf(request.getParameter("projectid"));
 
         request.setAttribute("project", ctrl.getProjectToChange(projectID));

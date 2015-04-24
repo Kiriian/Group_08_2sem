@@ -30,7 +30,6 @@ public class Mapper
 
     static
     {
-        System.err.println("static initialiser called in IO");
         try
         {
             Class.forName(DB.DRIVER);

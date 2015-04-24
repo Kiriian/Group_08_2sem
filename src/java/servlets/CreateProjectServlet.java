@@ -48,8 +48,6 @@ public class CreateProjectServlet extends HttpServlet
             throws ServletException, IOException, ClassNotFoundException, SQLException
     {
         response.setContentType("text/html;charset=UTF-8");
-        request.getSession().getAttribute("user");
-        
         try
         {
             status = request.getParameter("status");
