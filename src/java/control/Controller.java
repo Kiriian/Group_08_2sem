@@ -39,16 +39,18 @@ public class Controller {
         facade.savePartner(part);
     }
 
-    public boolean validateCheckLogin(String username, String password) throws InvalidDataException {
+    public UserDTO validateCheckLogin(String username, String password) throws InvalidDataException {
         return facade.validateCheckLogin(username, password);
     }
 
     public void createUser(UserDTO user) throws InvalidDataException {
-         facade.createUser(user);
+          facade.createUser(user);
     }
 
     public void createEmployee(EmployeeDTO emp) throws InvalidDataException
     {
         facade.createEmployee(emp);
     }
+    
+   
 }

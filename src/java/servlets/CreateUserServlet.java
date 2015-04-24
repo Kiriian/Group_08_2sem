@@ -40,6 +40,7 @@ public class CreateUserServlet extends HttpServlet {
     private String lastname;
     private String username;
     private String password;
+    private String userType;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, InvalidDataException {
@@ -70,7 +71,7 @@ public class CreateUserServlet extends HttpServlet {
             request.setAttribute("validateMsg", ide.getMessage());
             request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
         }
-        UserDTO user = new UserDTO(username, password, partnerID, employeeID, firstname, lastname);
+        UserDTO user = new UserDTO(username, password, partnerID, employeeID, firstname, lastname, userType);
         ctrl.createUser(user);
         request.setAttribute("validateMsg", "User created");
         request.getRequestDispatcher("CreateUser.jsp").forward(request, response);

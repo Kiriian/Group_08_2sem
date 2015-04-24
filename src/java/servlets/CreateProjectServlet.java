@@ -47,7 +47,6 @@ public class CreateProjectServlet extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException
     {
-        String answer = null;
         try
         {
             status = request.getParameter("status");
@@ -95,7 +94,6 @@ public class CreateProjectServlet extends HttpServlet
             ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone, projectBudget);
             controller.SaveProject(p);
             request.setAttribute("Project", p);
-            request.setAttribute("validateMsg", answer);
             request.getRequestDispatcher("projectCreated.jsp").forward(request, response);
         } catch (Exception e)
         {

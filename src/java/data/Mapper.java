@@ -40,7 +40,7 @@ public class Mapper
         }
     }
 
-    public boolean validateCheckLogin(String username, String password) throws SQLException
+    public UserDTO validateCheckLogin(String username, String password) throws SQLException
     {
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
@@ -52,16 +52,24 @@ public class Mapper
 
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next())
+            while (rs.next())
             {
-                return true;
+                UserDTO user = new UserDTO(rs.getInt("USER_ID"),
+                        rs.getString("USERNAME"),
+                        rs.getString("PASSWORD"),
+                        rs.getInt("PARTNER_ID"),
+                        rs.getInt("EMPLOYEE_ID"),
+                        rs.getString("FIRSTNAME"),
+                        rs.getString("LASTNAME"),
+                        rs.getString("USER_TYPE"));
+                return user;
             }
 
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
         }
-        return false;
+        return null;
     }
 
     public void saveProject(ProjectDTO p) throws SQLException
@@ -241,14 +249,15 @@ public class Mapper
         PreparedStatement statement = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql5 = "INSERT INTO USERS VALUES (USER_ID_SEQUENCE.NEXTVAL, ?, ?, ?,?,?,?)";
+            String sql5 = "INSERT INTO USERS VALUES (USER_ID_SEQUENCE.NEXTVAL, ?, ?,?, ?,?,?,?)";
             statement = connection.prepareStatement(sql5);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstname());
             statement.setString(4, user.getLastname());
-            statement.setInt(5, user.getPartnerID());
-            statement.setInt(6, user.getEmployeeID());
+            statement.setString(5, user.getUserType());
+            statement.setInt(6, user.getPartnerID());
+            statement.setInt(7, user.getEmployeeID());
             statement.executeUpdate();
 
         } catch (SQLException sqle)

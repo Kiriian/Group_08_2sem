@@ -7,6 +7,7 @@ package servlets;
 
 import control.Controller;
 import control.InvalidDataException;
+import control.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -45,9 +46,11 @@ public class LogInServlet extends HttpServlet
             request.setAttribute("validateMsg", "Inputfields cannot be empty");
             request.getRequestDispatcher("LogIn.jsp").forward(request, response);
         }
-        boolean LogInCheck = false;
-        LogInCheck = ctrl.validateCheckLogin(username, password);
-        if (LogInCheck == true)
+        UserDTO user;
+        user = ctrl.validateCheckLogin(username, password);
+        request.getSession().setAttribute("user", user);
+        
+        if (user != null)
         {
             request.getRequestDispatcher("Welcome.jsp").forward(request, response);
         }

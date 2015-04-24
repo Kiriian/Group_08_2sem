@@ -59,6 +59,10 @@
             EmployeeID: &nbsp <input type="text" name="employeeID" value="0" size="20" />
             <br>
             <br>
+            User Type:
+            <select name="userType">
+                <option value="dell">Dell</option>
+                <option value="partner">Partner</option></select>
             <input type="submit" value="Submit User" name="CreateUserServlet" />
         </form>
 

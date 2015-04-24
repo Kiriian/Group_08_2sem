@@ -30,7 +30,7 @@ interface IDBFacade
     
     void savePartner(PartnerDTO part) throws InvalidDataException;
     
-    boolean validateCheckLogin(String username, String password) throws InvalidDataException;
+    UserDTO validateCheckLogin(String username, String password) throws InvalidDataException;
     
    void createUser(UserDTO user) throws InvalidDataException;
    

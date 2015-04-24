@@ -69,7 +69,7 @@ public class DBFacade implements IDBFacade {
     }
 
     @Override
-    public boolean validateCheckLogin(String username, String password) throws InvalidDataException {
+    public UserDTO validateCheckLogin(String username, String password) throws InvalidDataException {
         try {
             return mapper.validateCheckLogin(username, password);
         } catch (SQLException sqle) {
@@ -80,7 +80,7 @@ public class DBFacade implements IDBFacade {
     @Override
     public void createUser(UserDTO user) throws InvalidDataException {
         try {
-            mapper.createUser(user);
+             mapper.createUser(user);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
         }

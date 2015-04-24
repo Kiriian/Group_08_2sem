@@ -19,15 +19,39 @@ public class UserDTO {
     int employeeID;
     String firstname;
     String lastname;
-    
+    String userType;
 
-    public UserDTO(String username, String password, int partnerID, int employeeID, String firstname, String lastname) {
+    public UserDTO(int userID, String username, String password, int partnerID, int employeeID, String firstname, String lastname, String userType)
+    {
+        this.userID = userID;
         this.username = username;
         this.password = password;
         this.partnerID = partnerID;
         this.employeeID = employeeID;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.userType = userType;
+    }
+
+    public String getUserType()
+    {
+        return userType;
+    }
+
+    public void setUserType(String userType)
+    {
+        this.userType = userType;
+    }
+    
+
+    public UserDTO(String username, String password, int partnerID, int employeeID, String firstname, String lastname, String userType) {
+        this.username = username;
+        this.password = password;
+        this.partnerID = partnerID;
+        this.employeeID = employeeID;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.userType = userType;
     }
 
     public void setUserID(int userID) {
