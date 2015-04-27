@@ -45,11 +45,12 @@
                 </ul>
             </c:otherwise>
         </c:choose>
+        
         <form name="Search project" action="searchProject" method="POST">
             <h1>Search Project</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
             <h4 align="left">To search for a project, choose the relevant status and press the search button</h4>
             <h4 align="left">To view or change a project, simply click the project ID of the project</h4>
-
+            <input type="hidden" name="hiddenPartnerID" value='${user.getPartnerID()}' size="20" />
             <h3 id ="confirm" align="center" >${projectHaveBeenChanged}</h3>
             <hr>
             <p5>Status: &nbsp <select name="status">
@@ -62,7 +63,7 @@
                     <option value="Claim approved">Claim sent</option>
                     <option value="Reimburst">Claim sent</option>                    
                 </select></p5>
-            <p6>Partner ID: <input type="text" name="partnerID" value="" disabled="disabled"/> </p6>
+            <p6>Partner ID: <input type="text" name="partnerID" value='${user.getPartnerID()}' disabled="disabled"/> </p6>
 
             <br><br>
             Quarter:&nbsp <input type="text" name="quarter" value="" disabled="disabled"/>

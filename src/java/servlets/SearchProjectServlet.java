@@ -37,22 +37,18 @@ public class SearchProjectServlet extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
         String status = request.getParameter("status");
-//        String partnerID = request.getParameter("partnerID");
-//        String quarter = request.getParameter("quarter");
+        int partnerID = Integer.valueOf(request.getParameter("hiddenPartnerID"));
         try
         {
-            if (!status.isEmpty())
+            if (partnerID == 0)
             {
                 request.setAttribute("projects", ctrl.getAllProjects(status));
             }
-//            else if (!partnerID.isEmpty())
-//            {
-//                request.setAttribute("projects", IO.getAllProjects(partnerID));
-//            }
-//            else if (!quarter.isEmpty())
-//            {
-//                request.setAttribute("projects", IO.getAllProjects(quarter));
-//            }
+            else
+            {
+                request.setAttribute("projects", ctrl.getAllPartnerProjects(status, partnerID));
+            }
+
         } catch (InvalidDataException ide)
         {
             System.err.println(ide);

@@ -23,6 +23,11 @@ public class Controller {
         facade.saveProject(p);
     }
 
+    public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws InvalidDataException
+    {
+        return facade.getAllPartnerProjects(searchCriteria, partnerID);
+    }
+    
     public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException {
         return facade.getAllProjects(searchCriteria);
     }

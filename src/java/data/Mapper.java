@@ -97,19 +97,61 @@ public class Mapper
         System.out.println("ok - fra io");
     }
 
-    public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws SQLException
+    public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws SQLException
     {
-        ArrayList<ProjectDTO> out = new ArrayList<>();
-        ResultSet rs = null;
+        ArrayList<ProjectDTO> pOut = new ArrayList<>();
+        ResultSet rs;
         PreparedStatement statement = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String query = "SELECT * FROM PROJECT WHERE STATUS LIKE '" + searchCriteria + "' ORDER BY PROJECT_ID DESC";
+            String sql7 = "SELECT * FROM PROJECT WHERE STATUS = ? AND PARTNER_ID = ?";
+            statement = connection.prepareStatement(sql7);
+            statement.setString(1, searchCriteria);
+            statement.setInt(2, partnerID);
+            
+            rs = statement.executeQuery();
+            
+            while (rs.next())
+            {
+                pOut.add(new ProjectDTO(
+                        rs.getString("STATUS"),
+                        rs.getString("START_DATE"),
+                        rs.getString("END_DATE"),
+                        rs.getString("CURRENCY"),
+                        rs.getString("ACTIVITY_DESCRIPTION"),
+                        rs.getString("COMMENTS"),
+                        rs.getString("TARGET_AUDIENCE"),
+                        rs.getString("OBJECTIVE_RESULT"),
+                        rs.getInt("PARTNER_ID"),
+                        rs.getInt("PROJECT_BUDGET"),
+                        rs.getInt("PROJECT_COST"),
+                        rs.getString("REQUIRED_POE"),
+                        rs.getInt("EMPLOYEE_ID"),
+                        rs.getInt("PROJECT_ID"),
+                        rs.getString("QUARTER_NAME")));
+            }
+        }
+        catch (SQLException sqle)
+        {
+            System.err.println(sqle); 
+        }
+       
+        return pOut;
+    }
+    
+    public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws SQLException
+    {
+        ArrayList<ProjectDTO> out = new ArrayList<>();
+        ResultSet rs;
+        PreparedStatement statement;
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
+            String query = "SELECT * FROM PROJECT WHERE STATUS LIKE ? ORDER BY PROJECT_ID DESC";
 
             statement = connection.prepareStatement(query);
-            //statement.setString(1, "Project proposal");
+            statement.setString(1, searchCriteria);
 
-            rs = statement.executeQuery(query);
+            rs = statement.executeQuery();
 
             //=== read the result
             while (rs.next())

@@ -31,7 +31,18 @@ public class DBFacade implements IDBFacade {
         }
 
     }
-
+    
+    @Override
+    public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws InvalidDataException
+    {
+        try{
+            return mapper.getAllPartnerProjects(searchCriteria, partnerID);
+        }catch (SQLException sqle)
+        {
+            throw new InvalidDataException("" + sqle);
+        }
+    }
+    
     @Override
     public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException {
         try {
