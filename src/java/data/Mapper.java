@@ -9,6 +9,11 @@ import control.EmployeeDTO;
 import control.PartnerDTO;
 import control.ProjectDTO;
 import control.UserDTO;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -325,6 +331,24 @@ public class Mapper
         {
             System.err.println(sqle);
         }
-
+    }
+    
+    public void uploadPOE (Part file, int projectID) throws SQLException, IOException
+    {
+        PreparedStatement statement = null;
+        InputStream inputStream = null;
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
+            String sql8="INSERT INTO POE (IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
+            statement = connection.prepareStatement(sql8);
+            statement.setInt(1, projectID);
+            inputStream = file.getInputStream();
+            statement.setBlob(2, inputStream);
+            statement.executeUpdate();
+        }
+        catch(SQLException sqle)
+        {
+            System.err.println(sqle);
+        }
     }
 }

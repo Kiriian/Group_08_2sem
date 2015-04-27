@@ -10,9 +10,10 @@ import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
 import control.UserDTO;
-import java.sql.SQLException;
+import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -37,4 +38,6 @@ interface IDBFacade
    void createUser(UserDTO user) throws InvalidDataException;
    
    void createEmployee(EmployeeDTO emp) throws InvalidDataException;
+   
+   void uploadPOE(Part file, int projectID) throws InvalidDataException;
 }

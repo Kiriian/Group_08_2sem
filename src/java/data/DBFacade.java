@@ -10,9 +10,15 @@ import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
 import control.UserDTO;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -97,12 +103,28 @@ public class DBFacade implements IDBFacade {
         }
     }
 
+    @Override
     public void createEmployee(EmployeeDTO emp) throws InvalidDataException
     {
        try {
             mapper.createEmployee(emp);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
+        }
+    }
+
+    @Override
+    public void uploadPOE(Part file, int projectID) throws InvalidDataException
+    {
+        try
+        {
+            mapper.uploadPOE(file, projectID);
+        } catch (SQLException | FileNotFoundException ex)
+        {
+            throw new InvalidDataException("" + ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

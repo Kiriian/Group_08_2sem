@@ -27,7 +27,7 @@
                 <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
                 <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-                <li><a href="#">Submit POE</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
             </ul>
         </c:when>
         <c:otherwise>

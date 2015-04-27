@@ -7,9 +7,11 @@ package control;
 
 import data.DBFacade;
 import data.Mapper;
+import java.io.File;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -57,5 +59,9 @@ public class Controller {
         facade.createEmployee(emp);
     }
     
+    public void uploadPOE(Part file, int projectID) throws InvalidDataException
+    {
+        facade.uploadPOE(file, projectID);
+    }
    
 }
