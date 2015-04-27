@@ -5,6 +5,7 @@
  */
 package data;
 
+
 import control.EmployeeDTO;
 import control.InvalidDataException;
 import control.PartnerDTO;
@@ -126,5 +127,20 @@ public class DBFacade implements IDBFacade {
         {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void uploadClaim(Part file, int projectID) throws InvalidDataException
+    {
+        try
+        {
+            mapper.uploadClaim(file, projectID);
+        } catch (SQLException |FileNotFoundException ex)
+        {
+            throw new InvalidDataException("" + ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
 }

@@ -63,5 +63,10 @@ public class Controller {
     {
         facade.uploadPOE(file, projectID);
     }
+    
+    public void uploadClaim(Part file, int projectID) throws InvalidDataException
+    {
+        facade.uploadClaim(file, projectID);
+    }
    
 }

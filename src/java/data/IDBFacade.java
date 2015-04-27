@@ -40,4 +40,6 @@ interface IDBFacade
    void createEmployee(EmployeeDTO emp) throws InvalidDataException;
    
    void uploadPOE(Part file, int projectID) throws InvalidDataException;
+   
+   void uploadClaim(Part file, int projectID) throws InvalidDataException;
 }

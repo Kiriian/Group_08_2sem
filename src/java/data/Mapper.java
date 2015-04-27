@@ -351,4 +351,22 @@ public class Mapper
             System.err.println(sqle);
         }
     }
+    public void uploadClaim (Part file, int projectID) throws SQLException, IOException
+    {
+        PreparedStatement statement = null;
+        InputStream inputStream = null;
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
+            String sql8="INSERT INTO CLAIM (CLAIM_IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
+            statement = connection.prepareStatement(sql8);
+            statement.setInt(1, projectID);
+            inputStream = file.getInputStream();
+            statement.setBlob(2, inputStream);
+            statement.executeUpdate();         
+        }
+        catch(SQLException sqle)
+        {
+            System.err.println(sqle);
+        }
+    }
 }
