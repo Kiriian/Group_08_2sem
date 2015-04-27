@@ -4,6 +4,7 @@
     Author     : martamiszczyk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,22 +17,36 @@
     </head>
     <body>
         <br>
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">DELL</a>
-        </div>
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
-            <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
-            <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-            <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
-            <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
-            <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
-        </ul>
-
+        <c:set var="user" value="${user}"></c:set>
+    <c:choose>
+        <c:when test="${user.getUserType() eq 'Partner'}">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">DELL</a>
+            </div>
+            <ul class="nav nav-tabs">
+                <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                <li><a href="#">Submit POE</a></li>
+            </ul>
+        </c:when>
+        <c:otherwise>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">DELL</a>
+            </div>
+            <ul class="nav nav-tabs">
+                <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+        </c:otherwise>
+    </c:choose>
         <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} 
         
         <form name="Change project" action="UpdateChangeProjectServlet" method="POST">
-            </h5> <input type="text" name="usertype" value='${user.getUserType()}' size="20" />
+            </h5> <input type="hidden" name="usertype" value='${user.getUserType()}' size="20" />
             <h4>${validateMsg}</h4>
             <hr> 
             <br>

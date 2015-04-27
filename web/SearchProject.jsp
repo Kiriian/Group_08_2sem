@@ -18,60 +18,75 @@
     </head>
     <body>
         <br>
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">DELL</a>
-        </div>
-        <ul class="nav nav-tabs">
-            <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
-            <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
-            <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-            <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
-            <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
-             <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
-           
-        </ul>
+        <c:set var="user" value="${user}"></c:set>
+        <c:choose>
+            <c:when test="${user.getUserType() eq 'Partner'}">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DELL</a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                    <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                    <li><a href="#">Submit POE</a></li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DELL</a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li ><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                    <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+                </ul>
+            </c:otherwise>
+        </c:choose>
         <form name="Search project" action="searchProject" method="POST">
-        <h1>Search Project</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
-        <h4 align="left">To search for a project, choose the relevant status and press the search button</h4>
-        <h4 align="left">To view or change a project, simply click the project ID of the project</h4>
+            <h1>Search Project</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
+            <h4 align="left">To search for a project, choose the relevant status and press the search button</h4>
+            <h4 align="left">To view or change a project, simply click the project ID of the project</h4>
 
-        <h3 id ="confirm" align="center" >${projectHaveBeenChanged}</h3>
-        <hr>
-        <p5>Status: &nbsp <select name="status">
-                <option value="Project proposal">Project proposal</option>
-                <option value="Submit">Submittet</option>
-                <option value="Execution">Execution</option>
-                <option value="Request POE">Request POE</option>
-                <option value="Approval">Approval</option>
-            <option value="Claim sent">Claim sent</option>
-            </select></p5>
-    <p6>Partner ID: <input type="text" name="partnerID" value="" disabled="disabled"/> </p6>
+            <h3 id ="confirm" align="center" >${projectHaveBeenChanged}</h3>
+            <hr>
+            <p5>Status: &nbsp <select name="status">
+                    <option value="Project proposal">Project proposal</option>
+                    <option value="Submit">Submittet</option>
+                    <option value="Execution">Execution</option>
+                    <option value="Request POE">Request POE</option>
+                    <option value="Approval">Approval</option>
+                    <option value="Claim sent">Claim sent</option>
+                </select></p5>
+            <p6>Partner ID: <input type="text" name="partnerID" value="" disabled="disabled"/> </p6>
 
-    <br><br>
-        Quarter:&nbsp <input type="text" name="quarter" value="" disabled="disabled"/>
-        
-        <p7><input type="submit" value="Search"/></p7>
-         <br><br>
-        
-        <table>
-            <tr>
-                <th>ProjectID</th>
-                <th>Status</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Activity Description</th>
-                <th>Objective & Result</th>
-                <th>Partner ID</th>
-                <th>Project Budget</th>
-                <th>Cost</th>
-                <th>Currency</th>
-                <th>Quarter</th>
-            </tr>
-        
+            <br><br>
+            Quarter:&nbsp <input type="text" name="quarter" value="" disabled="disabled"/>
+
+            <p7><input type="submit" value="Search"/></p7>
+            <br><br>
+
+            <table>
+                <tr>
+                    <th>ProjectID</th>
+                    <th>Status</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Activity Description</th>
+                    <th>Objective & Result</th>
+                    <th>Partner ID</th>
+                    <th>Project Budget</th>
+                    <th>Cost</th>
+                    <th>Currency</th>
+                    <th>Quarter</th>
+                </tr>
+
         </form>
         <c:forEach var="p" items="${projects}">
         <tr>
-            <td <a onclick="location.href='changeProjectServlet?projectid=${p.getProjectID()}'">${p.getProjectID()}</a></td>
+            <td <a onclick="location.href = 'changeProjectServlet?projectid=${p.getProjectID()}'">${p.getProjectID()}</a></td>
             <td>${p.getStatus()}</td>
             <td>${p.getStartDate()}</td>
             <td>${p.getEndDate()}</td>
@@ -82,10 +97,10 @@
             <td>${p.getCost()}</td>
             <td>${p.getCurrency()}</td>
             <td>${p.getQuarter()}</td>
-            
-           <!-- <p>${p}</p> -->
-         </tr>
-        </c:forEach>
-          </table>
-    </body>
+
+<!-- <p>${p}</p> -->
+        </tr>
+    </c:forEach>
+</table>
+</body>
 </html>
