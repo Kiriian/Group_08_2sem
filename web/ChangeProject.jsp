@@ -55,12 +55,14 @@
                 <br>
                 Status:&nbsp <input type="text" name="" value='${project.getStatus()}'  size="20" readonly="readonly"/>
             &nbsp To change status use the dropdown: &nbsp <select name="status">
-                <option value="Project proposal">Project proposal</option>
-                <option value="Submit">Submittet</option>
-                <option value="Execution">Execution</option>
-                <option value="Request POE">Request POE</option>
-                <option value="Approval">Approval</option>
-                <option value="Claim sent">Claim sent</option>
+                    <option value="Project proposal">Project proposal</option>
+                    <option value="Project approval">Submittet</option>
+                    <option value="Execution">Execution</option>
+                    <option value="POE uploaded">Request POE</option>
+                    <option value="POE approval">Approval</option>
+                    <option value="Claim uploaded">Claim sent</option>
+                    <option value="Claim approved">Claim sent</option>
+                    <option value="Reimburst">Claim sent</option> 
             </select>
             <br>
             <br>
