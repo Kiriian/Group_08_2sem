@@ -102,7 +102,7 @@
             <br>
             <br>
             Required POE:
-            <input type="text" name="requiredPOE" value="Nothing here yet" size="20" disabled="disabled" />
+            <input type="text" name="requiredPOE" value="" size="20"/>
             <br>
             <br>
             Employee ID:

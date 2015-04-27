@@ -15,7 +15,7 @@
         <title>Upload POE</title>
     </head>
     <body>
-        <h1>Upload POE</h1>
+        <h1>Upload POE</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
         <br>
         <br>
         <div class="navbar-header">
@@ -28,6 +28,7 @@
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
         </ul>
         <form name="Upload POE" action="uploadPOEServlet" method="POST" enctype="multipart/form-data">
+            <h3>Note: You can only upload one file pr. project</h3>
             <h3>${validateMsg}</h3>
             <br>
             <br>
@@ -41,9 +42,5 @@
             <br>
             <br>
         </form>
-
-
-
-
     </body>
 </html>

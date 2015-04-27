@@ -95,7 +95,7 @@ public class Mapper
             statement.setString(9, p.getObjectiveResult());
             statement.setInt(10, p.getPartnerID());
             statement.executeUpdate();
-            connection.commit();
+            
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
@@ -344,7 +344,7 @@ public class Mapper
             statement.setInt(1, projectID);
             inputStream = file.getInputStream();
             statement.setBlob(2, inputStream);
-            statement.executeUpdate();
+            statement.executeUpdate();         
         }
         catch(SQLException sqle)
         {
