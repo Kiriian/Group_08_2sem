@@ -29,7 +29,7 @@ import javax.servlet.http.Part;
     "/uploadPOEServlet"
 })
 @MultipartConfig(maxFileSize = 16177215)
-public class uploadPOEServlet extends HttpServlet
+public class UploadPOEServlet extends HttpServlet
 {
     Controller ctrl = new Controller();
     /**
@@ -77,7 +77,7 @@ public class uploadPOEServlet extends HttpServlet
             processRequest(request, response);
         } catch (InvalidDataException ex)
         {
-            Logger.getLogger(uploadPOEServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UploadPOEServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -98,7 +98,7 @@ public class uploadPOEServlet extends HttpServlet
             processRequest(request, response);
         } catch (InvalidDataException ex)
         {
-            Logger.getLogger(uploadPOEServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UploadPOEServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

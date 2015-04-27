@@ -56,7 +56,7 @@ public class UpdateChangeProjectServlet extends HttpServlet
             try
             {
                 String status = request.getParameter("status");
-                if (status.equals("Project proposal") || status.equals("POE sent") || status.equals("Execution") || status.equals("Claim uploaded"))
+                if (status.equals("Project proposal") || status.equals("POE uploaded") || status.equals("Execution") || status.equals("Claim uploaded") || status.equals("Reimburst"))
                 {
                     request.setAttribute("validateMsg", "You do not have the credentials to use the status: " + status);
                     RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
@@ -124,7 +124,7 @@ public class UpdateChangeProjectServlet extends HttpServlet
             try
             {
                 String status = request.getParameter("status");
-                if (!status.equals("Project proposal") || !status.equals("POE sent") || !status.equals("Execution") || !status.equals("Claim uploaded"))
+                if (!status.equals("Project proposal") || !status.equals("POE uploaded") || !status.equals("Execution") || !status.equals("Claim uploaded") || !status.equals("Reimburst"))
                 {
                     request.setAttribute("validateMsg", "You do not have the credentials to use the status: " + status);
                     RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");

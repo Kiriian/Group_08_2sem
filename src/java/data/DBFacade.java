@@ -10,6 +10,7 @@ import control.EmployeeDTO;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
+import control.QuarterDTO;
 import control.UserDTO;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -142,5 +143,17 @@ public class DBFacade implements IDBFacade {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+    }
+
+    @Override
+    public void createQuarter(QuarterDTO quarter) throws InvalidDataException{
+        try
+        {
+            mapper.createQuarter(quarter);
+        }
+        catch(SQLException sqle)
+        {
+            throw new InvalidDataException("" + sqle);
+        }
     }
 }

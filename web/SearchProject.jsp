@@ -55,13 +55,13 @@
             <hr>
             <p5>Status: &nbsp <select name="status">
                     <option value="Project proposal">Project proposal</option>
-                    <option value="Project approval">Submittet</option>
+                    <option value="Project approval">Project approval</option>
                     <option value="Execution">Execution</option>
-                    <option value="POE uploaded">Request POE</option>
-                    <option value="POE approval">Approval</option>
-                    <option value="Claim uploaded">Claim sent</option>
-                    <option value="Claim approved">Claim sent</option>
-                    <option value="Reimburst">Claim sent</option>                    
+                    <option value="POE uploaded">POE uploaded</option>
+                    <option value="POE approval">POE approval</option>
+                    <option value="Claim uploaded">Claim uploaded</option>
+                    <option value="Claim approved">Claim approved</option>
+                    <option value="Reimburst">Reimburst</option>                    
                 </select></p5>
             <p6>Partner ID: <input type="text" name="partnerID" value='${user.getPartnerID()}' disabled="disabled"/> </p6>
 

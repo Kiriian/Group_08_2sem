@@ -41,6 +41,7 @@
                 <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
         </c:otherwise>
     </c:choose>
         <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} 
@@ -56,13 +57,13 @@
                 Status:&nbsp <input type="text" name="" value='${project.getStatus()}'  size="20" readonly="readonly"/>
             &nbsp To change status use the dropdown: &nbsp <select name="status">
                     <option value="Project proposal">Project proposal</option>
-                    <option value="Project approval">Submittet</option>
+                    <option value="Project approval">Project approval</option>
                     <option value="Execution">Execution</option>
-                    <option value="POE uploaded">Request POE</option>
-                    <option value="POE approval">Approval</option>
-                    <option value="Claim uploaded">Claim sent</option>
-                    <option value="Claim approved">Claim sent</option>
-                    <option value="Reimburst">Claim sent</option> 
+                    <option value="POE uploaded">POE uploaded</option>
+                    <option value="POE approval">POE approval</option>
+                    <option value="Claim uploaded">Claim uploaded</option>
+                    <option value="Claim approved">Claim approved</option>
+                    <option value="Reimburst">Reimburst</option>
             </select>
             <br>
             <br>

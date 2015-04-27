@@ -68,5 +68,9 @@ public class Controller {
     {
         facade.uploadClaim(file, projectID);
     }
+
+    public void createQuarter(QuarterDTO quarter) throws InvalidDataException{
+        facade.createQuarter(quarter);
+    }
    
 }

@@ -26,6 +26,7 @@
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
             <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
             <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+            <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
         </ul>
         <h1>Create Partner</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
         <h3>${validateMsg}</h3>

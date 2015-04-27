@@ -42,6 +42,7 @@
                 <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
             </ul>
         </c:otherwise>
     </c:choose>

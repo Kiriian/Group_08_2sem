@@ -8,6 +8,7 @@ package data;
 import control.EmployeeDTO;
 import control.PartnerDTO;
 import control.ProjectDTO;
+import control.QuarterDTO;
 import control.UserDTO;
 import java.io.File;
 import java.io.FileInputStream;
@@ -363,6 +364,23 @@ public class Mapper
             inputStream = file.getInputStream();
             statement.setBlob(2, inputStream);
             statement.executeUpdate();         
+        }
+        catch(SQLException sqle)
+        {
+            System.err.println(sqle);
+        }
+    }
+
+    void createQuarter(QuarterDTO quarter) throws SQLException{
+        PreparedStatement statement;
+        
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
+            String sql12 = "INSERT INTO QUARTER (QUARTER_NAME, QUARTER_BUDGET) VALUES (?, ?)";
+            statement = connection.prepareStatement(sql12);
+            statement.setString(1, quarter.getQuarterName());
+            statement.setInt(2, quarter.getQuarterBudget());
+            statement.executeUpdate(); 
         }
         catch(SQLException sqle)
         {

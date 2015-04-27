@@ -9,6 +9,7 @@ import control.EmployeeDTO;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
+import control.QuarterDTO;
 import control.UserDTO;
 import java.io.File;
 import java.text.ParseException;
@@ -42,4 +43,6 @@ interface IDBFacade
    void uploadPOE(Part file, int projectID) throws InvalidDataException;
    
    void uploadClaim(Part file, int projectID) throws InvalidDataException;
+   
+   void createQuarter(QuarterDTO quarter) throws InvalidDataException;
 }
