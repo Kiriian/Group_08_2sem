@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ViewPOE", urlPatterns =
 {
-    "/ViewPOE"
+    "/ViewPOEServlet"
 })
 @MultipartConfig
 public class ViewPOEServlet extends HttpServlet
