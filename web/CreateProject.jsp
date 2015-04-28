@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="CreateProject.css" rel="stylesheet" type="text/css"/>
+        <link href="ProjectCSS.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -27,7 +27,8 @@
                 <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
                 <li class="active"><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-                <li><a href="#">Submit POE</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
             </ul>
         </c:when>
         <c:otherwise>

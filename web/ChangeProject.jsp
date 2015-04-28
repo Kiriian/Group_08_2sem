@@ -28,6 +28,7 @@
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
                 <li class="active"><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
+                <li><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
             </ul>
         </c:when>
         <c:otherwise>
@@ -42,6 +43,7 @@
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
                 <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
+                
         </c:otherwise>
     </c:choose>
         <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} 
@@ -66,6 +68,7 @@
                     <option value="Reimburst">Reimburst</option>
             </select>
             <br>
+            
             <br>
             Start date: 
             <input type="text" name="startDate" value='${project.getStartDate()}' size="20" />&nbsp &nbsp &nbsp
@@ -105,7 +108,7 @@
             Required POE:
             <input type="text" name="requiredPOE" value="" size="20"/>
             <br>
-            <br>
+            <br> 
             Employee ID:
             <input type="text" name="employeeID" value='${project.getEmployeeID()}' />
             <br>

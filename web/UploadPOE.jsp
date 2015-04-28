@@ -26,6 +26,7 @@
             <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
             <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
+            <li><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
         </ul>
         <form name="Upload POE" action="uploadPOEServlet" method="POST" enctype="multipart/form-data">
             <h3>Note: You can only upload one file pr. project</h3>
