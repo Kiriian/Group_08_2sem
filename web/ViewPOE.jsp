@@ -17,39 +17,40 @@
     <body>
         <br>
         <c:set var="user" value="${user}"></c:set>
-    <c:choose>
-        <c:when test="${user.getUserType() eq 'Partner'}">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">DELL</a>
-            </div>
-            <ul class="nav nav-tabs">
-                <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
-                <li class="active"><a href="http://localhost:8080/Group_08_2sem/ViewPOE.jsp">View POE</a></li>
-            </ul>
-        </c:when>
-        <c:otherwise>
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">DELL</a>
-            </div>
-            <ul class="nav nav-tabs">
-                <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
-                <li class="active"><a href="http://localhost:8080/Group_08_2sem/ViewPOE.jsp">View POE</a></li>
-        </c:otherwise>
-    </c:choose>
-                <h1>View POE</h1>
+        <c:choose>
+            <c:when test="${user.getUserType() eq 'Partner'}">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DELL</a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
+                    <li class="active"><a href="http://localhost:8080/Group_08_2sem/ViewPOE.jsp">View POE</a></li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DELL</a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
+                    <li class="active"><a href="http://localhost:8080/Group_08_2sem/ViewPOE.jsp">View POE</a></li>
+                    </c:otherwise>
+                </c:choose>
+            <br>
+            <h1>View POE</h1>
             <br>
             <br>
-            
-            
-    </body>
-</html>
+
+
+            </body>
+            </html>

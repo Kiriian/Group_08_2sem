@@ -43,7 +43,6 @@
                     <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
                     <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
                     <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
-
                 </c:otherwise>
             </c:choose>
             <br>
@@ -66,9 +65,9 @@
                     <option value="POE approval">POE approval</option>
                     <option value="Claim uploaded">Claim uploaded</option>
                     <option value="Claim approved">Claim approved</option>
-                    <option value="Reimburst">Reimburst</option>
+                    <option value="Reimburse">Reimburse</option>
                 </select>
-                &nbsp &nbsp<input type="submit" value="'ViewPOEServlet?projectID=${project.getProjectID()}'" name="ViewPOE" onclick="window.open('http://localhost:8080/Group_08_2sem/ViewPOE.jsp')"/>
+                &nbsp &nbsp <a onclick="location.href = 'ViewPOEServlet?projectid=${project.getProjectID()}'">View POE</a>
                 <br>
                 <br>
                 Start date: 

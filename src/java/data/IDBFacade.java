@@ -12,6 +12,7 @@ import control.ProjectDTO;
 import control.QuarterDTO;
 import control.UserDTO;
 import java.io.File;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.servlet.http.Part;
@@ -45,4 +46,6 @@ interface IDBFacade
    void uploadClaim(Part file, int projectID) throws InvalidDataException;
    
    void createQuarter(QuarterDTO quarter) throws InvalidDataException;
+   
+   InputStream getImage(int projectID) throws InvalidDataException;
 }

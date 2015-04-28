@@ -15,6 +15,7 @@ import control.UserDTO;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -152,6 +153,19 @@ public class DBFacade implements IDBFacade {
             mapper.createQuarter(quarter);
         }
         catch(SQLException sqle)
+        {
+            throw new InvalidDataException("" + sqle);
+        }
+    }
+    
+    @Override
+    public InputStream getImage(int projectID) throws InvalidDataException
+    {
+        try
+        {
+            return mapper.getImage(projectID);
+        }
+        catch(SQLException | IOException sqle)
         {
             throw new InvalidDataException("" + sqle);
         }

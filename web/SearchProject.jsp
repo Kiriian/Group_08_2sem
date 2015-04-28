@@ -62,7 +62,7 @@
                     <option value="POE approval">POE approval</option>
                     <option value="Claim uploaded">Claim uploaded</option>
                     <option value="Claim approved">Claim approved</option>
-                    <option value="Reimburst">Reimburst</option>                    
+                    <option value="Reimburse">Reimburse</option>                    
                 </select></p5>
             <p6>Partner ID: <input type="text" name="partnerID" value='${user.getPartnerID()}' disabled="disabled"/> </p6>
 

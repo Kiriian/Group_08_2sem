@@ -8,6 +8,7 @@ package control;
 import data.DBFacade;
 import data.Mapper;
 import java.io.File;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -71,6 +72,11 @@ public class Controller {
 
     public void createQuarter(QuarterDTO quarter) throws InvalidDataException{
         facade.createQuarter(quarter);
+    }
+    
+    public InputStream getImage (int projectID) throws InvalidDataException
+    {
+        return facade.getImage(projectID);
     }
    
 }
