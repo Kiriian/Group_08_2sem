@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -50,9 +51,9 @@ public class Mapper
     {
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String checkLogin = "SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
+            String sql1 = "SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
 
-            PreparedStatement statement = connection.prepareStatement(checkLogin);
+            PreparedStatement statement = connection.prepareStatement(sql1);
             statement.setString(1, username);
             statement.setString(2, password);
 
@@ -82,9 +83,9 @@ public class Mapper
     {
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql = "INSERT INTO PROJECT(PROJECT_ID, STATUS, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+            String sql2 = "INSERT INTO PROJECT(PROJECT_ID, STATUS, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
 
-            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql2);
             statement.setString(1, p.getStatus());
             statement.setString(2, p.getActivityDescription());
             statement.setString(3, p.getComments());
@@ -96,7 +97,7 @@ public class Mapper
             statement.setString(9, p.getObjectiveResult());
             statement.setInt(10, p.getPartnerID());
             statement.executeUpdate();
-            
+
         } catch (SQLException sqle)
         {
             System.err.println(sqle);
@@ -111,13 +112,13 @@ public class Mapper
         PreparedStatement statement = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql7 = "SELECT * FROM PROJECT WHERE STATUS = ? AND PARTNER_ID = ?";
-            statement = connection.prepareStatement(sql7);
+            String sql3 = "SELECT * FROM PROJECT WHERE STATUS = ? AND PARTNER_ID = ?";
+            statement = connection.prepareStatement(sql3);
             statement.setString(1, searchCriteria);
             statement.setInt(2, partnerID);
-            
+
             rs = statement.executeQuery();
-            
+
             while (rs.next())
             {
                 pOut.add(new ProjectDTO(
@@ -137,15 +138,14 @@ public class Mapper
                         rs.getInt("PROJECT_ID"),
                         rs.getString("QUARTER_NAME")));
             }
-        }
-        catch (SQLException sqle)
+        } catch (SQLException sqle)
         {
-            System.err.println(sqle); 
+            System.err.println(sqle);
         }
-       
+
         return pOut;
     }
-    
+
     public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws SQLException
     {
         ArrayList<ProjectDTO> out = new ArrayList<>();
@@ -153,9 +153,9 @@ public class Mapper
         PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String query = "SELECT * FROM PROJECT WHERE STATUS LIKE ? ORDER BY PROJECT_ID DESC";
+            String sql4 = "SELECT * FROM PROJECT WHERE STATUS LIKE ? ORDER BY PROJECT_ID DESC";
 
-            statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(sql4);
             statement.setString(1, searchCriteria);
 
             rs = statement.executeQuery();
@@ -194,11 +194,11 @@ public class Mapper
         ProjectDTO p = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);)
         {
-            String sql2 = "SELECT * FROM PROJECT WHERE PROJECT_ID LIKE '" + projectID + "'";
+            String sql5 = "SELECT * FROM PROJECT WHERE PROJECT_ID LIKE '" + projectID + "'";
 
-            statement = connection.prepareStatement(sql2);
+            statement = connection.prepareStatement(sql5);
 
-            rs = statement.executeQuery(sql2);
+            rs = statement.executeQuery(sql5);
 
             while (rs.next())
             {
@@ -234,7 +234,7 @@ public class Mapper
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.s");
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql3 = "UPDATE PROJECT SET STATUS=?,"
+            String sql6 = "UPDATE PROJECT SET STATUS=?,"
                     + "ACTIVITY_DESCRIPTION=?,"
                     + "COMMENTS=?,"
                     + "TARGET_AUDIENCE=?,"
@@ -247,7 +247,7 @@ public class Mapper
                     + "EMPLOYEE_ID=?,"
                     + "QUARTER_NAME=?"
                     + "WHERE PROJECT_ID=?";
-            statement = connection.prepareStatement(sql3);
+            statement = connection.prepareStatement(sql6);
             statement.setString(1, p.getStatus());
             statement.setString(2, p.getActivityDescription());
             statement.setString(3, p.getComments());
@@ -279,8 +279,8 @@ public class Mapper
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
 
-            String sql4 = "INSERT INTO PARTNER VALUES (PARTNER_ID_SEQUENCE.NEXTVAL, ?, ?, ?)";
-            statement = connection.prepareStatement(sql4);
+            String sql7 = "INSERT INTO PARTNER VALUES (PARTNER_ID_SEQUENCE.NEXTVAL, ?, ?, ?)";
+            statement = connection.prepareStatement(sql7);
             statement.setString(1, part.getCountry());
             statement.setString(2, part.getPartnerName());
             statement.setString(3, part.getPartnerType());
@@ -297,8 +297,8 @@ public class Mapper
         PreparedStatement statement = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql5 = "INSERT INTO USERS VALUES (USER_ID_SEQUENCE.NEXTVAL, ?, ?,?, ?,?,?,?)";
-            statement = connection.prepareStatement(sql5);
+            String sql8 = "INSERT INTO USERS VALUES (USER_ID_SEQUENCE.NEXTVAL, ?, ?,?, ?,?,?,?)";
+            statement = connection.prepareStatement(sql8);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstname());
@@ -320,8 +320,8 @@ public class Mapper
         PreparedStatement statement = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql6 = "INSERT INTO EMPLOYEE VALUES (EMPLOYEE_ID_SEQUENCE.NEXTVAL, ?, ?, ?,?)";
-            statement = connection.prepareStatement(sql6);
+            String sql9 = "INSERT INTO EMPLOYEE VALUES (EMPLOYEE_ID_SEQUENCE.NEXTVAL, ?, ?, ?,?)";
+            statement = connection.prepareStatement(sql9);
             statement.setString(1, emp.getFirstname());
             statement.setString(2, emp.getLastname());
             statement.setString(3, emp.getCountry());
@@ -333,58 +333,82 @@ public class Mapper
             System.err.println(sqle);
         }
     }
-    
-    public void uploadPOE (Part file, int projectID) throws SQLException, IOException
+
+    public void uploadPOE(Part file, int projectID) throws SQLException, IOException
     {
         PreparedStatement statement = null;
         InputStream inputStream = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql8="INSERT INTO POE (IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
-            statement = connection.prepareStatement(sql8);
+            String sql10 = "INSERT INTO POE (IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
+            statement = connection.prepareStatement(sql10);
             statement.setInt(1, projectID);
             inputStream = file.getInputStream();
             statement.setBlob(2, inputStream);
-            statement.executeUpdate();         
-        }
-        catch(SQLException sqle)
-        {
-            System.err.println(sqle);
-        }
-    }
-    public void uploadClaim (Part file, int projectID) throws SQLException, IOException
-    {
-        PreparedStatement statement = null;
-        InputStream inputStream = null;
-        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
-        {
-            String sql8="INSERT INTO CLAIM (CLAIM_IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
-            statement = connection.prepareStatement(sql8);
-            statement.setInt(1, projectID);
-            inputStream = file.getInputStream();
-            statement.setBlob(2, inputStream);
-            statement.executeUpdate();         
-        }
-        catch(SQLException sqle)
+            statement.executeUpdate();
+        } catch (SQLException sqle)
         {
             System.err.println(sqle);
         }
     }
 
-    void createQuarter(QuarterDTO quarter) throws SQLException{
+    public void uploadClaim(Part file, int projectID) throws SQLException, IOException
+    {
+        PreparedStatement statement = null;
+        InputStream inputStream = null;
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
+            String sql11 = "INSERT INTO CLAIM (CLAIM_IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
+            statement = connection.prepareStatement(sql11);
+            statement.setInt(1, projectID);
+            inputStream = file.getInputStream();
+            statement.setBlob(2, inputStream);
+            statement.executeUpdate();
+        } catch (SQLException sqle)
+        {
+            System.err.println(sqle);
+        }
+    }
+
+    public void createQuarter(QuarterDTO quarter) throws SQLException
+    {
         PreparedStatement statement;
-        
+
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
             String sql12 = "INSERT INTO QUARTER (QUARTER_NAME, QUARTER_BUDGET) VALUES (?, ?)";
             statement = connection.prepareStatement(sql12);
             statement.setString(1, quarter.getQuarterName());
             statement.setInt(2, quarter.getQuarterBudget());
-            statement.executeUpdate(); 
-        }
-        catch(SQLException sqle)
+            statement.executeUpdate();
+        } catch (SQLException sqle)
         {
             System.err.println(sqle);
+        }
+    }
+
+    public InputStream getImage(int projectID) throws SQLException, IOException
+    {
+        PreparedStatement statement;
+        ResultSet rs;
+        int imageID;
+        InputStream inputStream = null;
+
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
+            String sql13 = "SELECT IMAGE FROM POE WHERE PROJECT_ID = ?";
+
+            statement = connection.prepareStatement(sql13);
+            statement.setInt(1, projectID);
+            rs = statement.executeQuery();
+            if (rs.next())
+            {
+                imageID = rs.getInt("IMAGE_ID");
+
+                Blob blob = rs.getBlob("IMAGE");
+                inputStream = blob.getBinaryStream();
+            }
+            return inputStream;
         }
     }
 }

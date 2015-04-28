@@ -46,8 +46,10 @@
                 <li class="active"><a href="http://localhost:8080/Group_08_2sem/ViewPOE.jsp">View POE</a></li>
         </c:otherwise>
     </c:choose>
-       
+                <h1>View POE</h1>
             <br>
             <br>
+            
+            
     </body>
 </html>
