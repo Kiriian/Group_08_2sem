@@ -50,7 +50,9 @@
             <h1>View POE</h1>
             <br>
             <br>
+            <form action="ViewPOEServlet" method="POST" enctype="multipart/form-data">
+                File: <input type="file" name="file" /> <button>Download</button>
+            </form>
 
-
-            </body>
-            </html>
+    </body>
+</html>

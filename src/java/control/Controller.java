@@ -6,10 +6,7 @@
 package control;
 
 import data.DBFacade;
-import data.Mapper;
-import java.io.File;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.servlet.http.Part;
@@ -60,21 +57,21 @@ public class Controller {
         facade.createEmployee(emp);
     }
     
-    public void uploadPOE(Part file, int projectID) throws InvalidDataException
+    public void uploadPOE(Part file, String contentType, int projectID) throws InvalidDataException
     {
-        facade.uploadPOE(file, projectID);
+        facade.uploadPOE(file, contentType, projectID);
     }
     
-    public void uploadClaim(Part file, int projectID) throws InvalidDataException
+    public void uploadClaim(Part file, String contentType, int projectID) throws InvalidDataException
     {
-        facade.uploadClaim(file, projectID);
+        facade.uploadClaim(file, contentType, projectID);
     }
 
     public void createQuarter(QuarterDTO quarter) throws InvalidDataException{
         facade.createQuarter(quarter);
     }
     
-    public InputStream getImage (int projectID) throws InvalidDataException
+    public ArrayList<ImageDTO> getImage (int projectID) throws InvalidDataException
     {
         return facade.getImage(projectID);
     }

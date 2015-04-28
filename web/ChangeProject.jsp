@@ -67,7 +67,7 @@
                     <option value="Claim approved">Claim approved</option>
                     <option value="Reimburse">Reimburse</option>
                 </select>
-                &nbsp &nbsp <a onclick="location.href = 'ViewPOEServlet?projectid=${project.getProjectID()}'">View POE</a>
+                &nbsp &nbsp <a onclick="location.href ='ViewPOEServlet?projectid=${project.getProjectID()}'">View POE</a>
                 <br>
                 <br>
                 Start date: 

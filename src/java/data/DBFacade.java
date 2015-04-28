@@ -7,6 +7,7 @@ package data;
 
 
 import control.EmployeeDTO;
+import control.ImageDTO;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
@@ -117,11 +118,11 @@ public class DBFacade implements IDBFacade {
     }
 
     @Override
-    public void uploadPOE(Part file, int projectID) throws InvalidDataException
+    public void uploadPOE(Part file, String contentType, int projectID) throws InvalidDataException
     {
         try
         {
-            mapper.uploadPOE(file, projectID);
+            mapper.uploadPOE(file, contentType, projectID);
         } catch (SQLException | FileNotFoundException ex)
         {
             throw new InvalidDataException("" + ex);
@@ -131,11 +132,12 @@ public class DBFacade implements IDBFacade {
         }
     }
 
-    public void uploadClaim(Part file, int projectID) throws InvalidDataException
+    @Override
+    public void uploadClaim(Part file, String contentType, int projectID) throws InvalidDataException
     {
         try
         {
-            mapper.uploadClaim(file, projectID);
+            mapper.uploadClaim(file, contentType, projectID);
         } catch (SQLException |FileNotFoundException ex)
         {
             throw new InvalidDataException("" + ex);
@@ -159,7 +161,7 @@ public class DBFacade implements IDBFacade {
     }
     
     @Override
-    public InputStream getImage(int projectID) throws InvalidDataException
+    public ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException
     {
         try
         {

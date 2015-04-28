@@ -6,6 +6,7 @@
 package data;
 
 import control.EmployeeDTO;
+import control.ImageDTO;
 import control.InvalidDataException;
 import control.PartnerDTO;
 import control.ProjectDTO;
@@ -41,11 +42,11 @@ interface IDBFacade
    
    void createEmployee(EmployeeDTO emp) throws InvalidDataException;
    
-   void uploadPOE(Part file, int projectID) throws InvalidDataException;
+   void uploadPOE(Part file, String contentType, int projectID) throws InvalidDataException;
    
-   void uploadClaim(Part file, int projectID) throws InvalidDataException;
+   void uploadClaim(Part file, String contentType, int projectID) throws InvalidDataException;
    
    void createQuarter(QuarterDTO quarter) throws InvalidDataException;
    
-   InputStream getImage(int projectID) throws InvalidDataException;
+   ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException;
 }

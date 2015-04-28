@@ -49,10 +49,11 @@ public class UploadPOEServlet extends HttpServlet
         request.getSession().getAttribute("user");
                 
         Part file = request.getPart("file");
+        String contentType = file.getHeader("content-type");
         int projectID = Integer.valueOf(request.getParameter("projectID"));
         System.out.println("file er i servlet: " + file);
         
-        ctrl.uploadPOE(file, projectID);
+        ctrl.uploadPOE(file, contentType, projectID);
         
         request.setAttribute("validateMsg", "Your file has been uploaded, remeber to change the status of the project");
         

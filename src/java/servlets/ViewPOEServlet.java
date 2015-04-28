@@ -1,13 +1,17 @@
 package servlets;
 
 import control.Controller;
+import control.ImageDTO;
 import control.InvalidDataException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 {
     "/ViewPOE"
 })
+@MultipartConfig
 public class ViewPOEServlet extends HttpServlet
 {
 
@@ -32,37 +37,44 @@ public class ViewPOEServlet extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
-        InputStream inputStream = null;
-        OutputStream outStream = null;
-        int projectID = Integer.valueOf(request.getParameter("projectid"));
-
-        inputStream = ctrl.getImage(projectID);
-        if (inputStream != null)
+        try
         {
-            int fileLength = inputStream.available();
+            ArrayList<ImageDTO> imageOut;
+            OutputStream outStream = null;
+            int projectID = Integer.valueOf(request.getParameter("projectid"));
 
-            response.setContentLength(fileLength);
-            outStream = response.getOutputStream();
+            imageOut = ctrl.getImage(projectID);
 
-            byte[] buffer = new byte[BUFFER_SIZE];
-            int bytesRead = -1;
-
-            while ((bytesRead = inputStream.read(buffer)) > 0)
+            for (ImageDTO image : imageOut)
             {
-                outStream.write(buffer, 0, bytesRead);
+                response.setContentType(image.getContentType());
+                try (OutputStream out = response.getOutputStream())
+                {
+                    InputStream in = image.getInputStream();
+                    byte[] buffer = new byte[1024];
+                    int count = 0;
+                    do
+                    {
+                        count = in.read(buffer);
+                        out.write(buffer, 0, count);
+                    } while (count == 1024);
+                    in.close();
+                }
             }
+            request.getRequestDispatcher("ViewPOE.jsp").forward(request, response);
         }
-        else
+        catch (Exception e)
         {
-            request.setAttribute("validateMsg", "Image not found");
-            request.getRequestDispatcher("ViewPOE.jsp").forward(request, response);
+            PrintWriter out = response.getWriter();
+            out.println("<h2>" + e + "</h2>");
+            out.print("<pre>");
+            e.printStackTrace(out);
+            out.println("</pre>");
         }
-            request.getRequestDispatcher("ViewPOE.jsp").forward(request, response);
-            inputStream.close();
-            outStream.close();
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -78,9 +90,11 @@ public class ViewPOEServlet extends HttpServlet
         try
         {
             processRequest(request, response);
+
         } catch (InvalidDataException ex)
         {
-            Logger.getLogger(ViewPOEServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewPOEServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -99,9 +113,11 @@ public class ViewPOEServlet extends HttpServlet
         try
         {
             processRequest(request, response);
+
         } catch (InvalidDataException ex)
         {
-            Logger.getLogger(ViewPOEServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewPOEServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

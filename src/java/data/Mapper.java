@@ -6,13 +6,11 @@
 package data;
 
 import control.EmployeeDTO;
+import control.ImageDTO;
 import control.PartnerDTO;
 import control.ProjectDTO;
 import control.QuarterDTO;
 import control.UserDTO;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -21,7 +19,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -334,17 +331,18 @@ public class Mapper
         }
     }
 
-    public void uploadPOE(Part file, int projectID) throws SQLException, IOException
+    public void uploadPOE(Part file, String contentType, int projectID) throws SQLException, IOException
     {
         PreparedStatement statement = null;
         InputStream inputStream = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql10 = "INSERT INTO POE (IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
+            String sql10 = "INSERT INTO POE (IMAGE_ID, PROJECT_ID, CONTENT_TYPE, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?, ?)";
             statement = connection.prepareStatement(sql10);
             statement.setInt(1, projectID);
+            statement.setString(2, contentType);
             inputStream = file.getInputStream();
-            statement.setBlob(2, inputStream);
+            statement.setBlob(3, inputStream);
             statement.executeUpdate();
         } catch (SQLException sqle)
         {
@@ -352,17 +350,18 @@ public class Mapper
         }
     }
 
-    public void uploadClaim(Part file, int projectID) throws SQLException, IOException
+    public void uploadClaim(Part file, String contentType, int projectID) throws SQLException, IOException
     {
         PreparedStatement statement = null;
         InputStream inputStream = null;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql11 = "INSERT INTO CLAIM (CLAIM_IMAGE_ID, PROJECT_ID, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?)";
+            String sql11 = "INSERT INTO CLAIM (CLAIM_IMAGE_ID, PROJECT_ID, CONTENT_TYPE, IMAGE) VALUES (IMAGE_ID_SEQUENCE.NEXTVAL, ?, ?, ?)";
             statement = connection.prepareStatement(sql11);
             statement.setInt(1, projectID);
+            statement.setString(2, contentType);
             inputStream = file.getInputStream();
-            statement.setBlob(2, inputStream);
+            statement.setBlob(3, inputStream);
             statement.executeUpdate();
         } catch (SQLException sqle)
         {
@@ -387,11 +386,11 @@ public class Mapper
         }
     }
 
-    public InputStream getImage(int projectID) throws SQLException, IOException
+    public ArrayList<ImageDTO> getImage(int projectID) throws SQLException, IOException
     {
+        ArrayList<ImageDTO> imageOut = new ArrayList<>();
         PreparedStatement statement;
         ResultSet rs;
-        int imageID;
         InputStream inputStream = null;
 
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
@@ -401,14 +400,14 @@ public class Mapper
             statement = connection.prepareStatement(sql13);
             statement.setInt(1, projectID);
             rs = statement.executeQuery();
-            if (rs.next())
+            
+            while (rs.next())
             {
-                imageID = rs.getInt("IMAGE_ID");
-
                 Blob blob = rs.getBlob("IMAGE");
                 inputStream = blob.getBinaryStream();
+                imageOut.add(new ImageDTO(rs.getInt("IMAGE_ID"), rs.getString("CONTENT_TYPE"), inputStream));
             }
-            return inputStream;
+            return imageOut;
         }
     }
 }
