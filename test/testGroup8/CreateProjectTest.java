@@ -26,8 +26,7 @@ import org.junit.Test;
  *
  * @author martamiszczyk
  */
-public class CreateProjectTest
-{
+public class CreateProjectTest {
 
     //Class variables: 
     private static Connection connection;
@@ -35,7 +34,6 @@ public class CreateProjectTest
     private Controller ctrl;
     private ProjectDTO p;
     private ArrayList<ProjectDTO> projectDTOArray;
-    private int projectID;
     private String status;
     private String startDate;
     private String endDate;
@@ -47,58 +45,50 @@ public class CreateProjectTest
     private int PartnerID;
     private int projectBudget;
 
-    public CreateProjectTest()
-    {
+    public CreateProjectTest() {
     }
 
     @BeforeClass
-    public static void setUpClass() throws SQLException
-    {
+    public static void setUpClass() throws SQLException {
         //DB connection:
         connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
 
     }
 
     @AfterClass
-    public static void tearDownClass() throws SQLException
-    {
+    public static void tearDownClass() throws SQLException {
 
         connection.close();
 
     }
 
     @Before
-    public void setUp() throws SQLException
-    {
+    public void setUp() throws SQLException {
         //INit class/objecter som man skal bruge til at teste med: 
         ctrl = new Controller();
         v = new Validator();
         projectDTOArray = new ArrayList<>();
         Statement statement = connection.createStatement();
         boolean isScriptExecuted = false;
-        try
-        {
+        try {
             File tmp = new File("src/conf/TestSaveProject.sql");
-            BufferedReader in = new BufferedReader(new FileReader("src/conf/TestSaveProject.sql"));
+            BufferedReader in = new BufferedReader(new FileReader("Group_08_2sem/src/conf/TestSaveProject.sql"));
             String str;
             StringBuffer sb = new StringBuffer();
-            while ((str = in.readLine()) != null)
-            {
+            while ((str = in.readLine()) != null) {
                 sb.append(str + "\n ");
             }
             in.close();
             statement.executeUpdate(sb.toString());
             isScriptExecuted = true;
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
 //            System.err.println("Failed to Execute" + "TestSaveProject.sql" + ". The error is" + e.getMessage());
         }
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
 
     }
 
@@ -106,8 +96,7 @@ public class CreateProjectTest
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void tc_1_saveProject() throws InvalidDataException
-    {
+    public void tc_1_saveProject() throws InvalidDataException {
         //Is it possible to make a project with all the attributes
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -124,15 +113,13 @@ public class CreateProjectTest
         ctrl.SaveProject(p);
         projectDTOArray = ctrl.getAllProjects(status);
 
-        for (ProjectDTO p2 : projectDTOArray)
-        {
+        for (ProjectDTO p2 : projectDTOArray) {
             Assert.assertEquals(1, projectDTOArray.size());
         }
     }
 
     @Test
-    public void tc_2_saveProject() throws InvalidDataException
-    {
+    public void tc_2_saveProject() throws InvalidDataException {
         //Er det muligt at oprette et projekt uden at indtaste budget
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -144,18 +131,15 @@ public class CreateProjectTest
         targetAudience = "Reseller";
         objectiveResult = "More customers";
 
-        try
-        {
+        try {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
-        } catch (InvalidDataException ide)
-        {
+        } catch (InvalidDataException ide) {
             assertThat(ide.getMessage(), is("Budget cannot be empty"));
         }
     }
 
     @Test
-    public void tc_3_saveProject() throws SQLException, ClassNotFoundException, InvalidDataException
-    {
+    public void tc_3_saveProject() throws SQLException, ClassNotFoundException, InvalidDataException {
         //Er det muligt at oprette et projekt uden at indtaste activity description
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -168,18 +152,15 @@ public class CreateProjectTest
         targetAudience = "Reseller";
         objectiveResult = "More customers";
 
-        try
-        {
+        try {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
-        } catch (InvalidDataException ide)
-        {
+        } catch (InvalidDataException ide) {
             assertThat(ide.getMessage(), is("Activity description cannot be empty"));
         }
     }
 
     @Test
-    public void tc_4_saveProject() throws InvalidDataException
-    {
+    public void tc_4_saveProject() throws InvalidDataException {
         //Er det muligt at oprette et projekt uden start og end date
         status = "Project proposal";
         projectBudget = 20000;
@@ -192,11 +173,9 @@ public class CreateProjectTest
         targetAudience = "Reseller";
         objectiveResult = "More customers";
 
-        try
-        {
+        try {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
-        } catch (InvalidDataException ide)
-        {
+        } catch (InvalidDataException ide) {
             assertThat(ide.getMessage(), is("The date cannot be empty"));
         }
     }
@@ -218,8 +197,7 @@ public class CreateProjectTest
 //}
 //
     @Test
-    public void tc_6_saveProject() throws InvalidDataException
-    {
+    public void tc_6_saveProject() throws InvalidDataException {
         //er det muligt at indtaste nonsenstal i budget
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -236,16 +214,14 @@ public class CreateProjectTest
         ctrl.SaveProject(p);
         ctrl.getAllProjects(status);
 
-        for (ProjectDTO p2 : projectDTOArray)
-        {
+        for (ProjectDTO p2 : projectDTOArray) {
             Assert.assertEquals(1, p2.getProjectID());
             Assert.assertEquals(100000000, p2.getProjectBudget());
         }
     }
 
     @Test
-    public void tc_7_saveProject() throws InvalidDataException
-    {
+    public void tc_7_saveProject() throws InvalidDataException {
         //Er det muligt at taste andet end tal og bindestreger i start og end date
         status = "Project proposal";
         startDate = "Hello World";
@@ -257,18 +233,15 @@ public class CreateProjectTest
         comments = "Tight schedule";
         targetAudience = "Reseller";
         objectiveResult = "More customers";
-        try
-        {
+        try {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
-        } catch (InvalidDataException ide)
-        {
+        } catch (InvalidDataException ide) {
             assertThat(ide.getMessage(), is("The date needs to be write in the format: YYYY-MM-DD0"));
         }
     }
 
     @Test
-    public void tc_8_saveProject() throws SQLException, ClassNotFoundException
-    {
+    public void tc_8_saveProject() throws SQLException, ClassNotFoundException {
         //Er det muligt at indtaste lange inddateringer i comments
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -282,17 +255,14 @@ public class CreateProjectTest
         objectiveResult = "More customers";
         comments = "0";
 
-        for (int i = 0; i < 1001; i++)
-        {
+        for (int i = 0; i < 1001; i++) {
             comments = i + "";
         }
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
-        try
-        {
+        try {
             ctrl.SaveProject(p);
-        } catch (InvalidDataException ide)
-        {
+        } catch (InvalidDataException ide) {
             assertThat(ide.getMessage(), is("værdi er for stor for kolonnen \"CPHJB190\".\"PROJECT\".\"COMMENTS\" (faktisk: 1001, maksimum: 1000)"));
         }
     }
@@ -316,12 +286,9 @@ public class CreateProjectTest
         }
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
-        try
-        {
+        try {
             ctrl.SaveProject(p);
-        }
-        catch(InvalidDataException ide)
-        {
+        } catch (InvalidDataException ide) {
             assertThat(ide.getMessage(), is("værdi er for stor for kolonnen \"CPHJB190\".\"PROJECT\".\"ACTIVITY_DESCRIPTION\" (faktisk: 1001, maksimum: 1000)"));
         }
     }

@@ -5,6 +5,7 @@
  */
 package data;
 
+import control.ClaimDTO;
 import control.EmployeeDTO;
 import control.ImageDTO;
 import control.InvalidDataException;
@@ -49,4 +50,6 @@ interface IDBFacade
    void createQuarter(QuarterDTO quarter) throws InvalidDataException;
    
    ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException;
+   
+   ClaimDTO getClaim(int ProjectID) throws InvalidDataException;
 }

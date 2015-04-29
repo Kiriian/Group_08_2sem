@@ -75,5 +75,9 @@ public class Controller {
     {
         return facade.getImage(projectID);
     }
+
+    public ClaimDTO getClaim(int projectID) throws InvalidDataException {
+        return facade.getClaim(projectID);
+    }
    
 }

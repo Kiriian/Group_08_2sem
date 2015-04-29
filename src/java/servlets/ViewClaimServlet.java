@@ -5,17 +5,17 @@
  */
 package servlets;
 
+import control.ClaimDTO;
 import control.Controller;
+import control.ImageDTO;
 import control.InvalidDataException;
-import control.PartnerDTO;
-import data.Mapper;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,17 +25,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jeanette
  */
-@WebServlet(name = "CreatePartnerServlet", urlPatterns =
-{
-    "/CreatePartnerServlet"
-})
-public class CreatePartnerServlet extends HttpServlet
-{
-    private Controller ctrl = new Controller();
-    private String country;
-    private String partnerName;
-    private String partnerType;
-
+@WebServlet(name = "ViewClaimServlet", urlPatterns = {"/ViewClaimServlet"})
+public class ViewClaimServlet extends HttpServlet {
+    Controller ctrl = new Controller();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,34 +38,22 @@ public class CreatePartnerServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, InvalidDataException
-    {
+            throws ServletException, IOException, InvalidDataException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getSession().getAttribute("user");
-        try
-        {
-            country = request.getParameter("country");
-            partnerType = request.getParameter("partnerType");
-            partnerName = request.getParameter("partnerName");
-            if (partnerName.isEmpty())
-            {
-                request.setAttribute("validateMsg", "Partner Name cannot be empty");
-                request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
-            }
-            PartnerDTO part = new PartnerDTO(country, partnerName, partnerType);
-            ctrl.savePartner(part);
-
-            request.setAttribute("partner", part);
-            request.setAttribute("validateMsg", "Partner created");
-            request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
-
-        } catch (Exception e)
-        {
-            PrintWriter out = response.getWriter();
-            out.println("<h2>" + e + "</h2>");
-            out.print("<pre>");
-            e.printStackTrace(out);
-            out.println("</pre>");
+        
+        int projectID = Integer.valueOf(request.getParameter("projectid"));
+        ClaimDTO image = ctrl.getClaim(projectID);
+        
+        response.setContentType(image.getContentType());
+        try (ServletOutputStream out2 = response.getOutputStream()) {
+            InputStream in = image.getInputStream();
+            
+            byte[] buffer = new byte[1024];
+            int count = 0;
+            do {
+                count = in.read(buffer);
+                out2.write(buffer, 0, count);
+            } while (count == 1024);
         }
     }
 
@@ -88,13 +68,11 @@ public class CreatePartnerServlet extends HttpServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        try
-        {
+            throws ServletException, IOException {
+        try {
             processRequest(request, response);
         } catch (InvalidDataException ex) {
-            Logger.getLogger(CreatePartnerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewClaimServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,14 +86,11 @@ public class CreatePartnerServlet extends HttpServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        try
-        {
+            throws ServletException, IOException {
+        try {
             processRequest(request, response);
-        } catch (InvalidDataException ex)
-        {
-            Logger.getLogger(CreatePartnerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidDataException ex) {
+            Logger.getLogger(ViewClaimServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -125,8 +100,7 @@ public class CreatePartnerServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

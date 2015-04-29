@@ -6,6 +6,7 @@
 package data;
 
 
+import control.ClaimDTO;
 import control.EmployeeDTO;
 import control.ImageDTO;
 import control.InvalidDataException;
@@ -166,6 +167,18 @@ public class DBFacade implements IDBFacade {
         try
         {
             return mapper.getImage(projectID);
+        }
+        catch(SQLException | IOException sqle)
+        {
+            throw new InvalidDataException("" + sqle);
+        }
+    }
+
+    @Override
+    public ClaimDTO getClaim(int projectID) throws InvalidDataException{
+        try
+        {
+            return mapper.getClaim(projectID);
         }
         catch(SQLException | IOException sqle)
         {

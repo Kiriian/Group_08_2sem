@@ -6,25 +6,30 @@
 package control;
 
 import java.io.InputStream;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author Jeanette
  */
-public class ImageDTO
-{
-    int imageID;
+public class ClaimDTO {
+    int claimImageID;
     int projectID;
     String contentType;
     InputStream inputStream;
 
-    public ImageDTO(int imageID, int projectID, String contentType, InputStream inputStream)
-    {
-        this.imageID = imageID;
+    public ClaimDTO(int claimImageID, int projectID, String contentType, InputStream inputStream) {
+        this.claimImageID = claimImageID;
         this.projectID = projectID;
         this.contentType = contentType;
         this.inputStream = inputStream;
+    }
+
+    public int getClaimImageID() {
+        return claimImageID;
+    }
+
+    public void setClaimImageID(int claimImageID) {
+        this.claimImageID = claimImageID;
     }
 
     public int getProjectID() {
@@ -34,36 +39,20 @@ public class ImageDTO
     public void setProjectID(int projectID) {
         this.projectID = projectID;
     }
-    
-    public int getImageID()
-    {
-        return imageID;
-    }
 
-    public void setImageID(int imageID)
-    {
-        this.imageID = imageID;
-    }
-
-    public String getContentType()
-    {
+    public String getContentType() {
         return contentType;
     }
 
-    public void setContentType(String contentType)
-    {
+    public void setContentType(String contentType) {
         this.contentType = contentType;
     }
 
-    public InputStream getInputStream()
-    {
+    public InputStream getInputStream() {
         return inputStream;
     }
 
-    public void setPart(InputStream inputStream)
-    {
+    public void setInputStream(InputStream inputStream) {
         this.inputStream = inputStream;
     }
-    
-    
 }
