@@ -32,7 +32,7 @@ public class CreateProjectServlet extends HttpServlet
             targetAudience, objectiveResult, firstname, lastname, phone, status;
     int projectBudget, partnerID;
 
-    Controller controller = new Controller();
+    Controller ctrl = new Controller();
     Validator v = new Validator();
 
     /**
@@ -86,17 +86,17 @@ public class CreateProjectServlet extends HttpServlet
 
             try
             {
-                v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult, firstname, lastname, phone);
+                v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
             } catch (InvalidDataException ex)
             {
                 request.setAttribute("validateMsg", ex.getMessage());
                 RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
                 rd.forward(request, response);
             }
-            ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, firstname, lastname, phone, projectBudget);
-            controller.SaveProject(p);
+            ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget);
+            ctrl.SaveProject(p);
             request.setAttribute("Project", p);
-            request.getRequestDispatcher("projectCreated.jsp").forward(request, response);
+            request.getRequestDispatcher("ProjectCreatedView.jsp").forward(request, response);
         } catch (Exception e)
         {
             PrintWriter out = response.getWriter();

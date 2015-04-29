@@ -46,6 +46,7 @@
                 </c:otherwise>
             </c:choose>
             <br>
+            <br>
             <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} 
 
                 <form name="Change project" action="UpdateChangeProjectServlet" method="POST">

@@ -22,10 +22,7 @@ public class Validator
             String endDate,
             String activityDescription,
             String targetAudience,
-            String objectiveResult,
-            String firstname,
-            String lastname,
-            String phone
+            String objectiveResult
     ) throws InvalidDataException
     {
         try
@@ -51,19 +48,26 @@ public class Validator
             {
                 throw new InvalidDataException("PartnerID cannot be empty");
             }
-            if (activityDescription.equals(""))
+            if (activityDescription.isEmpty())
             {
-                throw new InvalidDataException("Activity Description cannot be empty");
+                throw new InvalidDataException("Activity description cannot be empty");
             }
-
+            if (startDate.isEmpty())
+            {
+                throw new InvalidDataException("The date cannot be empty");
+            }
+            if (endDate.isEmpty())
+            {
+                throw new InvalidDataException("The date cannot be empty");
+            }
             if (startDate.matches(patternLetters))
             {
-                throw new InvalidDataException("The date needs to be write in the format: yyyy-mm-dd");
+                throw new InvalidDataException("The date needs to be write in the format: YYYY-MM-DD");
             }
 
             if (endDate.matches(patternLetters))
             {
-                throw new InvalidDataException("The date needs to be write in the format: yyyy-mm-dd");
+                throw new InvalidDataException("The date needs to be write in the format: YYYY-MM-DD");
             }
 
             if (targetAudience.matches(patternNumbers))
@@ -71,12 +75,12 @@ public class Validator
                 throw new InvalidDataException("Target audience cannot contain numbers");
             }
 
-            if (targetAudience.equals(""))
+            if (targetAudience.isEmpty())
             {
                 throw new InvalidDataException("Target audience cannot be empty");
             }
 
-            if (objectiveResult.equals(""))
+            if (objectiveResult.isEmpty())
             {
                 throw new InvalidDataException("Objective and result cannot be empty");
             }

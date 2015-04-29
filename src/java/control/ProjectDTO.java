@@ -20,9 +20,6 @@ public class ProjectDTO implements Serializable
     private String targetAudience;
     private String objectiveResult;
     private int partnerID;
-    private String firstname;
-    private String lastname;
-    private String phone;
     private int projectBudget;
     private int cost;
     private String requiredPOE;
@@ -31,7 +28,7 @@ public class ProjectDTO implements Serializable
     private String quarter;
 
 
-    public ProjectDTO(String status, String startDate, String endDate, String currency, String activityDescription, String comments, String targetAudience, String objectiveResult, int partnerID, String firstname, String lastname, String phone, int projectBudget)
+    public ProjectDTO(String status, String startDate, String endDate, String currency, String activityDescription, String comments, String targetAudience, String objectiveResult, int partnerID, int projectBudget)
     {
         this.status = status;
         this.startDate = startDate;
@@ -42,9 +39,6 @@ public class ProjectDTO implements Serializable
         this.targetAudience = targetAudience;
         this.objectiveResult = objectiveResult;
         this.partnerID = partnerID;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phone = phone;
         this.projectBudget = projectBudget;
     }
 
@@ -132,21 +126,6 @@ public class ProjectDTO implements Serializable
         return partnerID;
     }
 
-    public String getFirstname()
-    {
-        return firstname;
-    }
-
-    public String getLastname()
-    {
-        return lastname;
-    }
-
-    public String getPhone()
-    {
-        return phone;
-    }
-
     public int getProjectBudget()
     {
         return projectBudget;
@@ -202,21 +181,6 @@ public class ProjectDTO implements Serializable
         this.partnerID = partnerID;
     }
 
-    public void setFirstname(String firstname)
-    {
-        this.firstname = firstname;
-    }
-
-    public void setLastname(String lastname)
-    {
-        this.lastname = lastname;
-    }
-
-    public void setPhone(String phone)
-    {
-        this.phone = phone;
-    }
-
     public void setProjectBudget(int projectBudget)
     {
         this.projectBudget = projectBudget;
@@ -249,7 +213,7 @@ public class ProjectDTO implements Serializable
     @Override
     public String toString()
     {
-        return "ProjectDTO{" + "status=" + status + ", startDate=" + startDate + ", endDate=" + endDate + ", currency=" + currency + ", activityDescription=" + activityDescription + ", comments=" + comments + ", targetAudience=" + targetAudience + ", objectiveResult=" + objectiveResult + ", partnerID=" + partnerID + ", firstname=" + firstname + ", lastname=" + lastname + ", phone=" + phone + ", projectBudget=" + projectBudget + ", cost=" + cost + ", requiredPOE=" + requiredPOE + ", employeeID=" + employeeID + ", projectID=" + projectID + ", quarter=" + quarter + '}';
+        return "ProjectDTO{" + "status=" + status + ", startDate=" + startDate + ", endDate=" + endDate + ", currency=" + currency + ", activityDescription=" + activityDescription + ", comments=" + comments + ", targetAudience=" + targetAudience + ", objectiveResult=" + objectiveResult + ", partnerID=" + partnerID + ", projectBudget=" + projectBudget + ", cost=" + cost + ", requiredPOE=" + requiredPOE + ", employeeID=" + employeeID + ", projectID=" + projectID + ", quarter=" + quarter + '}';
     }
 
 }
