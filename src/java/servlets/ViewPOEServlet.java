@@ -37,41 +37,27 @@ public class ViewPOEServlet extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
-        try
+        ArrayList<ImageDTO> imageOut;
+        int projectID = Integer.valueOf(request.getParameter("projectid"));
+
+        imageOut = ctrl.getImage(projectID);
+
+        for (ImageDTO image : imageOut)
         {
-            ArrayList<ImageDTO> imageOut;
-            OutputStream outStream = null;
-            int projectID = Integer.valueOf(request.getParameter("projectid"));
-
-            imageOut = ctrl.getImage(projectID);
-
-            for (ImageDTO image : imageOut)
+            response.setContentType(image.getContentType());
+            try (OutputStream out = response.getOutputStream())
             {
-                response.setContentType(image.getContentType());
-                try (OutputStream out = response.getOutputStream())
+                InputStream in = image.getInputStream();
+                byte[] buffer = new byte[1024];
+                int count = 0;
+                do
                 {
-                    InputStream in = image.getInputStream();
-                    byte[] buffer = new byte[1024];
-                    int count = 0;
-                    do
-                    {
-                        count = in.read(buffer);
-                        out.write(buffer, 0, count);
-                    } while (count == 1024);
-                    in.close();
-                }
+                    count = in.read(buffer);
+                    out.write(buffer, 0, count);
+                } while (count == 1024);
+                in.close();
             }
-            request.getRequestDispatcher("ViewPOE.jsp").forward(request, response);
         }
-        catch (Exception e)
-        {
-            PrintWriter out = response.getWriter();
-            out.println("<h2>" + e + "</h2>");
-            out.print("<pre>");
-            e.printStackTrace(out);
-            out.println("</pre>");
-        }
-
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

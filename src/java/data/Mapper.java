@@ -11,8 +11,12 @@ import control.PartnerDTO;
 import control.ProjectDTO;
 import control.QuarterDTO;
 import control.UserDTO;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -395,17 +399,28 @@ public class Mapper
 
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
-            String sql13 = "SELECT IMAGE FROM POE WHERE PROJECT_ID = ?";
+            String sql13 = "SELECT * FROM POE WHERE PROJECT_ID = ?";
 
             statement = connection.prepareStatement(sql13);
             statement.setInt(1, projectID);
             rs = statement.executeQuery();
-            
+
             while (rs.next())
             {
                 Blob blob = rs.getBlob("IMAGE");
                 inputStream = blob.getBinaryStream();
-                imageOut.add(new ImageDTO(rs.getInt("IMAGE_ID"), rs.getString("CONTENT_TYPE"), inputStream));
+                File tmp = new File("tmp.tmp");
+                OutputStream out = new FileOutputStream(tmp);
+                byte[] buff = new byte[4096];  // how much of the blob to read/write at a time
+                int len = 0;
+
+                while ((len = inputStream.read(buff)) != -1)
+                {
+                    out.write(buff, 0, len);
+                }
+                out.close();
+                inputStream.close();
+                imageOut.add(new ImageDTO(rs.getInt("IMAGE_ID"), rs.getString("CONTENT_TYPE"), new FileInputStream(tmp)));
             }
             return imageOut;
         }
