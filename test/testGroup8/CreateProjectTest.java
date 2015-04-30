@@ -33,6 +33,7 @@ public class CreateProjectTest {
     private Validator v;
     private Controller ctrl;
     private ProjectDTO p;
+    private ProjectDTO p2;
     private ArrayList<ProjectDTO> projectDTOArray;
     private String status;
     private String startDate;
@@ -67,24 +68,6 @@ public class CreateProjectTest {
         //INit class/objecter som man skal bruge til at teste med: 
         ctrl = new Controller();
         v = new Validator();
-        projectDTOArray = new ArrayList<>();
-        Statement statement = connection.createStatement();
-        boolean isScriptExecuted = false;
-        try {
-            File tmp = new File("src/conf/TestSaveProject.sql");
-            BufferedReader in = new BufferedReader(new FileReader("Group_08_2sem/src/conf/TestSaveProject.sql"));
-            String str;
-            StringBuffer sb = new StringBuffer();
-            while ((str = in.readLine()) != null) {
-                sb.append(str + "\n ");
-            }
-            in.close();
-            statement.executeUpdate(sb.toString());
-            isScriptExecuted = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-//            System.err.println("Failed to Execute" + "TestSaveProject.sql" + ". The error is" + e.getMessage());
-        }
     }
 
     @After
@@ -110,12 +93,8 @@ public class CreateProjectTest {
         objectiveResult = "More customers";
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
-        ctrl.SaveProject(p);
-        projectDTOArray = ctrl.getAllProjects(status);
-
-        for (ProjectDTO p2 : projectDTOArray) {
-            Assert.assertEquals(1, projectDTOArray.size());
-        }
+        p2 = ctrl.SaveProject(p);
+        
     }
 
     @Test
