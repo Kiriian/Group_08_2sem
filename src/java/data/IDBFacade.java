@@ -52,4 +52,6 @@ interface IDBFacade
    ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException;
    
    ClaimDTO getClaim(int ProjectID) throws InvalidDataException;
+   
+   int getProjectIDSequence() throws InvalidDataException;
 }

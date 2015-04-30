@@ -185,4 +185,17 @@ public class DBFacade implements IDBFacade {
             throw new InvalidDataException("" + sqle);
         }
     }
+    
+    @Override
+    public int getProjectIDSequence() throws InvalidDataException
+    {
+        try
+        {
+            return mapper.getProjectIDSequence();
+        }
+        catch(SQLException sqle)
+        {
+           throw new InvalidDataException("" + sqle); 
+        }
+    }
 }

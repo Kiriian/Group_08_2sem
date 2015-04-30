@@ -80,4 +80,8 @@ public class Controller {
         return facade.getClaim(projectID);
     }
    
+    public int getProjectIDSequence() throws InvalidDataException
+    {
+        return facade.getProjectIDSequence();
+    }
 }

@@ -5,13 +5,9 @@ import control.InvalidDataException;
 import control.ProjectDTO;
 import control.Validator;
 import data.DB;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
@@ -82,8 +78,8 @@ public class CreateProjectTest {
     public void tc_1_saveProject() throws InvalidDataException {
         //Is it possible to make a project with all the attributes
         status = "Project proposal";
-        startDate = "2015-02-10";
-        endDate = "2015-03-10";
+        startDate = "2015-02-10 00:00:00.0";
+        endDate = "2015-03-10 00:00:00.0";
         projectBudget = 20000;
         currency = "NOK";
         PartnerID = 1;
@@ -95,6 +91,11 @@ public class CreateProjectTest {
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         p2 = ctrl.SaveProject(p);
         
+        Assert.assertEquals(p.getStartDate(), p2.getStartDate());
+        Assert.assertEquals(p.getEndDate(), p2.getEndDate());
+        Assert.assertEquals(p.getProjectBudget(), p2.getProjectBudget());
+        Assert.assertEquals(p.getPartnerID(), p2.getPartnerID());
+        Assert.assertEquals(p.getActivityDescription(), p2.getActivityDescription());
     }
 
     @Test
@@ -159,24 +160,8 @@ public class CreateProjectTest {
         }
     }
 
-//    @Test
-//    public void tc_5_saveProject() throws SQLException, ClassNotFoundException {
-//        // Kan ikke rigtigt test det i JUnittest
-//        status = "Project proposal";
-//        startDate = "2015-02-10";
-//        endDate = "2015-02-30";
-//        projectBudget = 20000;
-//        currency = "NOK";
-//        PartnerID = 1;
-//        activityDescription = "Events for employees";
-//        comments = "Tight schedule";
-//        targetAudience = "Reseller";
-//        objectiveResult = "More customers";
-//        
-//}
-//
     @Test
-    public void tc_6_saveProject() throws InvalidDataException {
+    public void tc_5_saveProject() throws InvalidDataException {
         //er det muligt at indtaste nonsenstal i budget
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -200,7 +185,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_7_saveProject() throws InvalidDataException {
+    public void tc_6_saveProject() throws InvalidDataException {
         //Er det muligt at taste andet end tal og bindestreger i start og end date
         status = "Project proposal";
         startDate = "Hello World";
@@ -215,12 +200,12 @@ public class CreateProjectTest {
         try {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
         } catch (InvalidDataException ide) {
-            assertThat(ide.getMessage(), is("The date needs to be write in the format: YYYY-MM-DD0"));
+            assertThat(ide.getMessage(), is("The date needs to be write in the format: YYYY-MM-DD"));
         }
     }
 
     @Test
-    public void tc_8_saveProject() throws SQLException, ClassNotFoundException {
+    public void tc_7_saveProject() throws SQLException, ClassNotFoundException {
         //Er det muligt at indtaste lange inddateringer i comments
         status = "Project proposal";
         startDate = "2015-02-10";
@@ -247,7 +232,7 @@ public class CreateProjectTest {
     }
 
     @Test
-    public void tc_9_saveProject() throws SQLException, ClassNotFoundException {
+    public void tc_8_saveProject() throws SQLException, ClassNotFoundException {
         //Er det muligt at indtaste lange inddateringer i activety description
         status = "Project proposal";
         startDate = "2015-02-10";
