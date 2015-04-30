@@ -94,8 +94,8 @@ public class CreateProjectServlet extends HttpServlet
                 rd.forward(request, response);
             }
             ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget);
-            ctrl.SaveProject(p);
-            request.setAttribute("Project", p);
+            ProjectDTO p2 = ctrl.SaveProject(p);
+            request.setAttribute("Project", p2);
             request.getRequestDispatcher("ProjectCreatedView.jsp").forward(request, response);
         } catch (Exception e)
         {

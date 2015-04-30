@@ -34,9 +34,9 @@ public class DBFacade implements IDBFacade {
     Mapper mapper = new Mapper();
 
     @Override
-    public void saveProject(ProjectDTO p) throws InvalidDataException {
+    public ProjectDTO saveProject(ProjectDTO p) throws InvalidDataException {
         try {
-            mapper.saveProject(p);
+            return mapper.saveProject(p);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
         }
@@ -64,9 +64,9 @@ public class DBFacade implements IDBFacade {
     }
 
     @Override
-    public ProjectDTO getProjectToChange(int projectID) throws InvalidDataException {
+    public ProjectDTO getProject(int projectID) throws InvalidDataException {
         try {
-            return mapper.getProjectToChange(projectID);
+            return mapper.getProject(projectID);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
         }

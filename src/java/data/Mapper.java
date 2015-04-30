@@ -74,27 +74,47 @@ public class Mapper {
         return null;
     }
 
-    public void saveProject(ProjectDTO p) throws SQLException {
-        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW)) {
-            String sql2 = "INSERT INTO PROJECT(PROJECT_ID, STATUS, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (PROJECT_ID_SEQUENCE.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+    public ProjectDTO saveProject(ProjectDTO p) throws SQLException {
+        PreparedStatement statement;
+        ResultSet rs;
+        int projectIDSequence = 0;
 
-            PreparedStatement statement = connection.prepareStatement(sql2);
-            statement.setString(1, p.getStatus());
-            statement.setString(2, p.getActivityDescription());
-            statement.setString(3, p.getComments());
-            statement.setString(4, p.getTargetAudience());
-            statement.setInt(5, p.getProjectBudget());
-            statement.setString(6, p.getCurrency());
-            statement.setString(7, p.getStartDate());
-            statement.setString(8, p.getEndDate());
-            statement.setString(9, p.getObjectiveResult());
-            statement.setInt(10, p.getPartnerID());
+        try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
+        {
+            String sql14 = "SELECT PROJECT_ID_SEQUENCE.NEXTVAL FROM DUAL";
+            statement = connection.prepareStatement(sql14);
+            rs = statement.executeQuery();
+            while (rs.next())
+            {
+                projectIDSequence = rs.getInt("NEXTVAL");
+                System.out.println("nextval er: " + projectIDSequence);
+            }
+
+            String sql2 = "INSERT INTO PROJECT(PROJECT_ID, STATUS, ACTIVITY_DESCRIPTION, COMMENTS, TARGET_AUDIENCE, PROJECT_BUDGET, CURRENCY, START_DATE, END_DATE, OBJECTIVE_RESULT, PARTNER_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+            statement = connection.prepareStatement(sql2);
+
+            statement.setInt(1, projectIDSequence);
+            statement.setString(2, p.getStatus());
+            statement.setString(3, p.getActivityDescription());
+            statement.setString(4, p.getComments());
+            statement.setString(5, p.getTargetAudience());
+            statement.setInt(6, p.getProjectBudget());
+            statement.setString(7, p.getCurrency());
+            statement.setString(8, p.getStartDate());
+            statement.setString(9, p.getEndDate());
+            statement.setString(10, p.getObjectiveResult());
+            statement.setInt(11, p.getPartnerID());
             statement.executeUpdate();
-
-        } catch (SQLException sqle) {
+            
+            return getProject(projectIDSequence);
+            
+        } catch (SQLException sqle)
+        {
             System.err.println(sqle);
         }
         System.out.println("ok - fra io");
+        return null;
     }
 
     public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws SQLException {
@@ -171,7 +191,7 @@ public class Mapper {
         return out;
     }
 
-    public ProjectDTO getProjectToChange(int projectID) throws SQLException {
+    public ProjectDTO getProject(int projectID) throws SQLException {
         ResultSet rs = null;
         PreparedStatement statement = null;
         ProjectDTO p = null;

@@ -48,6 +48,7 @@
             </ul>
         </c:otherwise>
     </c:choose>
+    <h5>ProjectID: <%= p.getProjectID()%></h5>
     <h5>Start date: <%= p.getStartDate()%></h5>
         <h5>End date: <%= p.getEndDate()%></h5>
         <h5>Budget: <%= p.getProjectBudget()%></h5>

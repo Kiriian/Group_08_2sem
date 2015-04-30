@@ -25,13 +25,13 @@ import javax.servlet.http.Part;
  */
 interface IDBFacade
 {
-    void saveProject(ProjectDTO p) throws InvalidDataException;
+    ProjectDTO saveProject(ProjectDTO p) throws InvalidDataException;
     
     ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws InvalidDataException;
     
     ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException;
     
-    ProjectDTO getProjectToChange(int projectID) throws InvalidDataException;
+    ProjectDTO getProject(int projectID) throws InvalidDataException;
     
     ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException;
     

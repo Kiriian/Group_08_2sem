@@ -19,8 +19,8 @@ public class Controller {
 
     DBFacade facade = new DBFacade();
 
-    public void SaveProject(ProjectDTO p) throws InvalidDataException {
-        facade.saveProject(p);
+    public ProjectDTO SaveProject(ProjectDTO p) throws InvalidDataException {
+        return facade.saveProject(p);
     }
 
     public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws InvalidDataException
@@ -32,8 +32,8 @@ public class Controller {
         return facade.getAllProjects(searchCriteria);
     }
 
-    public ProjectDTO getProjectToChange(int projectID) throws InvalidDataException {
-        return facade.getProjectToChange(projectID);
+    public ProjectDTO getProject(int projectID) throws InvalidDataException {
+        return facade.getProject(projectID);
     }
 
     public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException {

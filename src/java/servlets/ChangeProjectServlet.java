@@ -50,7 +50,7 @@ public class ChangeProjectServlet extends HttpServlet
         
         int projectID = Integer.valueOf(request.getParameter("projectid"));
 
-        request.setAttribute("project", ctrl.getProjectToChange(projectID));
+        request.setAttribute("project", ctrl.getProject(projectID));
         
         request.getRequestDispatcher("ChangeProject.jsp").forward(request, response);
     }
