@@ -58,7 +58,7 @@ public class CreateQuarterServlet extends HttpServlet {
         QuarterDTO quarter = new QuarterDTO(quarterName, quarterBudget);
         
         ctrl.createQuarter(quarter);
-        request.setAttribute("validateMsg", "Project has been created");
+        request.setAttribute("validateMsg", "Quarter has been created");
         request.getRequestDispatcher("CreateQuarter.jsp").forward(request, response);
     }
 
