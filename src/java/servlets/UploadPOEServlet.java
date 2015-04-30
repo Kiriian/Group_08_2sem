@@ -55,7 +55,7 @@ public class UploadPOEServlet extends HttpServlet
         
         ctrl.uploadPOE(file, contentType, projectID);
         
-        request.setAttribute("validateMsg", "Your file has been uploaded, remeber to change the status of the project");
+        request.setAttribute("validateMsg", "Your file has been uploaded, remember to change the status of the project");
         
         request.getRequestDispatcher("UploadPOE.jsp").forward(request, response);
     }
