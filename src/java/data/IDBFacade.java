@@ -35,19 +35,19 @@ interface IDBFacade
     
     ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException;
     
-    void savePartner(PartnerDTO part) throws InvalidDataException;
+    PartnerDTO savePartner(PartnerDTO part) throws InvalidDataException;
     
     UserDTO validateCheckLogin(String username, String password) throws InvalidDataException;
     
-   void createUser(UserDTO user) throws InvalidDataException;
+   UserDTO createUser(UserDTO user) throws InvalidDataException;
    
-   void createEmployee(EmployeeDTO emp) throws InvalidDataException;
+   EmployeeDTO createEmployee(EmployeeDTO emp) throws InvalidDataException;
    
    void uploadPOE(Part file, String contentType, int projectID) throws InvalidDataException;
    
    void uploadClaim(Part file, String contentType, int projectID) throws InvalidDataException;
    
-   void createQuarter(QuarterDTO quarter) throws InvalidDataException;
+   QuarterDTO createQuarter(QuarterDTO quarter) throws InvalidDataException;
    
    ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException;
    

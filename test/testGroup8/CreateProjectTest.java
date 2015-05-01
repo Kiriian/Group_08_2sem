@@ -78,8 +78,8 @@ public class CreateProjectTest {
     public void tc_1_saveProject() throws InvalidDataException {
         //Is it possible to make a project with all the attributes
         status = "Project proposal";
-        startDate = "2015-02-10 00:00:00.0";
-        endDate = "2015-03-10 00:00:00.0";
+        startDate = "2015-02-10";
+        endDate = "2015-03-10";
         projectBudget = 20000;
         currency = "NOK";
         PartnerID = 1;
@@ -90,8 +90,7 @@ public class CreateProjectTest {
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         p2 = ctrl.SaveProject(p);
-        
-        Assert.assertEquals(p.getStartDate(), p2.getStartDate());
+        Assert.assertEquals(p2.getStartDate(), p.getStartDate());
         Assert.assertEquals(p.getEndDate(), p2.getEndDate());
         Assert.assertEquals(p.getProjectBudget(), p2.getProjectBudget());
         Assert.assertEquals(p.getPartnerID(), p2.getPartnerID());
@@ -176,12 +175,8 @@ public class CreateProjectTest {
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         ctrl.SaveProject(p);
-        ctrl.getAllProjects(status);
 
-        for (ProjectDTO p2 : projectDTOArray) {
-            Assert.assertEquals(1, p2.getProjectID());
-            Assert.assertEquals(100000000, p2.getProjectBudget());
-        }
+
     }
 
     @Test

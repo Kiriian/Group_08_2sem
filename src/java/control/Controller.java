@@ -23,11 +23,10 @@ public class Controller {
         return facade.saveProject(p);
     }
 
-    public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws InvalidDataException
-    {
+    public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws InvalidDataException {
         return facade.getAllPartnerProjects(searchCriteria, partnerID);
     }
-    
+
     public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws InvalidDataException {
         return facade.getAllProjects(searchCriteria);
     }
@@ -40,48 +39,43 @@ public class Controller {
         return facade.updateProject(p);
     }
 
-    public void savePartner(PartnerDTO part) throws InvalidDataException {
-        facade.savePartner(part);
+    public PartnerDTO savePartner(PartnerDTO part) throws InvalidDataException {
+        return facade.savePartner(part);
     }
 
     public UserDTO validateCheckLogin(String username, String password) throws InvalidDataException {
         return facade.validateCheckLogin(username, password);
     }
 
-    public void createUser(UserDTO user) throws InvalidDataException {
-          facade.createUser(user);
+    public UserDTO createUser(UserDTO user) throws InvalidDataException {
+        return facade.createUser(user);
     }
 
-    public void createEmployee(EmployeeDTO emp) throws InvalidDataException
-    {
-        facade.createEmployee(emp);
+    public EmployeeDTO createEmployee(EmployeeDTO emp) throws InvalidDataException {
+        return facade.createEmployee(emp);
     }
-    
-    public void uploadPOE(Part file, String contentType, int projectID) throws InvalidDataException
-    {
+
+    public void uploadPOE(Part file, String contentType, int projectID) throws InvalidDataException {
         facade.uploadPOE(file, contentType, projectID);
     }
-    
-    public void uploadClaim(Part file, String contentType, int projectID) throws InvalidDataException
-    {
+
+    public void uploadClaim(Part file, String contentType, int projectID) throws InvalidDataException {
         facade.uploadClaim(file, contentType, projectID);
     }
 
-    public void createQuarter(QuarterDTO quarter) throws InvalidDataException{
-        facade.createQuarter(quarter);
+    public QuarterDTO createQuarter(QuarterDTO quarter) throws InvalidDataException {
+        return facade.createQuarter(quarter);
     }
-    
-    public ArrayList<ImageDTO> getImage (int projectID) throws InvalidDataException
-    {
+
+    public ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException {
         return facade.getImage(projectID);
     }
 
     public ClaimDTO getClaim(int projectID) throws InvalidDataException {
         return facade.getClaim(projectID);
     }
-   
-    public int getProjectIDSequence() throws InvalidDataException
-    {
+
+    public int getProjectIDSequence() throws InvalidDataException {
         return facade.getProjectIDSequence();
     }
 }

@@ -7,6 +7,7 @@ package control;
  */
 public class EmployeeDTO
 {
+    int employeeID;
     String firstname;
     String lastname;
     String country;
@@ -19,6 +20,16 @@ public class EmployeeDTO
         this.country = country;
         this.employeeType = employeeType;
     }
+
+    public EmployeeDTO(int employeeID, String firstname, String lastname, String country, String employeeType) {
+        this.employeeID = employeeID;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.country = country;
+        this.employeeType = employeeType;
+    }
+    
+    
 
     public String getFirstname()
     {
@@ -59,5 +70,12 @@ public class EmployeeDTO
     {
         this.employeeType = employeeType;
     }
-    
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
 }

@@ -14,10 +14,8 @@ import control.PartnerDTO;
 import control.ProjectDTO;
 import control.QuarterDTO;
 import control.UserDTO;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -82,9 +80,9 @@ public class DBFacade implements IDBFacade {
     }
 
     @Override
-    public void savePartner(PartnerDTO part) throws InvalidDataException {
+    public PartnerDTO savePartner(PartnerDTO part) throws InvalidDataException {
         try {
-            mapper.savePartner(part);
+            return mapper.savePartner(part);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
         }
@@ -100,19 +98,19 @@ public class DBFacade implements IDBFacade {
     }
 
     @Override
-    public void createUser(UserDTO user) throws InvalidDataException {
+    public UserDTO createUser(UserDTO user) throws InvalidDataException {
         try {
-             mapper.createUser(user);
+             return mapper.createUser(user);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
         }
     }
 
     @Override
-    public void createEmployee(EmployeeDTO emp) throws InvalidDataException
+    public EmployeeDTO createEmployee(EmployeeDTO emp) throws InvalidDataException
     {
        try {
-            mapper.createEmployee(emp);
+            return mapper.createEmployee(emp);
         } catch (SQLException sqle) {
             throw new InvalidDataException("" + sqle);
         }
@@ -150,10 +148,10 @@ public class DBFacade implements IDBFacade {
     }
 
     @Override
-    public void createQuarter(QuarterDTO quarter) throws InvalidDataException{
+    public QuarterDTO createQuarter(QuarterDTO quarter) throws InvalidDataException{
         try
         {
-            mapper.createQuarter(quarter);
+            return mapper.createQuarter(quarter);
         }
         catch(SQLException sqle)
         {
