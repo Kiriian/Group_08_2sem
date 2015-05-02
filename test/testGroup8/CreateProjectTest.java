@@ -189,10 +189,8 @@ public class CreateProjectTest
         comments = "Tight schedule";
         targetAudience = "Reseller";
         objectiveResult = "More customers";
-
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
-        ctrl.SaveProject(p);
-
+        p2 = ctrl.SaveProject(p);
         Assert.assertEquals(p2.getStartDate(), p.getStartDate());
         Assert.assertEquals(p.getEndDate(), p2.getEndDate());
         Assert.assertEquals(p.getProjectBudget(), p2.getProjectBudget());
