@@ -111,11 +111,10 @@ public class Mapper
 
     public ProjectDTO saveProject(ProjectDTO p) throws SQLException, ParseException
     {
-        ProjectDTO p2 = null;
-        PreparedStatement statement = null;
+        ProjectDTO p2;
+        PreparedStatement statement;
         ResultSet rs = null;
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("her er endDate: " + p.getEndDate());
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
             int projectID = getProjectIDSequence();
@@ -154,8 +153,8 @@ public class Mapper
     public ArrayList<ProjectDTO> getAllPartnerProjects(String searchCriteria, int partnerID) throws SQLException
     {
         ArrayList<ProjectDTO> pOut = new ArrayList<>();
-        ResultSet rs = null;
-        PreparedStatement statement = null;
+        ResultSet rs;
+        PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
             String sql3 = "SELECT * FROM PROJECT WHERE STATUS = ? AND PARTNER_ID = ?";
@@ -195,8 +194,8 @@ public class Mapper
     public ArrayList<ProjectDTO> getAllProjects(String searchCriteria) throws SQLException
     {
         ArrayList<ProjectDTO> out = new ArrayList<>();
-        ResultSet rs = null;
-        PreparedStatement statement = null;
+        ResultSet rs;
+        PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
             String sql4 = "SELECT * FROM PROJECT WHERE STATUS LIKE ? ORDER BY PROJECT_ID DESC";
@@ -237,22 +236,23 @@ public class Mapper
     {   
         String startDate;
         String endDate;
-        ResultSet rs = null;
-        PreparedStatement statement = null;
+        ResultSet rs;
+        PreparedStatement statement;
         ProjectDTO p2 = null;
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);)
         {
             String sql5 = "SELECT * FROM PROJECT WHERE PROJECT_ID = ?";
             statement = connection.prepareStatement(sql5);
             statement.setInt(1, projectID);
             rs = statement.executeQuery();
+            
             while (rs.next())
             {
                 p2 = new ProjectDTO(
                         rs.getString("STATUS"),
-                        startDate = formatter.format(rs.getDate("START_DATE")),
-                        endDate = formatter.format(rs.getDate("END_DATE")),
+                        formatter.format(rs.getDate("START_DATE")),
+                        formatter.format(rs.getDate("END_DATE")),
                         rs.getString("CURRENCY"),
                         rs.getString("ACTIVITY_DESCRIPTION"),
                         rs.getString("COMMENTS"),
@@ -278,7 +278,7 @@ public class Mapper
     public ProjectDTO updateProject(ProjectDTO p) throws SQLException, java.text.ParseException
     {
         PreparedStatement statement = null;
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW))
         {
             String sql6 = "UPDATE PROJECT SET STATUS=?,"

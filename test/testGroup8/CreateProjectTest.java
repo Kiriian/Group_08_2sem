@@ -4,9 +4,7 @@ import control.Controller;
 import control.InvalidDataException;
 import control.ProjectDTO;
 import control.Validator;
-import data.DB;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.is;
@@ -183,7 +181,7 @@ public class CreateProjectTest
         //er det muligt at indtaste "nonsenstal" i budget
         status = "Project proposal";
         startDate = "2015-02-10";
-        endDate = "2015-02-30";
+        endDate = "2015-02-29";
         projectBudget = 100000000;
         currency = "NOK";
         PartnerID = 1;

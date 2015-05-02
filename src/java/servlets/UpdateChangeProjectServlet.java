@@ -8,9 +8,7 @@ package servlets;
 import control.Controller;
 import control.InvalidDataException;
 import control.ProjectDTO;
-import data.Mapper;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +50,6 @@ public class UpdateChangeProjectServlet extends HttpServlet {
         request.getSession().getAttribute("user");
         String types = request.getParameter("usertype");
 
-        System.err.println("type:" + types);
         if (types.equalsIgnoreCase("dell")) {
             String status = request.getParameter("status");
             if (status.equals("Project proposal") || status.equals("POE uploaded") || status.equals("Execution") || status.equals("Claim uploaded")) {
@@ -70,9 +67,6 @@ public class UpdateChangeProjectServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
                 rd.forward(request, response);
             }
-//            String budgetText = request.getParameter("budget");
-//            System.out.println("budget: "+budgetText);
-//            budget = Integer.valueOf(budgetText);
             String currency = request.getParameter("currency");
             String activityDescription = request.getParameter("activityDescription");
             String comments = request.getParameter("comments");
@@ -100,13 +94,12 @@ public class UpdateChangeProjectServlet extends HttpServlet {
             ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget, projectCost, requiredPOE, employeeID, projectID, quarter);
             ctrl.updateProject(p);
             String confirm = "Project " + projectID + " have been changed, you can now view the changed project by doing a search";
-//            request.setAttribute("validateMsg", answer);
             request.setAttribute("projectHaveBeenChanged", confirm);
             request.getRequestDispatcher("SearchProject.jsp").forward(request, response);
 
         } else {
             String status = request.getParameter("status");
-            if (!status.equals("Project proposal") || !status.equals("POE uploaded") || !status.equals("Execution") || !status.equals("Claim uploaded")) {
+            if (status.equals("POE approved") || status.equals("Project approved") || status.equals("Reimburse") || status.equals("Claim approved")) {
                 request.setAttribute("validateMsg", "You do not have the credentials to use the status: " + status);
                 RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
                 rd.forward(request, response);
@@ -121,9 +114,6 @@ public class UpdateChangeProjectServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
                 rd.forward(request, response);
             }
-//            String budgetText = request.getParameter("budget");
-//            System.out.println("budget: "+budgetText);
-//            budget = Integer.valueOf(budgetText);
             String currency = request.getParameter("currency");
             String activityDescription = request.getParameter("activityDescription");
             String comments = request.getParameter("comments");
