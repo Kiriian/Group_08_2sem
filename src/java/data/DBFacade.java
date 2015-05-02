@@ -35,7 +35,7 @@ public class DBFacade implements IDBFacade {
     public ProjectDTO saveProject(ProjectDTO p) throws InvalidDataException {
         try {
             return mapper.saveProject(p);
-        } catch (SQLException sqle) {
+        } catch (SQLException | ParseException sqle) {
             throw new InvalidDataException("" + sqle);
         }
 
@@ -71,10 +71,10 @@ public class DBFacade implements IDBFacade {
     }
 
     @Override
-    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException {
+    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException{
         try {
             return mapper.updateProject(p);
-        } catch (SQLException sqle) {
+        } catch (SQLException | ParseException sqle) {
             throw new InvalidDataException("" + sqle);
         }
     }

@@ -6,8 +6,6 @@
 package control;
 
 import data.DBFacade;
-import java.io.InputStream;
-import java.text.ParseException;
 import java.util.ArrayList;
 import javax.servlet.http.Part;
 
@@ -35,7 +33,7 @@ public class Controller {
         return facade.getProject(projectID);
     }
 
-    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException, ParseException {
+    public ProjectDTO updateProject(ProjectDTO p) throws InvalidDataException{
         return facade.updateProject(p);
     }
 

@@ -51,7 +51,7 @@ public class CreateProjectTest
     public static void setUpClass() throws SQLException
     {
         //DB connection:
-        connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
+        //connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
 
     }
 
@@ -59,7 +59,7 @@ public class CreateProjectTest
     public static void tearDownClass() throws SQLException
     {
 
-        connection.close();
+        //connection.close();
 
     }
 
@@ -69,6 +69,8 @@ public class CreateProjectTest
         //INit class/objecter som man skal bruge til at teste med: 
         ctrl = new Controller();
         v = new Validator();
+        p = null;
+        p2 = null;
     }
 
     @After
@@ -97,7 +99,7 @@ public class CreateProjectTest
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         p2 = ctrl.SaveProject(p);
-        Assert.assertEquals(p2.getStartDate(), p.getStartDate());
+        Assert.assertEquals(p.getStartDate(), p2.getStartDate());
         Assert.assertEquals(p.getEndDate(), p2.getEndDate());
         Assert.assertEquals(p.getProjectBudget(), p2.getProjectBudget());
         Assert.assertEquals(p.getPartnerID(), p2.getPartnerID());
@@ -191,7 +193,7 @@ public class CreateProjectTest
         objectiveResult = "More customers";
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         p2 = ctrl.SaveProject(p);
-        Assert.assertEquals(p2.getStartDate(), p.getStartDate());
+        Assert.assertEquals(p.getStartDate(), p2.getStartDate());
         Assert.assertEquals(p.getEndDate(), p2.getEndDate());
         Assert.assertEquals(p.getProjectBudget(), p2.getProjectBudget());
         Assert.assertEquals(p.getPartnerID(), p2.getPartnerID());
