@@ -375,7 +375,7 @@ public class Mapper {
         PreparedStatement statement = null;
         int employeeIDSequence = 0;
         try (Connection connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW)) {
-            String sql17 = "SELECT EMPLOYEE_ID_SEQUENCE FROM DUAL";
+            String sql17 = "SELECT EMPLOYEE_ID_SEQUENCE.NEXTVAL FROM DUAL";
             statement = connection.prepareStatement(sql17);
             rs = statement.executeQuery();
             while (rs.next()) {
@@ -391,13 +391,14 @@ public class Mapper {
             statement.setString(5, emp.getEmployeeType());
             statement.executeUpdate();
 
-            String sql18 = "SELECT * FROM USER WHERE USER_ID = ?";
+            String sql18 = "SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID = ?";
             statement = connection.prepareStatement(sql18);
             statement.setInt(1, employeeIDSequence);
             rs = statement.executeQuery();
 
             while (rs.next()) {
                 emp = new EmployeeDTO(rs.getInt("EMPLOYEE_ID"), rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getString("COUNTRY"), rs.getString("EMPLOYEE_TYPE"));
+                System.out.println("emp i mapper: " + emp.toString());
             }
 
             return emp;

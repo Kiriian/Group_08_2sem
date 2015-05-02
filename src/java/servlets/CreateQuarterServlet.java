@@ -22,9 +22,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jeanette
  */
-@WebServlet(name = "CreateQuarterServlet", urlPatterns = {"/CreateQuarterServlet"})
-public class CreateQuarterServlet extends HttpServlet {
+@WebServlet(name = "CreateQuarterServlet", urlPatterns =
+{
+    "/CreateQuarterServlet"
+})
+public class CreateQuarterServlet extends HttpServlet
+{
+
     Controller ctrl = new Controller();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,31 +41,41 @@ public class CreateQuarterServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, InvalidDataException {
+            throws ServletException, IOException, InvalidDataException
+    {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
-        int quarterBudget = 0;
-        String quarterName = request.getParameter("quarterName");
-        if (quarterName.isEmpty())
-        {
-            request.setAttribute("validateMsg", "Quarter name cannot be empty");
-            request.getRequestDispatcher("CreateQuarter.jsp").forward(request, response);
-        }
         try
         {
-            quarterBudget = Integer.valueOf(request.getParameter("quarterBudget"));
-        }
-        catch (NumberFormatException nfe)
+            int quarterBudget = 0;
+            String quarterName = request.getParameter("quarterName");
+            if (quarterName.isEmpty())
+            {
+                request.setAttribute("validateMsg", "Quarter name cannot be empty");
+                request.getRequestDispatcher("CreateQuarter.jsp").forward(request, response);
+            }
+            try
+            {
+                quarterBudget = Integer.valueOf(request.getParameter("quarterBudget"));
+            } catch (NumberFormatException nfe)
+            {
+                request.setAttribute("validateMsg", "Quarter budget cannot contain letters");
+                request.getRequestDispatcher("CreateQuarter.jsp").forward(request, response);
+            }
+
+            QuarterDTO quarter = new QuarterDTO(quarterName, quarterBudget);
+            QuarterDTO quarter2 = ctrl.createQuarter(quarter);
+            request.setAttribute("quarter", quarter2);
+            request.getRequestDispatcher("ViewCreatedQuarter.jsp").forward(request, response);
+        } catch (Exception e)
         {
-            request.setAttribute("validateMsg", "Quarter budget cannot contain letters");
-            request.getRequestDispatcher("CreateQuarter.jsp").forward(request, response);
+            PrintWriter out = response.getWriter();
+            out.println("<h2>" + e + "</h2>");
+            out.print("<pre>");
+            e.printStackTrace(out);
+            out.println("</pre>");
         }
-        
-        QuarterDTO quarter = new QuarterDTO(quarterName, quarterBudget);
-        
-        ctrl.createQuarter(quarter);
-        request.setAttribute("validateMsg", "Quarter has been created");
-        request.getRequestDispatcher("CreateQuarter.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,10 +89,13 @@ public class CreateQuarterServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
+            throws ServletException, IOException
+    {
+        try
+        {
             processRequest(request, response);
-        } catch (InvalidDataException ex) {
+        } catch (InvalidDataException ex)
+        {
             Logger.getLogger(CreateQuarterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -91,10 +110,13 @@ public class CreateQuarterServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
+            throws ServletException, IOException
+    {
+        try
+        {
             processRequest(request, response);
-        } catch (InvalidDataException ex) {
+        } catch (InvalidDataException ex)
+        {
             Logger.getLogger(CreateQuarterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -105,7 +127,8 @@ public class CreateQuarterServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 

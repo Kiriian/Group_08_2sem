@@ -47,7 +47,7 @@ public class CreateUserServlet extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
-        
+    try{
         try {
             firstname = request.getParameter("firstname");
             lastname = request.getParameter("lastname");
@@ -68,16 +68,27 @@ public class CreateUserServlet extends HttpServlet {
                 request.setAttribute("validateMsg", "employeeID must not contain letters");
                 request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
             }
-
+                
             answer = uv.userValidator(firstname, lastname, username, password, repeatPassword, partnerID, employeeID);
         } catch (InvalidDataException ide) {
             request.setAttribute("validateMsg", ide.getMessage());
             request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
         }
+        userType = request.getParameter("userType");
         UserDTO user = new UserDTO(username, password, partnerID, employeeID, firstname, lastname, userType);
-        ctrl.createUser(user);
+        UserDTO user2 = ctrl.createUser(user);
+        request.setAttribute("user", user2);
         request.setAttribute("validateMsg", "User created");
-        request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
+        request.getRequestDispatcher("ViewUserCreated.jsp").forward(request, response);
+    }
+    catch(Exception e)
+    {
+        PrintWriter out = response.getWriter();
+            out.println("<h2>" + e + "</h2>");
+            out.print("<pre>");
+            e.printStackTrace(out);
+            out.println("</pre>");
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

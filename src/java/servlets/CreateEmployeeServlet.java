@@ -49,6 +49,7 @@ public class CreateEmployeeServlet extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
+        try {
             firstname = request.getParameter("firstname");
             lastname = request.getParameter("lastname");
             country = request.getParameter("country");
@@ -59,9 +60,19 @@ public class CreateEmployeeServlet extends HttpServlet
                 request.getRequestDispatcher("CreateEmployee.jsp").forward(request, response);
             }
         EmployeeDTO emp = new EmployeeDTO(firstname,lastname, country, employeeType);
-        ctrl.createEmployee(emp);
-        request.setAttribute("validateMsg", "Employee created");
-        request.getRequestDispatcher("CreateEmployee.jsp").forward(request, response);
+        EmployeeDTO emp2 = ctrl.createEmployee(emp);
+            System.out.println("emp er her: " + emp2.toString());
+        request.setAttribute("emp", emp2);
+        request.getRequestDispatcher("ViewCreatedEmployee.jsp").forward(request, response);
+        }
+        catch (Exception e)
+        {
+            PrintWriter out = response.getWriter();
+            out.println("<h2>" + e + "</h2>");
+            out.print("<pre>");
+            e.printStackTrace(out);
+            out.println("</pre>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

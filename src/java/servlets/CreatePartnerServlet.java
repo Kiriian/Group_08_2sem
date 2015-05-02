@@ -61,11 +61,10 @@ public class CreatePartnerServlet extends HttpServlet
                 request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
             }
             PartnerDTO part = new PartnerDTO(country, partnerName, partnerType);
-            ctrl.savePartner(part);
+            PartnerDTO part2 = ctrl.savePartner(part);
 
-            request.setAttribute("partner", part);
-            request.setAttribute("validateMsg", "Partner created");
-            request.getRequestDispatcher("CreatePartner.jsp").forward(request, response);
+            request.setAttribute("partner", part2);
+            request.getRequestDispatcher("ViewCreatedPartner.jsp").forward(request, response);
 
         } catch (Exception e)
         {
