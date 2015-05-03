@@ -99,7 +99,7 @@ public class UpdateChangeProjectServlet extends HttpServlet {
 
         } else {
             String status = request.getParameter("status");
-            if (status.equals("POE approved") || status.equals("Project approved") || status.equals("Reimburse") || status.equals("Claim approved")) {
+            if (status.equals("Project approval") || status.equals("POE approval") || status.equals("Reimburse") || status.equals("Claim approved")) {
                 request.setAttribute("validateMsg", "You do not have the credentials to use the status: " + status);
                 RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
                 rd.forward(request, response);
