@@ -43,107 +43,106 @@ public class UpdateChangeProjectServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws control.InvalidDataException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, InvalidDataException, ParseException {
+            throws ServletException, IOException, InvalidDataException {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
         String types = request.getParameter("usertype");
-
+        System.out.println("Usertype: " + types);
         if (types.equalsIgnoreCase("dell")) {
             String status = request.getParameter("status");
-            if (status.equals("Project proposal") || status.equals("POE uploaded") || status.equals("Execution") || status.equals("Claim uploaded")) {
+            if (!status.equals("Project proposal") && !status.equals("POE uploaded") && !status.equals("Execution") && !status.equals("Claim uploaded")) {
+                String startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
+                String endDate = request.getParameter("endDate");
+                try {
+                    projectBudget = Integer.valueOf(request.getParameter("budget"));
+                } catch (NumberFormatException ex) {
+                    request.setAttribute("validateMsg", "Budget cannot contain letters");
+                    RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
+                    rd.forward(request, response);
+                }
+                String currency = request.getParameter("currency");
+                String activityDescription = request.getParameter("activityDescription");
+                String comments = request.getParameter("comments");
+                String targetAudience = request.getParameter("targetAudience");
+                String objectiveResult = request.getParameter("objectiveResult");
+                try {
+                    partnerID = Integer.valueOf(request.getParameter("partnerID"));
+                } catch (NumberFormatException nfe) {
+                    request.setAttribute("validateMsg", "PartnerID cannot contain letters");
+                    RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
+                    rd.forward(request, response);
+                }
+                String requiredPOE = request.getParameter("requiredPOE");
+                try {
+                    projectCost = Integer.valueOf(request.getParameter("cost"));
+                } catch (NumberFormatException nfe) {
+                    request.setAttribute("validateMsg", "Cost cannot contain letters");
+                    RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
+                    rd.forward(request, response);
+                }
+                int employeeID = Integer.valueOf(request.getParameter("employeeID"));
+                String quarter = request.getParameter("quarter");
+                projectID = Integer.valueOf(request.getParameter("projectID"));
+
+                ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget, projectCost, requiredPOE, employeeID, projectID, quarter);
+                ctrl.updateProject(p);
+                String confirm = "Project " + projectID + " have been changed, you can now view the changed project by doing a search";
+                request.setAttribute("projectHaveBeenChanged", confirm);
+                request.getRequestDispatcher("SearchProject.jsp").forward(request, response);
+            } else {
                 request.setAttribute("validateMsg", "You do not have the credentials to use the status: " + status);
                 RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
                 rd.forward(request, response);
             }
-
-            String startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
-            String endDate = request.getParameter("endDate");
-            try {
-                projectBudget = Integer.valueOf(request.getParameter("budget"));
-            } catch (NumberFormatException ex) {
-                request.setAttribute("validateMsg", "Budget cannot contain letters");
-                RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
-                rd.forward(request, response);
-            }
-            String currency = request.getParameter("currency");
-            String activityDescription = request.getParameter("activityDescription");
-            String comments = request.getParameter("comments");
-            String targetAudience = request.getParameter("targetAudience");
-            String objectiveResult = request.getParameter("objectiveResult");
-            try {
-                partnerID = Integer.valueOf(request.getParameter("partnerID"));
-            } catch (NumberFormatException nfe) {
-                request.setAttribute("validateMsg", "PartnerID cannot contain letters");
-                RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
-                rd.forward(request, response);
-            }
-            String requiredPOE = request.getParameter("requiredPOE");
-            try {
-                projectCost = Integer.valueOf(request.getParameter("cost"));
-            } catch (NumberFormatException nfe) {
-                request.setAttribute("validateMsg", "Cost cannot contain letters");
-                RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
-                rd.forward(request, response);
-            }
-            int employeeID = Integer.valueOf(request.getParameter("employeeID"));
-            String quarter = request.getParameter("quarter");
-            projectID = Integer.valueOf(request.getParameter("projectID"));
-
-            ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget, projectCost, requiredPOE, employeeID, projectID, quarter);
-            ctrl.updateProject(p);
-            String confirm = "Project " + projectID + " have been changed, you can now view the changed project by doing a search";
-            request.setAttribute("projectHaveBeenChanged", confirm);
-            request.getRequestDispatcher("SearchProject.jsp").forward(request, response);
-
         } else {
             String status = request.getParameter("status");
-            if (status.equals("Project approval") || status.equals("POE approval") || status.equals("Reimburse") || status.equals("Claim approved")) {
+            if (!status.equals("Project approval") && !status.equals("POE approval") && !status.equals("Reimburse") && !status.equals("Claim approved")) {
+                String startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
+                String endDate = request.getParameter("endDate");
+                try {
+                    projectBudget = Integer.valueOf(request.getParameter("budget"));
+                } catch (NumberFormatException ex) {
+                    request.setAttribute("validateMsg", "Budget cannot contain letters");
+                    RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
+                    rd.forward(request, response);
+                }
+                String currency = request.getParameter("currency");
+                String activityDescription = request.getParameter("activityDescription");
+                String comments = request.getParameter("comments");
+                String targetAudience = request.getParameter("targetAudience");
+                String objectiveResult = request.getParameter("objectiveResult");
+                try {
+                    partnerID = Integer.valueOf(request.getParameter("partnerID"));
+                } catch (NumberFormatException nfe) {
+                    request.setAttribute("validateMsg", "PartnerID cannot contain letters");
+                    RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
+                    rd.forward(request, response);
+                }
+                String requiredPOE = request.getParameter("requiredPOE");
+                try {
+                    projectCost = Integer.valueOf(request.getParameter("cost"));
+                } catch (NumberFormatException nfe) {
+                    request.setAttribute("validateMsg", "Cost cannot contain letters");
+                    RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
+                    rd.forward(request, response);
+                }
+                int employeeID = Integer.valueOf(request.getParameter("employeeID"));
+                String quarter = request.getParameter("quarter");
+                projectID = Integer.valueOf(request.getParameter("projectID"));
+
+                ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget, projectCost, requiredPOE, employeeID, projectID, quarter);
+                ctrl.updateProject(p);
+                String confirm = "Project " + projectID + " have been changed, you can now view the changed project by doing a search";
+                request.setAttribute("projectHaveBeenChanged", confirm);
+                request.getRequestDispatcher("SearchProject.jsp").forward(request, response);
+            } else {
                 request.setAttribute("validateMsg", "You do not have the credentials to use the status: " + status);
                 RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
                 rd.forward(request, response);
             }
-
-            String startDate = request.getParameter("startDate");   //request.getParameter henter string fra tekst feltet som har navnet indskrevet i stringen
-            String endDate = request.getParameter("endDate");
-            try {
-                projectBudget = Integer.valueOf(request.getParameter("budget"));
-            } catch (NumberFormatException ex) {
-                request.setAttribute("validateMsg", "Budget cannot contain letters");
-                RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
-                rd.forward(request, response);
-            }
-            String currency = request.getParameter("currency");
-            String activityDescription = request.getParameter("activityDescription");
-            String comments = request.getParameter("comments");
-            String targetAudience = request.getParameter("targetAudience");
-            String objectiveResult = request.getParameter("objectiveResult");
-            try {
-                partnerID = Integer.valueOf(request.getParameter("partnerID"));
-            } catch (NumberFormatException nfe) {
-                request.setAttribute("validateMsg", "PartnerID cannot contain letters");
-                RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
-                rd.forward(request, response);
-            }
-            String requiredPOE = request.getParameter("requiredPOE");
-            try {
-                projectCost = Integer.valueOf(request.getParameter("cost"));
-            } catch (NumberFormatException nfe) {
-                request.setAttribute("validateMsg", "Cost cannot contain letters");
-                RequestDispatcher rd = request.getRequestDispatcher("ChangeProject.jsp");
-                rd.forward(request, response);
-            }
-            int employeeID = Integer.valueOf(request.getParameter("employeeID"));
-            String quarter = request.getParameter("quarter");
-            projectID = Integer.valueOf(request.getParameter("projectID"));
-
-            ProjectDTO p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, partnerID, projectBudget, projectCost, requiredPOE, employeeID, projectID, quarter);
-            ctrl.updateProject(p);
-            String confirm = "Project " + projectID + " have been changed, you can now view the changed project by doing a search";
-//            request.setAttribute("validateMsg", answer);
-            request.setAttribute("projectHaveBeenChanged", confirm);
-            request.getRequestDispatcher("SearchProject.jsp").forward(request, response);
 
         }
 
@@ -165,8 +164,6 @@ public class UpdateChangeProjectServlet extends HttpServlet {
             processRequest(request, response);
         } catch (InvalidDataException ex) {
             Logger.getLogger(UpdateChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(UpdateChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -184,8 +181,6 @@ public class UpdateChangeProjectServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (InvalidDataException ex) {
-            Logger.getLogger(UpdateChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
             Logger.getLogger(UpdateChangeProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

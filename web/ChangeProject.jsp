@@ -50,7 +50,7 @@
             <h1>View and Change Project ${project.getProjectID()}</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} 
 
                 <form name="Change project" action="UpdateChangeProjectServlet" method="POST">
-            </h5> <input type="hidden" name="usertype" value='${user.getUserType()}' size="20" />
+            </h5> <input type="hidden" name="usertype" value="${user.getUserType()}" size="20" />
             <h4>${validateMsg}</h4>
             <hr> 
             <br>
