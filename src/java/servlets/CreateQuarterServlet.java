@@ -59,7 +59,7 @@ public class CreateQuarterServlet extends HttpServlet
                 quarterBudget = Integer.valueOf(request.getParameter("quarterBudget"));
             } catch (NumberFormatException nfe)
             {
-                request.setAttribute("validateMsg", "Quarter budget cannot contain letters");
+                request.setAttribute("validateMsg", "Quarter budget cannot contain letters or be empty");
                 request.getRequestDispatcher("CreateQuarter.jsp").forward(request, response);
             }
 

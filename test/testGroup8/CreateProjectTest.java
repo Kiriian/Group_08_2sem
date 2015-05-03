@@ -181,7 +181,7 @@ public class CreateProjectTest
         //er det muligt at indtaste "nonsenstal" i budget
         status = "Project proposal";
         startDate = "2015-02-10";
-        endDate = "2015-02-29";
+        endDate = "2015-02-28";
         projectBudget = 100000000;
         currency = "NOK";
         PartnerID = 1;
