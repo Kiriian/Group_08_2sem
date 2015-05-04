@@ -86,6 +86,8 @@ public class CreateProjectServlet extends HttpServlet
 
             try
             {
+                //Vi giver validatoren alle variabler, og hvis der er nogen af dem der ikke overholder de kriterier vi har sat op
+                // sider den vores egen exception: InvalidDataException, samt en relevant fejl besked.
                 v.validator(projectBudget, partnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
             } catch (InvalidDataException ex)
             {

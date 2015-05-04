@@ -43,11 +43,15 @@ public class ViewClaimServlet extends HttpServlet {
         
         int projectID = Integer.valueOf(request.getParameter("projectid"));
         ClaimDTO image = ctrl.getClaim(projectID);
-        
+        // vi sætter cpntentType, så siden ved hvilket format den skal forvente.
         response.setContentType(image.getContentType());
+        // her efter åbner vi outputStream for at kunne få billedet eller filen læst ud på en hjemmeside
+        //så brugerne kan se den.
         try (ServletOutputStream out2 = response.getOutputStream()) {
+            //her henter vi inputstreamen fra ImageDTO'en
             InputStream in = image.getInputStream();
-            
+            //så sætter vi antallet af bytes den skal læse
+            //På grund af vores do while vil den blive ved med at læse fra filen indtil filen er tom.
             byte[] buffer = new byte[1024];
             int count = 0;
             do {
