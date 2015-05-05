@@ -51,7 +51,6 @@ public class UploadPOEServlet extends HttpServlet
         Part file = request.getPart("file");
         String contentType = file.getHeader("content-type");
         int projectID = Integer.valueOf(request.getParameter("projectID"));
-        System.out.println("file er i servlet: " + file);
         
         ctrl.uploadPOE(file, contentType, projectID);
         

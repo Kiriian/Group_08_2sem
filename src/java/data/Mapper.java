@@ -91,7 +91,6 @@ public class Mapper {
             rs = statement.executeQuery();
             while (rs.next()) {
                 projectIDSequence = rs.getInt("NEXTVAL");
-                System.out.println("nextval er: " + projectIDSequence);
             }
 
             return projectIDSequence;
@@ -137,7 +136,6 @@ public class Mapper {
             statement.setInt(11, p.getPartnerID());
             statement.executeUpdate();
             p2 = getProject(projectID);
-            System.out.println("efter det er blevet hentet ud er endDate: " + p2.getEndDate());
             return p2;
 
         } catch (SQLException sqle) {
@@ -427,7 +425,6 @@ public class Mapper {
 
             while (rs.next()) {
                 emp = new EmployeeDTO(rs.getInt("EMPLOYEE_ID"), rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getString("COUNTRY"), rs.getString("EMPLOYEE_TYPE"));
-                System.out.println("emp i mapper: " + emp.toString());
             }
 
             return emp;

@@ -50,7 +50,6 @@ public class UpdateChangeProjectServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
         String types = request.getParameter("usertype");
-        System.out.println("Usertype: " + types);
         if (types.equalsIgnoreCase("dell")) {
             String status = request.getParameter("status");
             if (!status.equals("Project proposal") && !status.equals("POE uploaded") && !status.equals("Execution") && !status.equals("Claim uploaded")) {

@@ -61,7 +61,6 @@ public class CreateEmployeeServlet extends HttpServlet
             }
         EmployeeDTO emp = new EmployeeDTO(firstname,lastname, country, employeeType);
         EmployeeDTO emp2 = ctrl.createEmployee(emp);
-            System.out.println("emp er her: " + emp2.toString());
         request.setAttribute("emp", emp2);
         request.getRequestDispatcher("ViewCreatedEmployee.jsp").forward(request, response);
         }

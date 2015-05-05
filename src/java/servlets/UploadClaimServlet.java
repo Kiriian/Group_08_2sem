@@ -42,7 +42,6 @@ public class UploadClaimServlet extends HttpServlet
         Part file = request.getPart("file");
         String contentType = file.getContentType();
         int projectID = Integer.valueOf(request.getParameter("projectID"));
-        System.out.println("file er i servlet: " + file);
 
         ctrl.uploadClaim(file, contentType, projectID);
 

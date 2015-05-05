@@ -27,28 +27,26 @@ import control.Validator;
 
 public class CreateProjectServlet extends HttpServlet
 {
-
-    String startDate, endDate, currency, activityDescription, comments,
-            targetAudience, objectiveResult, firstname, lastname, phone, status;
-    int projectBudget, partnerID;
-
     Controller ctrl = new Controller();
     Validator v = new Validator();
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException
     {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
+        int projectBudget = 0;
+        int partnerID = 0;
+        String startDate;
+        String endDate;
+        String currency;
+        String activityDescription;
+        String comments;
+        String targetAudience;
+        String objectiveResult;
+        String status;
+        
+        
         try
         {
             status = request.getParameter("status");
@@ -63,9 +61,6 @@ public class CreateProjectServlet extends HttpServlet
                 RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
                 rd.forward(request, response);
             }
-//            String budgetText = request.getParameter("budget");
-//            System.out.println("budget: "+budgetText);
-//            budget = Integer.valueOf(budgetText);
             currency = request.getParameter("currency");
             activityDescription = request.getParameter("activityDescription");
             comments = request.getParameter("comments");
@@ -80,10 +75,6 @@ public class CreateProjectServlet extends HttpServlet
                 RequestDispatcher rd = request.getRequestDispatcher("CreateProject.jsp");
                 rd.forward(request, response);
             }
-            firstname = request.getParameter("firstName");
-            lastname = request.getParameter("lastName");
-            phone = request.getParameter("phone");
-
             try
             {
                 //Vi giver validatoren alle variabler, og hvis der er nogen af dem der ikke overholder de kriterier vi har sat op
