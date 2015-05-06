@@ -42,6 +42,7 @@ public class ViewClaimServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         int projectID = Integer.valueOf(request.getParameter("projectid"));
+        request.getSession().getAttribute("user");
         ClaimDTO image = ctrl.getClaim(projectID);
         // vi sætter cpntentType, så siden ved hvilket format den skal forvente.
         response.setContentType(image.getContentType());

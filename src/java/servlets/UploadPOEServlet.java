@@ -7,9 +7,7 @@ package servlets;
 
 import control.Controller;
 import control.InvalidDataException;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;

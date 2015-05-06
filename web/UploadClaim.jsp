@@ -29,7 +29,7 @@
             <li class="active"><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
         </ul>
         <form name="Upload claim" action="UploadClaimServlet" method="POST" enctype="multipart/form-data">
-            <h3>Note: You can only upload one file pr. project</h3>
+            <h3>Note: You can only upload one file pr. project, so if multipul files need to be sent, upload them in a zip file</h3>
             <h3>${validateMsg}</h3>
             <br>
             <br>
