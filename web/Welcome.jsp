@@ -18,40 +18,57 @@
     </head>
     <body>
         <h1>Welcome</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
-    <c:set var="user" value="${user}"></c:set>
-    <c:choose>
-        <c:when test="${user.getUserType() eq 'Partner'}">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">DELL</a>
-            </div>
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
-            </ul>
-        </c:when>
-        <c:otherwise>
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">DELL</a>
-            </div>
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
-                <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
-            </ul>
-        </c:otherwise>
-    </c:choose>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>kan man skrive mere her?</h1>
-    <h3>ja da!</h3>
-</body>
+        <c:set var="user" value="${user}"></c:set>
+        <c:choose>
+            <c:when test="${user.getUserType() eq 'Partner'}">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DELL</a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/UploadPOE.jsp">Submit POE</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/UploadClaim.jsp">Upload claim</a></li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DELL</a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="http://localhost:8080/Group_08_2sem/Welcome.jsp">Welcome</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateProject.jsp">Create project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/SearchProject.jsp">Search and change project</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreatePartner.jsp">Create partner</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateUser.jsp">Create user</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateEmployee.jsp">Create employee</a></li>
+                    <li><a href="http://localhost:8080/Group_08_2sem/CreateQuarter.jsp">Create quarter</a></li>
+                </ul>
+            </c:otherwise>
+        </c:choose>
+        <br>
+        <br>
+        <br>
+        <br>
+        <img src="http://mundoplanotp3uminho.pbworks.com/f/1258493067/dell_logo.jpg" width="550" height="550" align="top" />
+
+        <textarea name="myTextBox" cols="100" rows="5">
+
+            To create a project, please press "create project".
+
+            To search for a project, choose the relevant status and press the search button
+            To view or change a project, simply click the project ID of the project.
+
+            To create a partner, please press "create partner" then you can chose partner type.
+
+            To create a user, please press "create user".
+
+            To create a employee, please press "create employee".
+
+            To create a quarter, please press "create quarter".
+
+        </textarea>
+
+    </body>
 </html>

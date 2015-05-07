@@ -7,19 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="control.ProjectDTO"%>
-<%ProjectDTO p=(ProjectDTO)request.getAttribute("Project");%>
+<%ProjectDTO p = (ProjectDTO) request.getAttribute("Project");%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Project Created</title><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-      <br>
-       <c:set var="user" value="${user}"></c:set>
+    <link href="ProjectCSS.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <br>
+    <c:set var="user" value="${user}"></c:set>
     <c:choose>
         <c:when test="${user.getUserType() eq 'Partner'}">
             <div class="navbar-header">
@@ -48,15 +49,39 @@
             </ul>
         </c:otherwise>
     </c:choose>
-    <h5>ProjectID: <%= p.getProjectID()%></h5>
-    <h5>Start date: <%= p.getStartDate()%></h5>
-        <h5>End date: <%= p.getEndDate()%></h5>
-        <h5>Budget: <%= p.getProjectBudget()%></h5>
-        <h5>Currency: <%= p.getCurrency()%></h5>
-        <h5>Partner ID: <%= p.getPartnerID() %></h5>
-        <h5>Activity Description: <%= p.getActivityDescription() %></h5>
-        <h5>Comments: <%= p.getComments() %></h5>
-        <h5>Target Audience: <%= p.getTargetAudience() %></h5>
-        <h5>Objective & Result: <%= p.getObjectiveResult() %></h5>
-    </body>
+    <form name="ProjectCreatedView" method="POST">
+        <table>
+            <tr>
+                <th>ProjectID</th>
+                <th>Status</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Activity Description</th>
+                <th>Objective & Result</th>
+                <th>Partner ID</th>
+                <th>Project Budget</th>
+                <th>Cost</th>
+                <th>Currency</th>
+                <th>Quarter</th>
+            </tr>
+    </form>
+<tr>
+    <td><%= p.getProjectID()%></td>
+    <td><%=p.getStatus()%></td>
+    <td><%=p.getStartDate()%></td>
+    <td><%=p.getEndDate()%></td>
+    <td><%=p.getActivityDescription()%></td>
+    <td><%=p.getObjectiveResult()%></td>
+    <td><%=p.getPartnerID()%></td>
+    <td><%=p.getProjectBudget()%></td>
+    <td><%=p.getCost()%></td>
+    <td><%=p.getCurrency()%></td>
+    <td><%=p.getQuarter()%></td>
+</tr>
+
+</table>
+</form>
+</body>
 </html>
+
+
