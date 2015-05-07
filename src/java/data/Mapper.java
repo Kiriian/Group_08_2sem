@@ -278,6 +278,8 @@ public class Mapper {
                     + "START_DATE=?,"
                     + "END_DATE=?,"
                     + "OBJECTIVE_RESULT=?,"
+                    + "REQUIRED_POE=?,"
+                    + "PARTNER_ID=?,"
                     + "EMPLOYEE_ID=?,"
                     + "QUARTER_NAME=?"
                     + "WHERE PROJECT_ID=?";
@@ -296,9 +298,11 @@ public class Mapper {
             java.sql.Date endDate2 = new java.sql.Date(endDate1.getTime());
             statement.setDate(9, endDate2);
             statement.setString(10, p.getObjectiveResult());
-            statement.setInt(11, p.getEmployeeID());
-            statement.setString(12, p.getQuarter());
-            statement.setInt(13, p.getProjectID());
+            statement.setString(11, p.getRequiredPOE());
+            statement.setInt(12, p.getPartnerID());
+            statement.setInt(13, p.getEmployeeID());
+            statement.setString(14, p.getQuarter());
+            statement.setInt(15, p.getProjectID());
             statement.executeUpdate();
         } catch (SQLException sqle) {
             System.err.println(sqle);
