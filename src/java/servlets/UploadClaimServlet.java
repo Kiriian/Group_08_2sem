@@ -41,7 +41,6 @@ public class UploadClaimServlet extends HttpServlet
         Part file = request.getPart("file");
         String contentType = file.getContentType();
         int projectID = Integer.valueOf(request.getParameter("projectID"));
-        System.out.println("file er her: " + file);
         ctrl.uploadClaim(file, contentType, projectID);
 
         request.setAttribute("validateMsg", "Your file has been uploaded, remeber to change the status of the project");
