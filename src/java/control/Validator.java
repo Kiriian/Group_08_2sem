@@ -27,7 +27,6 @@ public class Validator
     {
         try
         {
-            System.err.println("fejl");
             if ((project_budget + "").matches(patternLetters))
             {
                 throw new InvalidDataException("Budget cannot contain letters");

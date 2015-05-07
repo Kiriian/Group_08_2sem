@@ -95,6 +95,7 @@ public class CreateProjectTest
         targetAudience = "Reseller";
         objectiveResult = "More customers";
 
+        v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         p2 = ctrl.SaveProject(p);
         Assert.assertEquals(p.getStartDate(), p2.getStartDate());
