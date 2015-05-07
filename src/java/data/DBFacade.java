@@ -160,7 +160,7 @@ public class DBFacade implements IDBFacade {
     }
     
     @Override
-    public ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException
+    public ImageDTO getImage(int projectID) throws InvalidDataException
     {
         try
         {

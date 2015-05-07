@@ -509,8 +509,8 @@ public class Mapper {
     }
 
     //Her hente vi filen ud fra databasen igen
-    public ArrayList<ImageDTO> getImage(int projectID) throws SQLException, IOException {
-        ArrayList<ImageDTO> imageOut = new ArrayList<>();
+    public ImageDTO getImage(int projectID) throws SQLException, IOException {
+        ImageDTO imageOut = null;
         PreparedStatement statement;
         ResultSet rs;
         InputStream inputStream = null;
@@ -544,7 +544,7 @@ public class Mapper {
                 //claim objekt som vi returner.
                 out.close();
                 inputStream.close();
-                imageOut.add(new ImageDTO(rs.getInt("IMAGE_ID"), rs.getInt("PROJECT_ID"), rs.getString("CONTENT_TYPE"), new FileInputStream(tmp)));
+                imageOut = new ImageDTO(rs.getInt("IMAGE_ID"), rs.getInt("PROJECT_ID"), rs.getString("CONTENT_TYPE"), new FileInputStream(tmp));
             }
             return imageOut;
         }

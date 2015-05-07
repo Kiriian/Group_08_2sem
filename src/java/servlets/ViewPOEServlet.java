@@ -6,7 +6,6 @@ import control.InvalidDataException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,27 +36,25 @@ public class ViewPOEServlet extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         request.getSession().getAttribute("user");
-        ArrayList<ImageDTO> imageOut;
+        ImageDTO image;
         int projectID = Integer.valueOf(request.getParameter("projectid"));
 
-        imageOut = ctrl.getImage(projectID);
+        image = ctrl.getImage(projectID);
 
-        for (ImageDTO image : imageOut)
+        response.setContentType(image.getContentType());
+        try (OutputStream out = response.getOutputStream())
         {
-            response.setContentType(image.getContentType());
-            try (OutputStream out = response.getOutputStream())
+            InputStream in = image.getInputStream();
+            byte[] buffer = new byte[1024];
+            int count = 0;
+            do
             {
-                InputStream in = image.getInputStream();
-                byte[] buffer = new byte[1024];
-                int count = 0;
-                do
-                {
-                    count = in.read(buffer);
-                    out.write(buffer, 0, count);
-                } while (count == 1024);
-                in.close();
-            }
+                count = in.read(buffer);
+                out.write(buffer, 0, count);
+            } while (count == 1024);
+            in.close();
         }
+
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

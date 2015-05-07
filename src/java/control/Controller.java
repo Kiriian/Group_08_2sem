@@ -65,7 +65,7 @@ public class Controller {
         return facade.createQuarter(quarter);
     }
 
-    public ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException {
+    public ImageDTO getImage(int projectID) throws InvalidDataException {
         return facade.getImage(projectID);
     }
 

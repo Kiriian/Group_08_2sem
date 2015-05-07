@@ -49,7 +49,7 @@ interface IDBFacade
    
    QuarterDTO createQuarter(QuarterDTO quarter) throws InvalidDataException;
    
-   ArrayList<ImageDTO> getImage(int projectID) throws InvalidDataException;
+   ImageDTO getImage(int projectID) throws InvalidDataException;
    
    ClaimDTO getClaim(int ProjectID) throws InvalidDataException;
    
