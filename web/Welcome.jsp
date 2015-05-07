@@ -17,7 +17,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome</h1><h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
+        <h5 align="right">Username:&nbsp ${user.getFirstname()} </h5>
         <c:set var="user" value="${user}"></c:set>
         <c:choose>
             <c:when test="${user.getUserType() eq 'Partner'}">
@@ -49,26 +49,43 @@
         </c:choose>
         <br>
         <br>
+
+        <img src="http://orig01.deviantart.net/6b6b/f/2015/127/f/8/dell_logo_by_kiriian-d8sgnfi.jpg" align="top" /> 
         <br>
         <br>
-        <img src="http://mundoplanotp3uminho.pbworks.com/f/1258493067/dell_logo.jpg" width="550" height="550" align="top" />
+        <h4>To create a project, please press "Create project".</h4>
 
-        <textarea name="myTextBox" cols="100" rows="5">
+        <h4>  To search for a project, choose the relevant status and press the search button.</h4>
 
-            To create a project, please press "create project".
+        <h4>  To view or change a project, press Search and change project. 
+            Choose the relevant status and press the search button and click the project ID of the project.</h4>
 
-            To search for a project, choose the relevant status and press the search button
-            To view or change a project, simply click the project ID of the project.
+        <h4>   To create a partner, please press "Create partner".</h4>
 
-            To create a partner, please press "create partner" then you can chose partner type.
+        <h4>   To create a user, please press "Create user".</h4>
 
-            To create a user, please press "create user".
+        <h4>   To create a employee, please press "Create employee".</h4>
 
-            To create a employee, please press "create employee".
+        <h4>   To create a quarter, please press "Create quarter".</h4>
 
-            To create a quarter, please press "create quarter".
-
-        </textarea>
+        <!-- <textarea name="myTextBox" cols="100" rows="5" readonly="readonly">
+ 
+             To create a project, please press "Create project".
+ 
+             To search for a project, choose the relevant status and press the search button.
+ 
+             To view or change a project, press Search and Change project. 
+             Choose the relevant status and press the search button and click the project ID of the project.
+ 
+             To create a partner, please press "Create partner".
+ 
+             To create a user, please press "Create user".
+ 
+             To create a employee, please press "Create employee".
+ 
+             To create a quarter, please press "Create quarter".
+ 
+         </textarea> -->
 
     </body>
 </html>
