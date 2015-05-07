@@ -68,24 +68,6 @@
 
         <h4>   To create a quarter, please press "Create quarter".</h4>
 
-        <!-- <textarea name="myTextBox" cols="100" rows="5" readonly="readonly">
- 
-             To create a project, please press "Create project".
- 
-             To search for a project, choose the relevant status and press the search button.
- 
-             To view or change a project, press Search and Change project. 
-             Choose the relevant status and press the search button and click the project ID of the project.
- 
-             To create a partner, please press "Create partner".
- 
-             To create a user, please press "Create user".
- 
-             To create a employee, please press "Create employee".
- 
-             To create a quarter, please press "Create quarter".
- 
-         </textarea> -->
 
     </body>
 </html>
