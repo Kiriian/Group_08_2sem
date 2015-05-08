@@ -52,7 +52,7 @@
             <br>
             <p> ${validateMsg} </p>
             <br>
-            <br>
+            
             <div> Project id:
                 <span>Status:&nbsp <input type="text" name="status" value="Project proposal" size="20" readonly="readonly" /> </span> </div> <br>
             Partner ID:
