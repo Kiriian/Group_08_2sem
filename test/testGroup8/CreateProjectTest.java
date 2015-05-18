@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -122,6 +123,7 @@ public class CreateProjectTest
         try
         {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
+            //fail();
         } catch (InvalidDataException ide)
         {
             assertThat(ide.getMessage(), is("Budget cannot be empty"));
@@ -146,6 +148,7 @@ public class CreateProjectTest
         try
         {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
+            //fail();
         } catch (InvalidDataException ide)
         {
             assertThat(ide.getMessage(), is("Activity description cannot be empty"));
@@ -170,6 +173,7 @@ public class CreateProjectTest
         try
         {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
+            //fail();
         } catch (InvalidDataException ide)
         {
             assertThat(ide.getMessage(), is("The date cannot be empty"));
@@ -217,6 +221,7 @@ public class CreateProjectTest
         try
         {
             v.validator(projectBudget, PartnerID, startDate, endDate, activityDescription, targetAudience, objectiveResult);
+            //fail();
         } catch (InvalidDataException ide)
         {
             assertThat(ide.getMessage(), is("The date needs to be write in the format: YYYY-MM-DD"));
@@ -242,12 +247,14 @@ public class CreateProjectTest
         for (int i = 0; i < 1001; i++)
         {
             comments = i + "";
+            // Should have been comments = i + comments
         }
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         try
         {
             ctrl.SaveProject(p);
+            //fail();
         } catch (InvalidDataException ide)
         {
             assertThat(ide.getMessage(), is("værdi er for stor for kolonnen \"CPHJB190\".\"PROJECT\".\"COMMENTS\" (faktisk: 1001, maksimum: 1000)"));
@@ -272,12 +279,14 @@ public class CreateProjectTest
         for (int i = 0; i < 101; i++)
         {
             activityDescription = i + "";
+            //Should have been activityDescription = i + activityDescription
         }
 
         p = new ProjectDTO(status, startDate, endDate, currency, activityDescription, comments, targetAudience, objectiveResult, PartnerID, projectBudget);
         try
         {
             ctrl.SaveProject(p);
+            //fail();
         } catch (InvalidDataException ide)
         {
             assertThat(ide.getMessage(), is("værdi er for stor for kolonnen \"CPHJB190\".\"PROJECT\".\"ACTIVITY_DESCRIPTION\" (faktisk: 1001, maksimum: 1000)"));

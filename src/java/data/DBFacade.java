@@ -37,6 +37,7 @@ public class DBFacade implements IDBFacade {
             return mapper.saveProject(p);
         } catch (SQLException | ParseException sqle) {
             throw new InvalidDataException("" + sqle);
+            // should have been throw new InvalidDataException(sqle.getMessage());
         }
 
     }
